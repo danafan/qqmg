@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/service/service",
+    "pages/push/push",
+    "pages/my/my"
+  ],
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#a1e81a",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/images/index.png",
+        "selectedIconPath": "/images/index_active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "iconPath": "/images/service.png",
+        "selectedIconPath": "/images/service_active.png",
+        "text": "服务"
+      },
+      {
+        "pagePath": "pages/push/push",
+        "iconPath": "/images/push.png",
+        "selectedIconPath": "/images/push_active.png",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "/images/my.png",
+        "selectedIconPath": "/images/my_active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor":"#a1e81a",
+    "enablePullDownRefresh":true,
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#a1e81a",
+    "navigationBarTitleText": "青青芒果",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

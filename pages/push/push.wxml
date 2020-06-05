@@ -1,0 +1,4 @@
+<!--pages/push/push.wxml-->
+<view class="container">
+  发布
+</view>
