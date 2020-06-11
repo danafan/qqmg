@@ -1,0 +1,60 @@
+/* pages/management/management.wxss */
+.prompt{
+  padding: 10rpx;
+  background: #e6e6e6;
+  width: 100%;
+  font-size: 24rpx;
+  color:red;
+}
+.info_item{
+  margin-bottom: 15rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 240rpx;
+  background: #fff;
+  box-shadow: 0 5rpx 5rpx #e6e6e6;
+  padding: 15rpx;
+}
+.goods_img{
+  margin-right: 15rpx;
+  width: 220rpx;
+  height: 180rpx;
+}
+.right_content{
+  flex: 1;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info_title{
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.content_bottom{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.time{
+  font-size: 24rpx;
+  color: #707070;
+}
+.shelves{
+  border:2rpx solid #f7a908;
+  width: 130rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #f7a908;
+}

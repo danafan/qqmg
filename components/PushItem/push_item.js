@@ -1,39 +1,24 @@
 // components/PushItem/push_item.js
+var app = getApp();
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    //大图列表
-    big_imgs: {
-      type: Array,
-      value: [{
-        id: 0,
-        url: "../../images/banner_01.png"
-      }, {
-        id: 1,
-        url: "../../images/banner_02.jpg"
-      }, {
-        id: 2,
-        url: "../../images/banner_03.jpg"
-      }]
-    }
+    infoItem: {
+      type: Object, //类型
+      value: {} //默认值
+    },
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
     show_img: false, //默认不显示大图  
     imgheights: [], //所有图片的高度
-    current: 0      // 默认  
+    big_imgs: [], //所有大图列表
+    current_index: 0, //当前选中的大图下标
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
-    imageLoad(e) { //获取图片真实宽度  
+    //获取图片真实宽度
+    imageLoad(e) {
       var imgwidth = e.detail.width,
         imgheight = e.detail.height,
         //宽高比  
@@ -43,25 +28,37 @@ Component({
       var imgheight = viewHeight;
       var imgheights = this.data.imgheights;
       //把每一张图片的对应的高度记录到数组里  
-      imgheights[e.target.dataset.id] = imgheight;
+      imgheights[e.target.dataset.index] = imgheight;
       this.setData({
         imgheights: imgheights
       })
     },
-    bindchange: function(e) {
+    //大图切换
+    bindchange(e) {
       this.setData({
-        current: e.detail.current
+        current_index: e.detail.current
       })
     },
     //拨打电话
-    call() {
-      wx.makePhoneCall({
-        phoneNumber: '1340000' //仅为示例，并非真实的电话号码
-      })
+    call(e) {
+      if (!app.globalData.userInfo) {
+        wx.navigateTo({
+          url: '/pages/auth/auth',
+        });
+      } else {
+        let phone = e.currentTarget.dataset.phone;
+        wx.makePhoneCall({
+          phoneNumber: phone
+        })
+      }
+
     },
     //点击显示大图
-    open() {
+    open(e) {
+      let img_obj = e.currentTarget.dataset;
       this.setData({
+        big_imgs: img_obj.imgs,
+        current_index: img_obj.index,
         show_img: true
       })
       wx.hideTabBar()
@@ -72,6 +69,12 @@ Component({
         show_img: false
       })
       wx.showTabBar()
+    },
+    //点击进入详情
+    detail() {
+      wx.navigateTo({
+        url: "/pages/detail/detail"
+      })
     }
   }
 })

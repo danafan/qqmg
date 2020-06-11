@@ -1,66 +1,68 @@
 // pages/my/my.js
+var app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    authStatus: false, //默认未登录
+    res_user_info: {
+      vip_level_count: 0,
+      vip_level: "--",
+      push_count: "--",
+      signing_count: "--"
+    }, //后台获取的用户信息
+    wx_user_info: {}, //微信用户信息
+  },
+  onShow() {
+    if (!app.globalData.userInfo) {
+      console.log("未登录")
+      this.setData({
+        authStatus: false,
+      })
+    } else {
+      console.log("登录")
+      this.setData({
+        authStatus: true,
+        wx_user_info: app.globalData.userInfo
+      })
+      //获取用户信息（根据微信用户获取）
+      this.getUserInfo();
+    }
+  },
+  //获取用户信息（根据微信用户获取）
+  getUserInfo() {
+    let userObj = {
+      vip_level_count: 28,
+      vip_level: "8",
+      push_count: "13",
+      signing_count: "45"
+    }
+    this.setData({
+      res_user_info: userObj
+    })
+  },
+  //点击我要发布
+  goPush() {
+    if (!app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '/pages/auth/auth',
+      });
+    } else {
+      wx.reLaunch({
+        url: '/pages/push/push'
+      })
+    }
+  },
+  //发布管理
+  pushManagement() {
+    if (!app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '/pages/auth/auth',
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/management/management"
+      })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

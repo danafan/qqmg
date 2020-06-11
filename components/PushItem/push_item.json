@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "big_img": "../BigImg/big_img"
+  }
 }

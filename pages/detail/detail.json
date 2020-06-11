@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "信息详情",
+  "usingComponents": {
+    "big_img": "../../components/BigImg/big_img"
+  }
+}

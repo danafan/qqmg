@@ -10,7 +10,7 @@
 
 .user_img {
   margin-right: 8rpx;
-  border-radius: 10rpx;
+  border-radius: 50%;
   width: 100rpx;
   height: 100rpx;
 }
@@ -30,14 +30,14 @@
   font-weight: 700;
 }
 .phone{
-  border-radius: 8rpx;
+  border:2rpx solid #f7a908;
   width: 130rpx;
-  text-align: center;
   height: 50rpx;
-  line-height: 50rpx;
-  background: #f7a908;
-  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 24rpx;
+  color: #f7a908;
 }
 .taps {
   margin-top: 10rpx;
@@ -46,6 +46,14 @@
   color: red;
   display: flex;
   align-items: center;
+}
+.category_item{
+  margin-right: 8rpx;
+  border-radius: 8rpx;
+  background: #f7a908;
+  color: #fff;
+  font-size: 22rpx;
+  padding: 8rpx 12rpx;
 }
 .tap{
   margin-right: 8rpx;
@@ -56,7 +64,6 @@
   padding: 5rpx 8rpx;
 }
 .describe {
-  margin-bottom: 10rpx;
   font-size: 28rpx;
   color: #333;
   display: -webkit-box;
@@ -65,7 +72,13 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
+.all{
+  margin-bottom: 10rpx;
+  padding-right: 30rpx;
+  text-align: end;
+  font-size: 28rpx;
+  color: #234d76;
+}
 .images {
   display: flex;
   flex-wrap: wrap;

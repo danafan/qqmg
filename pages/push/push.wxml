@@ -1,4 +1,66 @@
 <!--pages/push/push.wxml-->
-<view class="container">
-  发布
-</view>
+<scroll-view scroll-y="{{sysScroll}}" >
+  <!-- 顶部提示 -->
+  <view class="prompt">
+    <view>青青芒果向您提供免费信息发布服务，发布信息请遵守国家法律法规，信息内容和图片不能包含联系方式、敏感词汇等信息！</view>
+    <view class="prompt_bottom">
+      <text>温馨提示：</text>
+      <text>描述清晰，内容完整，将有机会获得公众号图文推送或首页热门的机会，大大增加信息的曝光率哦！</text>
+    </view>
+  </view>
+  <view>
+  </view>
+  <!-- 类别 -->
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{category_list}}" range-key="name" header-text="请选择信息类别">
+    <view class="info_type">
+      <view class="info_left">
+      <view class="info_label">信息类别</view>
+      <view class="info_text">{{category_text == ''?'请选择（必选）':category_text}}</view>
+    </view>
+    <image class="info_right" src="../../images/right.png"></image>
+    </view>
+  </picker>
+  <!-- 标题 -->
+  <view class="title">
+    <view class="title_label">标题</view>
+    <input class="title_input" maxlength="30" value="{{title}}" placeholder="请输入标题（必填 0 - 30字）" bindinput="changeTitle" />
+  </view>
+  <!-- 描述 -->
+  <view class="describe_box">
+    <view class="info_label">描述</view>
+    <textarea class="textarea" maxlength="120" value="{{desc}}" bindinput="changeDesc" placeholder="请输入描述内容（0 - 120字）" />
+  </view>
+  <!-- 标签 -->
+  <view class="info_taps">
+    <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="id" data-id="{{item.id}}" bindtap="activeTap">{{item.text}}</view>
+  </view>
+  <!-- 上传图片 -->
+  <view class="upload_content">
+    <view class="upload_label">上传图片
+      <text class="max_imgs">（最多9张）</text>
+    </view>
+    <view class="camera_box">
+      <view class="show_img_box" wx:for="{{upload_images}}" wx:key="*this">
+        <image class="show_img" src="{{item}}"></image>
+        <view class="close" data-index="{{index}}" bindtap="deleteImg">
+          <image class="close_icon" src="../../images/close.png"></image>
+        </view>
+      </view>
+      <view class="upload_box" bindtap="chooseImage" wx:if="{{upload_images.length < 9}}">
+        <image class="camera_icon" src="../../images/camera.png"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 联系人 -->
+  <view class="title">
+    <view class="title_label">联系人</view>
+    <input class="title_input" cursor-spacing="12" value="{{contact}}" placeholder="请输入联系人（必填）" bindinput="changeContact" />
+  </view>
+  <!-- 联系电话 -->
+  <view class="title">
+    <view class="title_label">联系电话</view>
+    <input class="title_input" cursor-spacing="10" type="number" value="{{contact_phone}}" placeholder="请输入联系电话（必填）" bindinput="changePhone" />
+  </view>
+  <!-- 发布按钮 -->
+  <view class="push_button" bindtap="pushNow">立即发布</view>
+</scroll-view>

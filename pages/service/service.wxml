@@ -1,4 +1,39 @@
 <!--pages/service/service.wxml-->
-<view>
-服务
+<view class="service_container">
+  <!-- 顶部导航 -->
+  <swiper class="tab_list" display-multiple-items="4" current="{{show_index}}">
+    <swiper-item wx:for="{{category_list}}" wx:key="id">
+      <view class="tab {{active_index == index? 'active_color' : ''}}" data-index="{{index}}" bindtap="changeCurrent">
+        {{item.name}}
+        <view class="active_tab" wx:if="{{active_index == index}}"></view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <!-- 底部列表 -->
+  <view class="advertising_list">
+    <view class="adver_item" wx:for="{{service_list}}" wx:key="id" bindtap="detail">
+      <image class="goods_img" src="{{item.goods_img}}"></image>
+      <view class="item_right">
+        <!-- 用户名和标签 -->
+        <view class="right_top">
+          <view class="username">{{item.title}}</view>
+          <view class="tap">{{item.category}}</view>
+        </view>
+        <!-- 描述 -->
+        <view class="describes">{{item.describes}}</view>
+        <!-- 标签 -->
+        <view class="subs">
+          <view class="sub" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</view>
+        </view>
+        <!-- 浏览量和查看按钮 -->
+        <view class="right_bottom">
+          <view class="browse">{{item.browse}}浏览</view>
+          <view class="buttons">
+            <image class="phone_icon" data-phone="{{item.phone}}" src="../../images/phone_icon.png" catchtap="call"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
 </view>

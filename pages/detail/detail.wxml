@@ -1,0 +1,62 @@
+<!--pages/detail/detail.wxml-->
+<view class="detail_box">
+  <view class="scroll_box">
+    <!-- 轮播图 -->
+    <view class="banner_box">
+      <swiper class="banner_content" autoplay="true" interval="5000" circular="true" bindchange="changeBanner">
+        <swiper-item wx:for="{{dateilObj.images}}" wx:key="*this" data-index="{{index}}" bindtap="openBigImg">
+          <image class="banner_img" src="{{item}}"></image>
+        </swiper-item>
+      </swiper>
+      <view class="shu">{{shu}} / {{dateilObj.images.length}}</view>
+    </view>
+    <!-- 标题和分享 -->
+    <view class="title_box">
+      <view class="goods_title">{{dateilObj.title}}</view>
+      <button class="share_box" open-type="share">
+          <image class="share_icon" src="../../images/share.png"></image>
+          <view class="share_text">分享</view>
+      </button>
+    </view>
+    <!-- 下面内容 -->
+    <view class="content_box">
+      <!-- 标签列表 -->
+      <view class="taps_box">
+        <view class="tap_item" wx:for="{{dateilObj.taps}}" wx:key="*this">{{item}}</view>
+      </view>
+      <!-- 分类显示 -->
+      <view class="cate_box">
+        <view class="cate_item">
+          <view class="cate_val_01">{{dateilObj.category_name}}</view>
+          <view class="cate_label">所属分类</view>
+        </view>
+        <view class="line"></view>
+        <view class="cate_item">
+          <view class="cate_val_02">{{dateilObj.create_time}}</view>
+          <view class="cate_label">发布时间</view>
+        </view>
+        <view class="line"></view>
+        <view class="cate_item">
+          <view class="cate_val_03">{{dateilObj.browse}}</view>
+          <view class="cate_label">浏览人数</view>
+        </view>
+      </view>
+      <!-- 个人头像 -->
+      <view class="user_info_box">
+        <image class="user_img" src="{{dateilObj.user_img}}"></image>
+        <view class="nickname">{{dateilObj.username}}</view>
+      </view>
+      <!-- 描述 -->
+      <view class="desc_box">
+        <text class="desc_title">描述：</text>
+        <text class="desc_content">{{dateilObj.desc}}</text>
+      </view>
+      <!-- 图片 -->
+      <view class="big_imgs">
+        <image class="img_item" wx:for="{{dateilObj.images}}" wx:key="*this" data-index="{{index}}" src="{{item}}" bindtap="openBigImg"></image>
+      </view>
+    </view>
+  </view>
+  <view class="phone_button" bindtap="call">拨打电话</view>
+  <big_img wx:if="{{show_img}}" big_imgs="{{dateilObj.images}}" current_index="{{current_index}}" bind:onEmit="close" />
+</view>

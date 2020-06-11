@@ -1,35 +1,24 @@
 <!--components/PushItem/push_item.wxml-->
 <view class="push_container">
-  <image class="user_img" src="../../images/banner_01.png"></image>
+  <image class="user_img" src="{{infoItem.user_img}}"></image>
   <view class="push_content">
     <view class="userinfo">
-      <view class="username">Ranbol</view>
-      <view class="phone" bindtap="call">拨打电话</view>
+      <view class="username">{{infoItem.username}}</view>
+      <view class="phone" data-phone="{{infoItem.phone}}" bindtap="call">拨打电话</view>
     </view>
     <view class="taps">
-      <view class="tap">售房</view>
-      <view class="tap">满五唯一</view>
+      <view class="category_item">{{infoItem.info_type}}</view>
+      <view class="tap" wx:for="{{infoItem.taps}}" wx:for-item="tap" wx:key="*this">{{tap}}</view>
     </view>
-    <view class="describe">这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述</view>
+    <view class="describe" bindtap="detail">{{infoItem.desc}}</view>
+    <view class="all" bindtap="detail">全文</view>
     <view class="images">
-      <image class="goods_img" src="../../images/banner_01.png" bindtap="open"></image>
-      <image class="goods_img" src="../../images/banner_02.jpg"></image>
-      <image class="goods_img" src="../../images/banner_03.jpg"></image>
-      <image class="goods_img" src="../../images/banner_03.jpg"></image>
-      <image class="goods_img" src="../../images/banner_01.png"></image>
+      <image class="goods_img" wx:for="{{infoItem.imgs}}" wx:key="*this" wx:for-item="img_url" src="{{img_url}}" data-index="{{index}}" data-imgs="{{infoItem.imgs}}" bindtap="open"></image>
     </view>
     <view class="bottom_info">
-      <view class="time">3分钟前</view>
-      <view class="browse">12浏览</view>
+      <view class="time">{{infoItem.create_time}}</view>
+      <view class="browse">{{infoItem.browse}}浏览</view>
     </view>
   </view>
-  <view class="imgs" wx:if="{{show_img}}" bindtap="close">
-    <swiper style="width:100%;height:{{imgheights[current]}}rpx;" bindchange="bindchange">
-      <block wx:for="{{big_imgs}}" wx:key="id">
-        <swiper-item>
-          <image class="banner_img" src="{{item.url}}" data-id='{{index}}' mode="widthFix" bindload="imageLoad"></image>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
+  <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close"/>
 </view>

@@ -1,4 +1,63 @@
 <!--pages/my/my.wxml-->
-<view class="container">
-我的
+<view class="my_container">
+  <view class="my_back">
+    <view class="my_info">
+      <image class="my_icon" src="{{wx_user_info.avatarUrl}}" wx:if="{{authStatus}}"></image>
+      <view class="user_img_box" wx:else>
+        <image class="user_img" src="../../images/user_img.png"></image>
+      </view>
+      <view class="my_name">{{authStatus?wx_user_info.nickName:'未登录'}}</view>
+      <view class="vip_box">
+        <view class="level_box">
+          <view class="current_level" style="width:{{res_user_info.vip_level_count}}%">
+            <view class="xian">
+              <image class="vip_icon" src="../../images/vip_icon.png"></image>
+              <view class="vip_txt">{{res_user_info.vip_level_count}}</view>
+            </view>
+          </view>
+          <view class="vip_toast">
+            <text class="special">积分说明：</text>
+            <text>每签到或发布一次增加一积分，</text>
+            <text class="special">10</text>
+            <text>积分为一个等级，达到</text>
+            <text class="special">6</text>
+            <text>级以上发布的内容将自动置为热门</text>
+          </view>
+        </view>
+      </view>
+      <view class="menu_list">
+        <view class="menu_item">
+          <view class="item_num">{{res_user_info.vip_level}}</view>
+          <view class="item_label">VIP</view>
+        </view>
+        <view class="line"></view>
+        <view class="menu_item">
+          <view class="item_num">{{res_user_info.push_count}}</view>
+          <view class="item_label">已发布</view>
+        </view>
+        <view class="line"></view>
+        <view class="menu_item">
+          <view class="item_num">{{res_user_info.signing_count}}</view>
+          <view class="item_label">已签到</view>
+        </view>
+      </view>
+      <view class="my_push" bindtap="goPush">我要发布</view>
+    </view>
+  </view>
+  <view class="my_options">
+    <view class="option" bindtap="pushManagement">
+      <view class="option_left">
+        <image class="option_icon" src="../../images/push_guan.png"></image>
+        <view class="option_label">发布管理</view>
+      </view>
+      <image class="right_icon" src="../../images/right.png"></image>
+    </view>
+    <!-- <view class="option">
+      <view class="option_left">
+        <image class="option_icon" src="../../images/top_up.png"></image>
+        <view class="option_label">充值</view>
+      </view>
+      <image class="right_icon" src="../../images/right.png"></image>
+    </view> -->
+  </view>
 </view>

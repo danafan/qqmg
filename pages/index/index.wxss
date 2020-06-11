@@ -66,7 +66,7 @@
 }
 
 .message_icon {
-  width: 40rpx;
+  width: 48rpx;
   height: 48rpx;
 }
 
@@ -81,7 +81,6 @@
 /* 广播 */
 
 .radio_box {
-  /* border-bottom: 1px solid #dbdbdb; */
   margin: 0 auto 10rpx;
   width: 80%;
   height: 70rpx;
@@ -176,5 +175,5 @@
   height: 70rpx;
   line-height: 70rpx;
   font-size: 26rpx;
-  color: #707070;
+  color: #f7a908;
 }

@@ -1,9 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/detail/detail",
     "pages/service/service",
     "pages/push/push",
-    "pages/my/my"
+    "pages/management/management",
+    "pages/my/my",
+    "pages/auth/auth",
+    "pages/sd/asjdh"
   ],
   "tabBar": {
     "color": "#a9b7b7",
@@ -37,8 +41,8 @@
     ]
   },
   "window": {
-    "backgroundColor":"#a1e81a",
-    "enablePullDownRefresh":true,
+    "backgroundColor": "#a1e81a",
+    "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#a1e81a",
     "navigationBarTitleText": "青青芒果",

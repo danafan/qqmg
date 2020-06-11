@@ -1,0 +1,38 @@
+<!--pages/management/management.wxml-->
+<scroll-view>
+  <!-- 顶部提示 -->
+  <view class="prompt">
+    为了给用户提供优质准确的信息服务，已成交的信息请您及时下架！
+  </view>
+  <!-- 信息列表 -->
+  <view class="info_item">
+    <image class="goods_img" src="../../images/banner_02.jpg"></image>
+    <view class="right_content">
+      <view class="info_title">这头牛的两只眼睛像铜铃一样大,两只弯角青里透亮,特别是那一身黄毛,像绸子一样光亮</view>
+      <view class="content_bottom">
+        <view class="time">发布时间：2020-05-26</view>
+        <view class="shelves">下架</view>
+      </view>
+    </view>
+  </view>
+  <view class="info_item">
+    <image class="goods_img" src="../../images/banner_02.jpg"></image>
+    <view class="right_content">
+      <view class="info_title">这头牛的两只眼睛像铜铃一样大,两只弯角青里透亮,特别是那一身黄毛,像绸子一样光亮</view>
+      <view class="content_bottom">
+        <view class="time">发布时间：2020-05-26</view>
+        <view class="shelves">下架</view>
+      </view>
+    </view>
+  </view>
+  <view class="info_item">
+    <image class="goods_img" src="../../images/banner_02.jpg"></image>
+    <view class="right_content">
+      <view class="info_title">这头牛的两只眼睛像铜铃一样大,两只弯角青里透亮,特别是那一身黄毛,像绸子一样光亮</view>
+      <view class="content_bottom">
+        <view class="time">发布时间：2020-05-26</view>
+        <view class="shelves">下架</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
