@@ -1,4 +1,7 @@
 <!--pages/auth/auth.wxml-->
-<view>
-  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+<view class="auth_box">
+  <image class="logo" src="../../images/mangguo.png"></image>
+  <view class="title">-- 青青芒果 便利生活 --</view>
+  <view class="toast">免费的本地信息服务平台</view>
+  <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">一键登录</button>
 </view>

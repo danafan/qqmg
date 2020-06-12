@@ -1,4 +1,4 @@
-// pages/sd/asjdh.js
+// pages/agreement/agreement.js
 Page({
 
   /**

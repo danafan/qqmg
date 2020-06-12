@@ -1,20 +1,17 @@
 /**index.wxss**/
-
-.top_back {
-  background: #a1e81a;
-  width: 100%;
-  height: 280rpx;
-}
-
-.content_box {
+.index_container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
+  overflow-y: scroll;
+}
+.top_back {
+  background: #a1e81a;
+  width: 100%;
+  height: 230rpx;
+  border-radius: 0 0 28rpx 28rpx;
 }
 
 .search_box {
@@ -28,8 +25,10 @@
 }
 
 .search_left {
+  margin-right: 15rpx;
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 
 .location_icon {
@@ -39,12 +38,11 @@
 
 .location_text {
   margin-left: 5rpx;
-  margin-right: 30rpx;
   font-size: 24rpx;
   color: #fff;
 }
 
-.search_input {
+/* .search_input {
   border-radius: 32rpx;
   background: rgba(255, 255, 255, 0.5);
   width: 500rpx;
@@ -63,60 +61,49 @@
 .input_text {
   font-size: 26rpx;
   color: #fff;
-}
+} */
 
 .message_icon {
+  margin-left: 15rpx;
   width: 48rpx;
   height: 48rpx;
+  z-index: 1;
 }
 
 .content {
-  flex: 1;
-  overflow-y: scroll;
-  background: #fff;
-  border-radius: 80rpx 80rpx 0 0;
-  padding: 15rpx;
+  padding: 0 15rpx 15rpx;
 }
-
 /* 广播 */
-
-.radio_box {
-  margin: 0 auto 10rpx;
-  width: 80%;
-  height: 70rpx;
-  display: flex;
-  align-items: center;
-}
-
-.radio_icon {
-  margin-right: 10rpx;
-  width: 42rpx;
-  height: 42rpx;
-}
-
 .swiper_box {
+  border-radius: 32rpx;
+  background: rgba(255, 255, 255, 0.3);
   flex: 1;
-  height: 50rpx;
+  height: 60rpx;
+  z-index: 1;
 }
 
 .radio_txt {
-  font-size: 26rpx;
-  color: #333;
-  line-height: 50rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  font-size: 28rpx;
+  color: #fff;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
-  
+  justify-content: center;
 }
 
 .cate_name {
-  color: #f7a908;
+  color: red;
 }
 
 /* banner */
 
 .banner_box {
+  margin: 0 auto;
   border-radius: 20rpx;
-  width: 100%;
+  width: 98%;
   height: 280rpx;
 }
 

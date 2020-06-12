@@ -94,6 +94,10 @@ Page({
     ], //服务列表
     show_index: 0, //解决顶部滑动bug
   },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
+  },
   onLoad(option) {
     if (option.index) {
       this.setData({

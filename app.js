@@ -19,6 +19,11 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    shareObj:{
+      title: '免费的本地信息服务平台',
+      imageUrl: "/images/banner_01.png",
+      path: '/pages/index/index'
+    }
   }
 })

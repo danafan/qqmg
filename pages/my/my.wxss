@@ -11,15 +11,21 @@
 .my_back {
   background: #a1e81a;
   width: 100%;
-  height: 300rpx;
+  height: 250rpx;
   position: relative;
 }
-
+.my_back_img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .my_info {
   border-radius: 15rpx;
   background: #fff;
   position: absolute;
-  top: 150rpx;
+  top: 110rpx;
   left: 50%;
   transform: translate(-50%);
   width: 700rpx;
@@ -41,7 +47,7 @@
   background: #fff;
   position: relative;
   top: -80rpx;
-  border: 1px solid #8a8a8a;
+  border: 1px solid #e6e6e6;
   width: 180rpx;
   height: 180rpx;
   border-radius: 50%;
@@ -60,6 +66,9 @@
   font-size: 32rpx;
   color: #333;
   font-weight: 700;
+}
+.hui_name{
+  color: #8a8a8a;
 }
 
 .vip_box {

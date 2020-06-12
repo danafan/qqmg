@@ -1,5 +1,5 @@
 <!--pages/push/push.wxml-->
-<scroll-view scroll-y="{{sysScroll}}" >
+<scroll-view scroll-y="{{sysScroll}}">
   <!-- 顶部提示 -->
   <view class="prompt">
     <view>青青芒果向您提供免费信息发布服务，发布信息请遵守国家法律法规，信息内容和图片不能包含联系方式、敏感词汇等信息！</view>
@@ -14,10 +14,10 @@
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{category_list}}" range-key="name" header-text="请选择信息类别">
     <view class="info_type">
       <view class="info_left">
-      <view class="info_label">信息类别</view>
-      <view class="info_text">{{category_text == ''?'请选择（必选）':category_text}}</view>
-    </view>
-    <image class="info_right" src="../../images/right.png"></image>
+        <view class="info_label">信息类别</view>
+        <view class="info_text">{{category_text == ''?'请选择（必选）':category_text}}</view>
+      </view>
+      <image class="info_right" src="../../images/right.png"></image>
     </view>
   </picker>
   <!-- 标题 -->
@@ -60,6 +60,13 @@
   <view class="title">
     <view class="title_label">联系电话</view>
     <input class="title_input" cursor-spacing="10" type="number" value="{{contact_phone}}" placeholder="请输入联系电话（必填）" bindinput="changePhone" />
+  </view>
+  <view class="label_box">
+    <view class="radio_box" bindtap="agree">
+      <view class="yuan" wx:if="{{agree}}"></view>
+    </view>
+    <text>我已阅读并且同意</text>
+    <text class="xuzhi" bindtap="goAgreement">【发布协议】</text>
   </view>
   <!-- 发布按钮 -->
   <view class="push_button" bindtap="pushNow">立即发布</view>

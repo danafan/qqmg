@@ -26,7 +26,7 @@ Page({
   //分享自定义
   onShareAppMessage: function(res) {
     return {
-      title: '这个小程序有点厉害，范玉龙做的',
+      title: this.data.dateilObj.title,
       imageUrl: this.data.dateilObj.images[0],
       path: '/pages/detail/detail'
     }

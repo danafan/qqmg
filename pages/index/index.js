@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    location:"杭州",
     swipers_data: {
       radio_list: [{
         id: "1",
@@ -67,6 +68,54 @@ Page({
         create_time: "昨天",
         browse: "108"
       }]
+  },
+  /**
+  * 生命周期函数--监听页面加载
+  */
+  onLoad: function (options) {
+    // this.getAddressDetail();
+  },
+
+  /**
+     * 获取地理位置信息详情
+     */
+  getAddressDetail: function () {
+    let that = this;
+    wx.getLocation({
+      type: 'wgs84',// 参考系
+      success: function (res) {
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        // 构建请求地址
+        var qqMapApi = 'http://apis.map.qq.com/ws/geocoder/v1/' + "?location=" + latitude + ',' +
+          longitude + "&key=" + 'XVLBZ-BSU66-ULJSQ-MFGXD-TM7GZ-55F2M' + "&get_poi=1";
+        that.sendRequest(qqMapApi);
+      }
+    })
+  },
+  sendRequest: function (qqMapApi) {
+    let that = this;
+    // 调用请求
+    wx.request({
+      url: qqMapApi,
+      data: {},
+      method: 'GET',
+      success: (res) => {
+        if (res.statusCode == 200 && res.data.status == 0) {
+          console.log(res.data.result.address_component)
+          // 从返回值中提取需要的业务地理信息数据
+          that.setData({ location: res.data.result.address_component.city });
+          // that.setData({ province: res.data.result.address_component.province });
+          // that.setData({ city: res.data.result.address_component.city });
+          // that.setData({ district: res.data.result.address_component.district });
+          // that.setData({ street: res.data.result.address_component.street });
+        }
+      }
+    })
+  },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
   },
   onPullDownRefresh: function() {
     //显示加载动画

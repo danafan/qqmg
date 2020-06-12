@@ -11,6 +11,16 @@ Page({
     }, //后台获取的用户信息
     wx_user_info: {}, //微信用户信息
   },
+  //点击头像登录
+  login(){
+    wx.navigateTo({
+      url: '/pages/auth/auth',
+    });
+  },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
+  },
   onShow() {
     if (!app.globalData.userInfo) {
       console.log("未登录")

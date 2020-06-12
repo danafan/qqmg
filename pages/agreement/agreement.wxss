@@ -1,0 +1,16 @@
+/* pages/agreement/agreement.wxss */
+.aggree_box{
+  box-sizing: border-box;
+  padding: 15rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.hong{
+  color: red;
+}
+.agree_title{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+}

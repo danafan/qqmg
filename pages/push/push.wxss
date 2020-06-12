@@ -148,6 +148,34 @@
   width: 32rpx;
   height: 32rpx;
 }
+.label_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+}
+.radio_box{
+  margin-right: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border:1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.yuan{
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+  background: #a1e81a;
+}
+
+.xuzhi{
+  color: red;
+}
 .push_button{
   border-radius: 40rpx;
   margin: 60rpx auto;

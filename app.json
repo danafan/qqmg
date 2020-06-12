@@ -1,14 +1,19 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/push/push",
+    "pages/auth/auth",
     "pages/detail/detail",
     "pages/service/service",
-    "pages/push/push",
     "pages/management/management",
-    "pages/my/my",
-    "pages/auth/auth",
-    "pages/sd/asjdh"
+    "pages/agreement/agreement",
+    "pages/my/my"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+    }
+  },
   "tabBar": {
     "color": "#a9b7b7",
     "selectedColor": "#a1e81a",

@@ -67,7 +67,12 @@ Page({
     }], //所有的标签列表
     upload_images: [], //选择的图片地址列表（可传递，需处理）
     contact: "", //联系人（可传递）
-    contact_phone: "" //联系电话（可传递）
+    contact_phone: "", //联系电话（可传递）
+    agree:false,      //是否同意发布须知
+  },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
   },
   onLoad() {
     if (!app.globalData.userInfo) {
@@ -189,6 +194,8 @@ Page({
         this.toast("请输入联系人");
       } else if (this.data.contact_phone == "") {
         this.toast("请输入联系电话");
+      } else if (!this.data.agree) {
+        this.toast("请阅读并同意发布协议！");
       } else {
         let req = {
           active_category_id: this.data.active_category_id,
@@ -221,6 +228,18 @@ Page({
       icon: "none",
       mask: true,
       duration: 1500
+    })
+  },
+  //点击是否同意协议
+  agree(){
+    this.setData({
+      agree: !this.data.agree
+    })
+  },
+  //查看协议
+  goAgreement() {
+    wx.navigateTo({
+      url: "/pages/agreement/agreement"
     })
   },
 

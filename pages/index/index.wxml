@@ -1,85 +1,84 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="top_back"></view>
-  <view class="content_box">
+<view class="index_container">
+  <view class="top_back">
     <view class="search_box">
       <view class="search_left">
         <image class="location_icon" src="../../images/location_icon.png"></image>
-        <view class="location_text">杭州</view>
-        <view class="search_input">
+        <view class="location_text">{{location}}</view>
+        <!-- <view class="search_input">
           <image class="search_icon" src="../../images/search_icon.png"></image>
           <view class="input_text">请输入搜索内容</view>
-        </view>
+        </view> -->
       </view>
-      <image class="message_icon" src="../../images/sign_in.png"></image>
-    </view>
-    <view class="content">
-      <!-- 广播 -->
-      <view class="radio_box">
-        <image class="radio_icon" src="../../images/radio.png"></image>
-        <swiper class="swiper_box" autoplay="true" interval="5000" circular="true" vertical="true">
-          <swiper-item wx:for="{{swipers_data.radio_list}}" wx:key="id">
-            <view class="radio_txt" bindtap="detail">【{{item.username}}】刚刚发布了
-              <view class="cate_name">{{item.type_text}}</view>
-            </view>
-          </swiper-item>
-        </swiper>
-      </view>
-      <!-- 轮播图 -->
-      <swiper class="banner_box" autoplay="true" interval="3000" circular="true" indicator-dots="{{true}}" indicator-color="rgba(0,0,0,.1)" indicator-active-color="#a1e81a">
-        <swiper-item wx:for="{{swipers_data.banner_list}}" wx:key="id">
-          <image class="banner_img" src="{{item.img_url}}"></image>
+      <swiper class="swiper_box" autoplay="true" interval="5000" circular="true" vertical="true">
+        <swiper-item wx:for="{{swipers_data.radio_list}}" wx:key="id">
+          <view class="radio_txt" bindtap="detail">
+            <text>'{{item.username}}'发布了</text>
+            <text class="cate_name">【{{item.type_text}}】</text>
+          </view>
         </swiper-item>
       </swiper>
-      <!-- 分类 -->
-      <view class="category_row">
-        <view class="category_item" data-index="1" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_01.png"></image>
-          <view class="cate_txt">招聘求职</view>
+      <image class="message_icon" src="../../images/sign_in.png"></image>
+    </view>
+    <view class="content_box">
+      <view class="content">
+        <!-- 轮播图 -->
+        <swiper class="banner_box" autoplay="true" interval="5000" duration="80" circular="true" indicator-dots="{{true}}" indicator-color="rgba(0,0,0,.1)" indicator-active-color="#a1e81a">
+          <swiper-item wx:for="{{swipers_data.banner_list}}" wx:key="id">
+            <image class="banner_img" src="{{item.img_url}}"></image>
+          </swiper-item>
+        </swiper>
+        <!-- 分类 -->
+        <view class="category_row">
+          <view class="category_item" data-index="1" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_01.png"></image>
+            <view class="cate_txt">招聘求职</view>
+          </view>
+          <view class="category_item" data-index="2" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_07.png"></image>
+            <view class="cate_txt">房屋租售</view>
+          </view>
+          <view class="category_item" data-index="3" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_03.png"></image>
+            <view class="cate_txt">店铺转让</view>
+          </view>
+          <view class="category_item" data-index="4" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_04.png"></image>
+            <view class="cate_txt">汽车交易</view>
+          </view>
         </view>
-        <view class="category_item" data-index="2" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_07.png"></image>
-          <view class="cate_txt">房屋租售</view>
+        <view class="category_row">
+          <view class="category_item" data-index="5" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_05.png"></image>
+            <view class="cate_txt">牲畜交易</view>
+          </view>
+          <view class="category_item" data-index="6" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_06.png"></image>
+            <view class="cate_txt">二手物品</view>
+          </view>
+          <view class="category_item" data-index="7" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_02.png"></image>
+            <view class="cate_txt">家政服务</view>
+          </view>
+          <view class="category_item" data-index="8" bindtap="service">
+            <image class="cate_icon" src="../../images/cate_08.png"></image>
+            <view class="cate_txt">农副产品</view>
+          </view>
         </view>
-        <view class="category_item" data-index="3" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_03.png"></image>
-          <view class="cate_txt">店铺转让</view>
+        <!-- 热门发布 -->
+        <view class="hot_box">
+          <view class="hot_left">
+            <view class="line"></view>
+            <view class="hot_text">最新发布</view>
+          </view>
+          <view class="hot_right" data-index="0" bindtap="service">查看全部</view>
         </view>
-        <view class="category_item" data-index="4" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_04.png"></image>
-          <view class="cate_txt">汽车交易</view>
-        </view>
+        <!-- 发布列表 -->
+        <push_item wx:for="{{info_list}}" wx:key="id" infoItem="{{item}}" />
       </view>
-      <view class="category_row">
-        <view class="category_item"  data-index="5" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_05.png"></image>
-          <view class="cate_txt">牲畜交易</view>
-        </view>
-        <view class="category_item" data-index="6" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_06.png"></image>
-          <view class="cate_txt">二手物品</view>
-        </view>
-        <view class="category_item" data-index="7" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_02.png"></image>
-          <view class="cate_txt">家政服务</view>
-        </view>
-        <view class="category_item" data-index="8" bindtap="service">
-          <image class="cate_icon" src="../../images/cate_08.png"></image>
-          <view class="cate_txt">农副产品</view>
-        </view>
-      </view>
-      <!-- 热门发布 -->
-      <view class="hot_box">
-        <view class="hot_left">
-          <view class="line"></view>
-          <view class="hot_text">最新发布</view>
-        </view>
-        <view class="hot_right" data-index="0" bindtap="service">查看全部</view>
-      </view>
-      <!-- 发布列表 -->
-      <push_item wx:for="{{info_list}}" wx:key="id" infoItem="{{item}}"/>
     </view>
   </view>
+
 
 
 </view>
