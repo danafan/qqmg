@@ -139,7 +139,7 @@ Page({
   //点击跳转到服务页面
   service(e){
     let i = e.currentTarget.dataset.index;
-    wx.reLaunch({
+    wx.navigateTo({
       url: '/pages/service/service?index=' + i
     })
   },

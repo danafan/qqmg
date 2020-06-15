@@ -48,7 +48,7 @@
       </view>
       <!-- 描述 -->
       <view class="desc_box">
-        <text class="desc_title">描述：</text>
+        <text class="desc_title">{{dateilObj.contact}}：</text>
         <text class="desc_content">{{dateilObj.desc}}</text>
       </view>
       <!-- 图片 -->

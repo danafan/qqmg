@@ -7,8 +7,8 @@ App({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: res => {
+              console.log(res);
               this.globalData.userInfo = res.userInfo;
-              console.log(this.globalData.userInfo);
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }

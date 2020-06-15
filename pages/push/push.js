@@ -65,13 +65,14 @@ Page({
       id: "8",
       text: "颜色正"
     }], //所有的标签列表
-    upload_images: [], //选择的图片地址列表（可传递，需处理）
+    upload_files: [], //选择的文件列表（可传递，需处理）
+    file_type: "", //上传的文件类型
     contact: "", //联系人（可传递）
     contact_phone: "", //联系电话（可传递）
-    agree:false,      //是否同意发布须知
+    agree: false, //是否同意发布须知
   },
   //分享自定义
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return app.globalData.shareObj
   },
   onLoad() {
@@ -143,26 +144,51 @@ Page({
   //点击选择图片
   chooseImage() {
     var that = this;
-    wx.chooseImage({
-      count: 9,
-      success(res) {
-        if (that.data.upload_images.length + res.tempFilePaths.length > 9) {
-          that.toast("图片不能超过9张");
-        } else {
-          that.setData({
-            upload_images: [...that.data.upload_images, ...res.tempFilePaths]
-          });
+    if (this.data.file_type == 'image' && this.data.upload_files.length > 0) {
+      wx.chooseImage({
+        count: 9,
+        success(res) {
+          if (that.data.upload_files.length + res.tempFilePaths.length > 9) {
+            that.toast("图片不能超过9张");
+          } else {
+            let arr = [];
+            res.tempFilePaths.map(item => {
+              let obj = {
+                tempFilePath: item
+              }
+              arr.push(obj);
+            })
+            that.setData({
+              upload_files: [...that.data.upload_files, ...arr]
+            });
+          }
         }
-      }
-    })
+      })
+    } else {
+      wx.chooseMedia({
+        count: 9,
+        mediaType: ['image', 'video'],
+        sourceType: ['album', 'camera'],
+        maxDuration: 8,
+        camera: 'back',
+        success(res) {
+          that.setData({
+            file_type: res.type,
+            upload_files: [...that.data.upload_files, ...res.tempFiles]
+          })
+        }
+      })
+    }
+    
+
   },
   //点击删除图片
   deleteImg(e) {
     let index = e.currentTarget.dataset.index;
-    let images = this.data.upload_images;
+    let images = this.data.upload_files;
     images.splice(index, 1);
     this.setData({
-      upload_images: images
+      upload_files: images
     })
   },
   //监听联系人
@@ -231,7 +257,7 @@ Page({
     })
   },
   //点击是否同意协议
-  agree(){
+  agree() {
     this.setData({
       agree: !this.data.agree
     })

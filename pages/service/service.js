@@ -42,60 +42,49 @@ Page({
     active_index: 0, //默认选中的顶部导航下标
     active_cate_id: "", //选中的导航id
     service_list: [{
-        id: "1",
-        goods_img: "https://pic2.58cdn.com.cn/anjuke_58/0b309b722c5fb413046e9a53262a34e0?w=240&h=180&ss=1&crop=1&cpos=middle&w=240&h=180&crop=1&t=1",
-        title: "崇华小区，房屋出租，拎包入住",
-        category: "房屋出租",
-        describes: "房子采光好，环境整洁，交通便利，生活超级便利，离地铁站近，周边有菜市场",
-        tags: ['采光好', '拎包入住', '满五唯一'],
-        browse: "108",
-        phone: "13067882143"
-      },
-      {
-        id: "2",
-        goods_img: "../../images/banner_02.jpg",
-        title: "二手商品转让",
-        category: "二手物品",
-        describes: "本人有一个限量款马克杯，九成新，现忍痛割爱",
-        tags: ['九成新', '保值'],
-        browse: "10",
-        phone: "13067882143"
-      },
-      {
-        id: "3",
-        goods_img: "../../images/banner_03.jpg",
-        title: "卖20头奶牛",
-        category: "牲畜交易",
-        describes: "育肥牛，膘好",
-        tags: ['口小'],
-        browse: "8",
-        phone: "13067882143"
-      },
-      {
-        id: "4",
-        goods_img: "../../images/banner_01.png",
-        title: "2020款雅阁低价转让，看好的来",
-        category: "汽车交易",
-        describes: "新款雅阁，电动天窗，因本人去外地所以诚信转让",
-        tags: ['保养好', '无划痕', '无事故', '白色', '高配', '干净'],
-        browse: "30",
-        phone: "13067882143"
-      },
-      {
-        id: "5",
-        goods_img: "../../images/banner_03.jpg",
-        title: "崇华小区，房屋出租，拎包入住",
-        category: "房屋出租",
-        describes: "房子采光好，环境整洁，交通便利，生活超级便利，离地铁站近，周边有菜市场",
-        tags: ['采光好', '拎包入住', '满五唯一'],
-        browse: "108",
-        phone: "13067882143"
-      }
-    ], //服务列表
+      id: "1",
+      user_img: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1165765833,86180705&fm=26&gp=0.jpg",
+      username: "胖葫芦",
+      phone: "13067882143",
+      info_type: "房屋租售",
+      taps: ["干净整洁", "家电齐全", "交通便利"],
+      desc: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
+      imgs: [
+        "http://img5.imgtn.bdimg.com/it/u=276815822,2703331779&fm=26&gp=0.jpg", "http://img5.imgtn.bdimg.com/it/u=234393529,3203191822&fm=26&gp=0.jpg", "http://img4.imgtn.bdimg.com/it/u=2426846869,4265052253&fm=26&gp=0.jpg", "http://img3.imgtn.bdimg.com/it/u=2362296928,3787617057&fm=26&gp=0.jpg", "http://img1.imgtn.bdimg.com/it/u=4027125397,1071762676&fm=15&gp=0.jpg"
+      ],
+      create_time: "3分钟前",
+      browse: "12"
+    }, {
+      id: "2",
+      user_img: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1522381966,644466171&fm=26&gp=0.jpg",
+      username: "@听雨",
+      phone: "13067882143",
+      info_type: "牲畜交易",
+      taps: ["膘肥体壮", "黑白花", "产奶量高"],
+      desc: "这头牛的两只眼睛像铜铃一样大,两只弯角青里透亮,特别是那一身黄毛,像绸子一样光亮",
+      imgs: [
+        "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=694357891,2697756894&fm=26&gp=0.jpg", "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1410842032,2730421252&fm=26&gp=0.jpg", "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1559105924,2340006983&fm=26&gp=0.jpg"
+      ],
+      create_time: "8小时前",
+      browse: "6"
+    }, {
+      id: "3",
+      user_img: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1629861,1032092665&fm=11&gp=0.jpg",
+      username: "蓝天白云",
+      phone: "13067882143",
+      info_type: "招聘求职",
+      taps: ["高薪", "不加班", "法定假日", "免费零食"],
+      desc: "公司工作环境优雅，同事相处和睦，法定节假日，生日礼物",
+      imgs: [
+        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2728969359,3430466718&fm=26&gp=0.jpg", "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2615551809,611271473&fm=15&gp=0.jpg", "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2476494870,1509703343&fm=26&gp=0.jpg", "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1674318272,2224049709&fm=15&gp=0.jpg", "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1236388489,293554175&fm=26&gp=0.jpg", "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1492600424,36195930&fm=26&gp=0.jpg", "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1404254628,3315059032&fm=26&gp=0.jpg", "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=343243997,1469454983&fm=26&gp=0.jpg"
+      ],
+      create_time: "8小时前",
+      browse: "6"
+    }], //服务列表
     show_index: 0, //解决顶部滑动bug
   },
   //分享自定义
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return app.globalData.shareObj
   },
   onLoad(option) {

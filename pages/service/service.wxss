@@ -46,7 +46,7 @@
   padding: 40rpx 20rpx 0;
 }
 
-.adver_item {
+/* .adver_item {
   margin-bottom: 50rpx;
   border-radius: 15rpx;
   width: 100%;
@@ -148,4 +148,4 @@
 .phone_icon{
   width: 48rpx;
   height: 48rpx;
-}
+} */

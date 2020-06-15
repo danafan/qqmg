@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="index_container">
+<!-- <official-account></official-account> -->
   <view class="top_back">
     <view class="search_box">
       <view class="search_left">

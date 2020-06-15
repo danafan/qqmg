@@ -1,0 +1,12 @@
+<!--pages/category/category.wxml-->
+<view class="category_box">
+  <view class="title">--- 请选择您要发布的类型 ---</view>
+  <view class="cate_list">
+    <view class="cate_but cate_but_01 {{index == 1 || index == 5 ? 'cate_but_02' : index == 2 || index == 7 ? 'cate_but_03' : ''}}" wx:for="{{categoryList}}" wx:key="id">
+     <picker range-key="val" bindchange="bindPickerChange" value="{{index}}" range="{{item.types}}">
+     {{item.name}}
+    </picker>
+    </view>
+  </view>
+  <view class="cate_toast">类型越准确，更加容易被其他粉丝看到哦～</view>
+</view>

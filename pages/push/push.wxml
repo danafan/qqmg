@@ -40,13 +40,17 @@
       <text class="max_imgs">（最多9张）</text>
     </view>
     <view class="camera_box">
-      <view class="show_img_box" wx:for="{{upload_images}}" wx:key="*this">
-        <image class="show_img" src="{{item}}"></image>
+      <view class="show_img_box" wx:for="{{upload_files}}" wx:key="*this">
+        <image class="show_img" src="{{item.tempFilePath}}" wx:if="{{file_type == 'image'}}"></image>
+        <video class="show_img" 
+          src="{{item.tempFilePath}}" 
+          duration="8"
+          wx:if="{{file_type == 'video'}}"></video>
         <view class="close" data-index="{{index}}" bindtap="deleteImg">
           <image class="close_icon" src="../../images/close.png"></image>
         </view>
       </view>
-      <view class="upload_box" bindtap="chooseImage" wx:if="{{upload_images.length < 9}}">
+      <view class="upload_box" bindtap="chooseImage" wx:if="{{file_type == '' || file_type == 'image' && upload_files.length < 9 || file_type == 'video' && upload_files.length < 1}}">
         <image class="camera_icon" src="../../images/camera.png"></image>
       </view>
     </view>

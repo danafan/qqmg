@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/category/category",
     "pages/index/index",
     "pages/push/push",
     "pages/auth/auth",
@@ -11,7 +12,7 @@
   ],
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
   "tabBar": {
@@ -26,13 +27,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/service/service",
-        "iconPath": "/images/service.png",
-        "selectedIconPath": "/images/service_active.png",
-        "text": "服务"
-      },
-      {
-        "pagePath": "pages/push/push",
+        "pagePath": "pages/category/category",
         "iconPath": "/images/push.png",
         "selectedIconPath": "/images/push_active.png",
         "text": "发布"
