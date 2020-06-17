@@ -1,12 +1,12 @@
 <!--components/PushItem/push_item.wxml-->
 <view class="push_container">
-  <image class="user_img" src="{{infoItem.user_img}}"></image>
+  <image class="user_img" src="{{infoItem.user_img}}" data-userid="{{infoItem.user_id}}" bindtap="getUserInfo"></image>
   <view class="push_content">
     <view class="userinfo">
-      <view class="username">{{infoItem.username}}</view>
+      <view class="username" data-userid="{{infoItem.user_id}}" bindtap="getUserInfo">{{infoItem.username}}</view>
       <view class="phone" data-phone="{{infoItem.phone}}" bindtap="call">拨打电话</view>
     </view>
-    <view class="taps">
+    <view class="taps" bindtap="detail">
       <view class="category_item">{{infoItem.info_type}}</view>
       <view class="tap" wx:for="{{infoItem.taps}}" wx:for-item="tap" wx:key="*this">{{tap}}</view>
     </view>

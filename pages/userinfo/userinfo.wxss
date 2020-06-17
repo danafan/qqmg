@@ -1,0 +1,30 @@
+/* pages/userinfo/userinfo.wxss */
+.user_info_box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.info_content{
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 15rpx 50rpx;
+}
+.user_img{
+  border-radius: 10rpx;
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 20rpx;
+}
+.nickname{
+  font-size: 42rpx;
+  color: #333;
+  font-weight: bold;
+}
+.menu_item{
+  font-size: 28rpx;
+  color: #707070;
+}

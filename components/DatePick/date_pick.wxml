@@ -1,0 +1,12 @@
+<!--components/DatePick/date_pick.wxml-->
+<view>
+  <picker mode="multiSelector" bindchange="bindStartMultiPickerChange" bindtap='pickerTap' bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="info_type">
+      <view class="info_left">
+        <view class="info_label">乘车时间</view>
+        <view class="info_text_null {{startDate != '' ? 'info_text':'' }}">{{startDate == '' ? '请选择乘车时间':startDate}}</view>
+      </view>
+      <image class="info_right" src="../../images/right.png"></image>
+    </view>
+  </picker>
+</view>

@@ -1,0 +1,12 @@
+<!--pages/userinfo/userinfo.wxml-->
+<view class="user_info_box">
+  <view class="info_content">
+    <image class="user_img" src="../../images/banner_02.jpg"></image>
+    <view class="user_text">
+      <view class="nickname">Ranbol</view>
+      <view class="menu_item">发布总数：12</view>
+    </view>
+  </view>
+  <!-- 信息列表 -->
+  <record_item wx:for="{{push_list}}" wx:key="id" Item="{{item}}" page_type="2" bind:getDetail="detail"/>
+</view>

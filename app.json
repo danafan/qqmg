@@ -1,12 +1,13 @@
 {
   "pages": [
-    "pages/category/category",
     "pages/index/index",
+    "pages/userinfo/userinfo",
+    "pages/management/management",
+    "pages/detail/detail",
+    "pages/category/category",
     "pages/push/push",
     "pages/auth/auth",
-    "pages/detail/detail",
     "pages/service/service",
-    "pages/management/management",
     "pages/agreement/agreement",
     "pages/my/my"
   ],

@@ -51,7 +51,6 @@ Component({
           phoneNumber: phone
         })
       }
-
     },
     //点击显示大图
     open(e) {
@@ -75,6 +74,13 @@ Component({
       wx.navigateTo({
         url: "/pages/detail/detail"
       })
+    },
+    //查看用户详情
+    getUserInfo(e){
+      let user_id = e.currentTarget.dataset.userid;
+      wx.navigateTo({
+        url: '/pages/userinfo/userinfo?userid=' + user_id,
+      });
     }
   }
 })

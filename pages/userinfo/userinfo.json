@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "发布管理",
+  "navigationBarTitleText": "用户信息",
   "usingComponents": {
     "record_item": "../../components/RecordItem/record_item"
   }

@@ -1,0 +1,17 @@
+<!--components/RecordItem/record_item.wxml-->
+<view class="record_item_box" data-id="{{Item.id}}" bindtap="detail">
+  <view class="create_time">
+    <text class="dd">02</text>
+    <text class="mm">3月</text>
+  </view>
+  <view class="info_item">
+    <image class="goods_img" src="{{Item.goods_img}}"></image>
+    <view class="right_content">
+      <view class="info_title">{{Item.title}}</view>
+      <view class="content_bottom">
+        <view class="time">浏览：{{Item.boswer}}</view>
+        <view class="shelves" data-id="{{Item.id}}" catchtap="shelves" wx:if="{{page_type == '1'}}">下架</view>
+      </view>
+    </view>
+  </view>
+</view>

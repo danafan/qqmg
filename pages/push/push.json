@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "发布",
-  "usingComponents": {}
+  "usingComponents": {
+    "date_pick": "../../components/DatePick/date_pick"
+  }
 }

@@ -51,7 +51,6 @@
 
 .title_box {
   margin-top: 20rpx;
-  margin-bottom: 20rpx;
   padding-left: 15rpx;
   width: 100%;
   display: flex;
@@ -59,19 +58,16 @@
   justify-content: space-between;
 }
 
-.goods_title {
+.user_info_box {
   flex: 1;
-  font-size: 36rpx;
-  color: #333;
-  font-weight: bold;
 }
 
 .share_box {
   margin-left: 10rpx;
-  border-radius: 40rpx 0 0 40rpx;
+  border-radius: 45rpx 0 0 45rpx;
   background: #f7a908;
-  width: 160rpx!important;
-  height: 80rpx;
+  width: 170rpx!important;
+  height: 90rpx;
   display: flex;
   align-items: center;
   padding: 0!important;
@@ -80,12 +76,12 @@
 .share_icon {
   margin-left: 10rpx;
   margin-right: 10rpx;
-  width: 46rpx;
-  height: 46rpx;
+  width: 48rpx;
+  height: 48rpx;
 }
 
 .share_text {
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #fff;
 }
 
@@ -156,6 +152,7 @@
 }
 
 .user_info_box {
+  flex: 1;
   height: 90rpx;
   display: flex;
   align-items: center;
@@ -163,17 +160,25 @@
 
 .user_img {
   margin-right: 10rpx;
-  width: 62rpx;
-  height: 62rpx;
+  width: 90rpx;
+  height: 90rpx;
   border-radius: 50%;
 }
 
 .nickname {
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: #234d76;
 }
-
+.cate_item_box{
+  border-radius: 5rpx;
+  margin-left: 15rpx;
+  background: #f7a908;
+  padding: 8rpx 15rpx;
+  font-size: 26rpx;
+  color: #fff;
+}
 .desc_box {
+  padding: 15rpx;
   font-size: 28rpx;
 }
 

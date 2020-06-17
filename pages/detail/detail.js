@@ -9,8 +9,8 @@ Page({
         "../../images/banner_02.jpg",
         "../../images/banner_03.jpg"
       ],
-      title: "崇化小区一楼出租,有天然气,干净整洁,领包入住",
       taps: ["天然气", "家电齐全", "拎包入住"],
+      cate_item:"出售",
       category_name: "房屋租售",
       create_time: "2020-05-26",
       browse: "132",
@@ -23,6 +23,9 @@ Page({
     current_index: 0, //默认选中图片的下标
     show_img: false, //默认不显示大图
     shu: 1, //默认banner当前数
+  },
+  onLoad(option){
+    console.log(option)
   },
   //分享自定义
   onShareAppMessage: function(res) {

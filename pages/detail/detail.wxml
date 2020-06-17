@@ -12,11 +12,21 @@
     </view>
     <!-- 标题和分享 -->
     <view class="title_box">
-      <view class="goods_title">{{dateilObj.title}}</view>
+      <!-- 个人头像 -->
+      <view class="user_info_box">
+        <image class="user_img" src="{{dateilObj.user_img}}"></image>
+        <view class="nickname">{{dateilObj.username}}</view>
+        <view class="cate_item_box">{{dateilObj.cate_item}}</view>
+      </view>
       <button class="share_box" open-type="share">
-          <image class="share_icon" src="../../images/share.png"></image>
-          <view class="share_text">分享</view>
+        <image class="share_icon" src="../../images/share.png"></image>
+        <view class="share_text">分享</view>
       </button>
+    </view>
+    <!-- 描述 -->
+    <view class="desc_box">
+      <text class="desc_title">{{dateilObj.contact}}：</text>
+      <text class="desc_content">{{dateilObj.desc}}</text>
     </view>
     <!-- 下面内容 -->
     <view class="content_box">
@@ -40,16 +50,6 @@
           <view class="cate_val_03">{{dateilObj.browse}}</view>
           <view class="cate_label">浏览人数</view>
         </view>
-      </view>
-      <!-- 个人头像 -->
-      <view class="user_info_box">
-        <image class="user_img" src="{{dateilObj.user_img}}"></image>
-        <view class="nickname">{{dateilObj.username}}</view>
-      </view>
-      <!-- 描述 -->
-      <view class="desc_box">
-        <text class="desc_title">{{dateilObj.contact}}：</text>
-        <text class="desc_content">{{dateilObj.desc}}</text>
       </view>
       <!-- 图片 -->
       <view class="big_imgs">

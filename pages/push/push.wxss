@@ -1,4 +1,12 @@
 /* pages/push/push.wxss */
+.push_box{
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; */
+  height: 500px;
+  /* overflow-y: scroll; */
+}
 .prompt{
   padding: 10rpx;
   background: #e6e6e6;
@@ -28,9 +36,14 @@
   font-size: 32rpx;
   color: #333;
 }
-.info_text{
+
+.info_text_null{
   font-size: 30rpx;
   color: #8a8a8a;
+}
+.info_text{
+  font-size: 30rpx;
+  color: #333;
 }
 .info_right{
   width: 32rpx;
@@ -56,7 +69,8 @@
   color: #333;
 }
 .describe_box{
-  padding: 25rpx 15rpx;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 25rpx 15rpx 15rpx;
 }
 .textarea{
   border:1px solid #e6e6e6;
@@ -69,8 +83,8 @@
   color: #333;
 }
 .info_taps{
+  margin-top: 25rpx;
   width: 100%;
-  padding: 15rpx;
   display: flex;
   flex-wrap: wrap;
 }
@@ -87,10 +101,18 @@
   background: #f7a908;
   color: #fff;
 }
+.sex_box{
+  margin-top: 25rpx;
+  display: flex;
+}
+.weui-cell,.weui-check__label{
+  width: 200rpx;
+  display: flex;
+}
 .upload_content{
   border-bottom: 1px solid #e6e6e6;
   width: 100%;
-  padding:0 15rpx 25rpx;
+  padding:25rpx 15rpx 15rpx;
 }
 .upload_label{
   margin-bottom: 25rpx;

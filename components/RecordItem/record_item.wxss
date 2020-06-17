@@ -1,0 +1,78 @@
+/* components/RecordItem/record_item.wxss */
+.record_item_box{
+  margin-bottom: 25rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 200rpx;
+  background: #fff;
+  box-shadow: 0 5rpx 5rpx #e6e6e6;
+  padding: 15rpx;
+}
+.create_time{
+  width: 130rpx;
+  height: 130rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dd{
+  margin-right: 3rpx;
+  position: relative;
+  bottom: 7rpx;
+  font-size: 52rpx;
+  color: #333;
+  font-weight: 700;
+}
+.mm{
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+.info_item{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.goods_img{
+  width: 150rpx;
+  height: 150rpx;
+}
+.right_content{
+  margin-left: 10rpx;
+  flex: 1;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info_title{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.content_bottom{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.time{
+  font-size: 24rpx;
+  color: #707070;
+}
+.shelves{
+  border:2rpx solid #f7a908;
+  width: 130rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #f7a908;
+}

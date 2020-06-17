@@ -5,14 +5,5 @@
     为了给用户提供优质准确的信息服务，已成交的信息请您及时下架！
   </view>
   <!-- 信息列表 -->
-  <view class="info_item" wx:for="{{push_list}}" wx:key="id" bindtap="detail">
-    <image class="goods_img" src="{{item.goods_img}}"></image>
-    <view class="right_content">
-      <view class="info_title">{{item.title}}</view>
-      <view class="content_bottom">
-        <view class="time">发布时间：{{item.create_time}}</view>
-        <view class="shelves" data-id="{{id}}" catchtap="shelves">下架</view>
-      </view>
-    </view>
-  </view>
+  <record_item wx:for="{{push_list}}" wx:key="id" Item="{{item}}" bind:getDetail="detail" bind:Shelves="shelves" page_type="1"/>
 </scroll-view>

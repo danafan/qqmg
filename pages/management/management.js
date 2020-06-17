@@ -7,39 +7,40 @@ Page({
         id:"1",
         goods_img:"../../images/banner_02.jpg",
         title:"室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        create_time:"2020-05-26"
+        boswer:"268"
       },
       {
         id: "2",
         goods_img: "../../images/banner_01.png",
         title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        create_time: "2020-05-26"
+        boswer: "268"
       },
       {
         id: "3",
         goods_img: "../../images/banner_03.jpg",
         title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        create_time: "2020-05-26"
+        boswer: "268"
       },
       {
         id: "4",
         goods_img: "../../images/banner_02.jpg",
         title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        create_time: "2020-05-26"
+        boswer: "268"
       },
       {
         id: "5",
         goods_img: "../../images/banner_01.png",
         title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        create_time: "2020-05-26"
+        boswer: "268"
       },
       {
         id: "6",
         goods_img: "../../images/banner_01.png",
         title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        create_time: "2020-05-26"
+        boswer: "268"
       },
-    ]
+    ],
+    active_id:"",   //点击的消息id
 
   },
   //分享自定义
@@ -47,13 +48,16 @@ Page({
     return app.globalData.shareObj
   },
   //点击进入详情
-  detail() {
+  detail(e) {
     wx.navigateTo({
-      url: "/pages/detail/detail"
+      url: "/pages/detail/detail?id=" + e.detail
     })
   },
   //下架
-  shelves(){
+  shelves(e){
+    this.setData({
+      active_id:e.detail
+    })
     wx.showModal({
       title: '提示',
       content: "确认下架该信息？",
