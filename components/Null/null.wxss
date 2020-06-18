@@ -1,0 +1,26 @@
+/* components/Null/null.wxss */
+.null_box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.null_icon{
+  width: 80rpx;
+  height: 80rpx;
+}
+.null_text{
+  font-size: 28rpx;
+  color: #bfbfbf;
+}
+.go_push{
+  margin-top: 10rpx;
+  background: #a1e81a;
+  border-radius: 35rpx;
+  width: 260rpx;
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #fff;
+}

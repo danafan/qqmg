@@ -1,4 +1,5 @@
 // pages/category/category.js
+const app = getApp();
 Page({
   data: {
     categoryList: [{
@@ -145,6 +146,10 @@ Page({
       }
     ], //一级和二级菜单
     level_01_id:"",    //选中的一级菜单
+  },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
   },
   //点击某一个一级菜单
   checkOneLevel(e){

@@ -7,5 +7,9 @@ Page({
     wx.navigateBack({
       delta: 1
     })
-  }
+  },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
+  },
 })

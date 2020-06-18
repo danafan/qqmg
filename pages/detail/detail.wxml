@@ -1,5 +1,10 @@
 <!--pages/detail/detail.wxml-->
 <view class="detail_box">
+  <!-- 分享进入的小提示 -->
+  <view class="toast_box" wx:if="{{isShare}}">
+    <image class="finger" src="../../images/finger.png"></image>
+    <view>点击左上角，有更多你可能感兴趣的信息哦～</view>
+  </view>
   <view class="scroll_box">
     <!-- 轮播图 -->
     <view class="banner_box">

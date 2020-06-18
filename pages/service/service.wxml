@@ -13,25 +13,5 @@
   <view class="advertising_list">
     <!-- 发布列表 -->
     <push_item wx:for="{{service_list}}" wx:key="id" infoItem="{{item}}" />
-    <!-- <view class="adver_item" wx:for="{{service_list}}" wx:key="id" bindtap="detail">
-      <image class="goods_img" src="{{item.goods_img}}"></image>
-      <view class="item_right">
-        <view class="right_top">
-          <view class="username">{{item.title}}</view>
-          <view class="tap">{{item.category}}</view>
-        </view>
-        <view class="describes">{{item.describes}}</view>
-        <view class="subs">
-          <view class="sub" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</view>
-        </view>
-        <view class="right_bottom">
-          <view class="browse">{{item.browse}}浏览</view>
-          <view class="buttons">
-            <image class="phone_icon" data-phone="{{item.phone}}" src="../../images/phone_icon.png" catchtap="call"></image>
-          </view>
-        </view>
-      </view>
-    </view> -->
-
   </view>
 </view>

@@ -11,15 +11,16 @@
   border-bottom: 1px solid #e6e6e6;
   width: 100%;
   display: flex;
-  padding: 30rpx 15rpx 50rpx;
+  padding: 30rpx 15rpx 80rpx;
 }
 .user_img{
   border-radius: 10rpx;
-  width: 150rpx;
-  height: 150rpx;
+  width: 120rpx;
+  height: 120rpx;
   margin-right: 20rpx;
 }
 .nickname{
+  margin-bottom: 10rpx;
   font-size: 42rpx;
   color: #333;
   font-weight: bold;

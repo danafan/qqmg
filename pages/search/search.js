@@ -1,46 +1,9 @@
-// pages/service/service.js
-var app = getApp();
+// pages/search/search.js
+const app = getApp();
 Page({
   data: {
-    category_list: [{
-        id: "0",
-        name: "全部"
-      },
-      {
-        id: "1",
-        name: "牲畜交易"
-      },
-      {
-        id: "2",
-        name: "农用物资"
-      },
-      {
-        id: "3",
-        name: "招聘求职"
-      },
-      {
-        id: "4",
-        name: "房产交易"
-      },
-      {
-        id: "5",
-        name: "二手物品"
-      },
-      {
-        id: "6",
-        name: "汽车交易"
-      },
-      {
-        id: "7",
-        name: "本地服务"
-      },
-      {
-        id: "8",
-        name: "打车拼车"
-      },
-    ], //所有类别
-    active_index: 0, //默认选中的顶部导航下标
-    active_cate_id: "", //选中的导航id
+    search_val: "", //输入的关键词
+    taps_list: ["种子", "化肥", "农药", "招聘", "求职", "出售", "出租", "求租", "求购", "家具家电", "电子产品", "交通工具", "日常用品", "轿车", "金融服务"], //标签列表
     service_list: [{
       id: "1",
       user_img: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1165765833,86180705&fm=26&gp=0.jpg",
@@ -80,44 +43,30 @@ Page({
       ],
       create_time: "8小时前",
       browse: "6"
-    }], //服务列表
-    show_index: 0, //解决顶部滑动bug
+    }, ], //信息列表
+    isNull:true,   //列表是否为空
   },
   //分享自定义
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     return app.globalData.shareObj
   },
-  onLoad(option) {
+  //监听输入
+  searchInput(e) {
     this.setData({
-      active_index: option.index == '-1' ? 0 : parseInt(option.index) + 1,
-      show_index: option.index >= 5 ? 5 : option.index == '-1' ? 0 : option.index
+      search_val: e.detail.value
     })
   },
-  //点击切换顶部导航
-  changeCurrent(e) {
-    let index = e.currentTarget.dataset.index;
-    this.setData({
-      active_index: index,
-      active_cate_id: this.data.category_list[index].id
-    })
-  },
-  //拨打电话
-  call(v) {
+  //点击我要发布
+  goPush() {
     if (!app.globalData.userInfo) {
       wx.navigateTo({
         url: '/pages/auth/auth',
       });
     } else {
-      let phone = v.currentTarget.dataset.phone;
-      wx.makePhoneCall({
-        phoneNumber: phone
+      wx.reLaunch({
+        url: '/pages/push/push'
       })
     }
   },
-  //点击进入详情
-  detail() {
-    wx.navigateTo({
-      url: "/pages/detail/detail"
-    })
-  }
+
 })

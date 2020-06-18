@@ -11,14 +11,14 @@ Page({
     }, //后台获取的用户信息
     wx_user_info: {}, //微信用户信息
   },
-  //点击头像登录
-  login(){
+  //登录
+  login() {
     wx.navigateTo({
       url: '/pages/auth/auth',
     });
   },
   //分享自定义
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return app.globalData.shareObj
   },
   onShow() {
@@ -48,18 +48,6 @@ Page({
     this.setData({
       res_user_info: userObj
     })
-  },
-  //点击我要发布
-  goPush() {
-    if (!app.globalData.userInfo) {
-      wx.navigateTo({
-        url: '/pages/auth/auth',
-      });
-    } else {
-      wx.reLaunch({
-        url: '/pages/push/push'
-      })
-    }
   },
   //发布管理
   pushManagement() {

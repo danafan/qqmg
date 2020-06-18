@@ -5,6 +5,7 @@
     <view class="user_text">
       <view class="nickname">Ranbol</view>
       <view class="menu_item">发布总数：12</view>
+      <view class="menu_item">活跃天数：8</view>
     </view>
   </view>
   <!-- 信息列表 -->

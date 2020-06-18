@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "首页",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "push_item":"../../components/PushItem/push_item"
+    "push_item":"../../components/PushItem/push_item",
+    "navigation": "../../components/Navigation/navigation"
   }
 }

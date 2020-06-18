@@ -23,16 +23,25 @@ Page({
     current_index: 0, //默认选中图片的下标
     show_img: false, //默认不显示大图
     shu: 1, //默认banner当前数
+    isShare:false,    //是否是分享页面进来的
+    current_id:"",    //当前信息的id
   },
   onLoad(option){
-    console.log(option)
+    this.setData({
+      current_id: option.id
+    })
+    if(option.isShare){
+      this.setData({
+        isShare: option.isShare
+      })
+    }
   },
   //分享自定义
   onShareAppMessage: function(res) {
     return {
-      title: this.data.dateilObj.title,
+      title: this.data.dateilObj.desc,
       imageUrl: this.data.dateilObj.images[0],
-      path: '/pages/detail/detail'
+      path: '/pages/detail/detail?id=' + this.data.current_id + "&isShare=" + this.data.isShare
     }
   },
   //监听banner变化

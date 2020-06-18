@@ -6,12 +6,12 @@
       <view class="username" data-userid="{{infoItem.user_id}}" bindtap="getUserInfo">{{infoItem.username}}</view>
       <view class="phone" data-phone="{{infoItem.phone}}" bindtap="call">拨打电话</view>
     </view>
-    <view class="taps" bindtap="detail">
+    <view class="taps" data-id="{{infoItem.id}}" bindtap="detail">
       <view class="category_item">{{infoItem.info_type}}</view>
       <view class="tap" wx:for="{{infoItem.taps}}" wx:for-item="tap" wx:key="*this">{{tap}}</view>
     </view>
-    <view class="describe" bindtap="detail">{{infoItem.desc}}</view>
-    <view class="all" bindtap="detail">全文</view>
+    <view class="describe" data-id="{{infoItem.id}}" bindtap="detail">{{infoItem.desc}}</view>
+    <view class="all" data-id="{{infoItem.id}}" bindtap="detail">全文</view>
     <view class="images">
       <image class="goods_img" wx:for="{{infoItem.imgs}}" wx:key="*this" wx:for-item="img_url" src="{{img_url}}" data-index="{{index}}" data-imgs="{{infoItem.imgs}}" bindtap="open"></image>
     </view>

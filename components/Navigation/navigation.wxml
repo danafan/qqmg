@@ -1,0 +1,13 @@
+<!--components/Navigation/navigation.wxml-->
+<view>
+  <view class='startBar' style='height:{{startBarHeight}}px'></view>
+  <view class="search_box" style="height:{{navgationHeight}}px">
+    <image class="location_icon" src="../../images/location_icon.png"></image>
+    <view class="location_text" bindtap="getLocationInfo">{{location}}</view>
+    <view class="search_input" bindtap="search">
+      <image class="search_icon" src="../../images/search_icon.png"></image>
+      <view class="input_text">请输入搜索内容</view>
+    </view>
+    <view class="zhan"></view>
+  </view>
+</view>

@@ -1,7 +1,7 @@
 <!--pages/my/my.wxml-->
 <view class="my_container">
   <view class="my_back">
-  <image class="my_back_img" src="../../images/top_back.png"></image>
+    <image class="my_back_img" src="../../images/top_back.png"></image>
     <view class="my_info">
       <image class="my_icon" src="{{wx_user_info.avatarUrl}}" wx:if="{{authStatus}}"></image>
       <view class="user_img_box" wx:else bindtap="login">
@@ -18,38 +18,38 @@
           </view>
           <view class="vip_toast">
             <text class="special">积分说明：</text>
-            <text>每签到或发布一次增加一积分，</text>
+            <text>活跃一天或发布一条增加一积分，</text>
             <text class="special">10</text>
             <text>积分为一个等级，达到</text>
             <text class="special">6</text>
-            <text>级以上发布的内容将自动置为热门</text>
+            <text>级以上服务号每周热门推送</text>
           </view>
         </view>
       </view>
       <view class="menu_list">
         <view class="menu_item">
+          <view class="item_num">{{res_user_info.signing_count}}</view>
+          <view class="item_label">活跃天数</view>
+        </view>
+        <view class="line"></view>
+        <view class="menu_item">
           <view class="item_num">{{res_user_info.vip_level}}</view>
-          <view class="item_label">VIP</view>
+          <view class="item_label">VIP等级</view>
         </view>
         <view class="line"></view>
         <view class="menu_item">
           <view class="item_num">{{res_user_info.push_count}}</view>
-          <view class="item_label">已发布</view>
-        </view>
-        <view class="line"></view>
-        <view class="menu_item">
-          <view class="item_num">{{res_user_info.signing_count}}</view>
-          <view class="item_label">已签到</view>
+          <view class="item_label">发布数量</view>
         </view>
       </view>
-      <view class="my_push" bindtap="goPush">我要发布</view>
+
     </view>
   </view>
   <view class="my_options">
     <view class="option" bindtap="pushManagement">
       <view class="option_left">
         <image class="option_icon" src="../../images/push_guan.png"></image>
-        <view class="option_label">发布管理</view>
+        <view class="option_label">我的发布</view>
       </view>
       <image class="right_icon" src="../../images/right.png"></image>
     </view>
@@ -61,4 +61,5 @@
       <image class="right_icon" src="../../images/right.png"></image>
     </view> -->
   </view>
+  <view class="my_push" bindtap="login" wx:if="{{!authStatus}}">登录</view>
 </view>

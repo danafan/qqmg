@@ -29,7 +29,7 @@
   left: 50%;
   transform: translate(-50%);
   width: 700rpx;
-  height: 580rpx;
+  height: 460rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,7 +120,7 @@
   position: absolute;
   top: 20rpx;
   font-size: 24rpx;
-  color: #dbdbdb;
+  color: #bfbfbf;
 }
 .special{
   color: #f7a908;
@@ -157,8 +157,7 @@
   font-weight: 700;
 }
 .my_push{
-  position: relative;
-  top: 50rpx;
+  margin: 50rpx auto 0;
   background: #a1e81a;
   border-radius: 39rpx;
   width: 300rpx;
@@ -170,7 +169,7 @@
 }
 
 .my_options{
-  margin-top: 460rpx;
+  margin-top: 340rpx;
   width: 100%;
   padding-left: 25rpx;
   padding-right: 25rpx;

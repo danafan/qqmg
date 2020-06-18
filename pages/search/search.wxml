@@ -1,0 +1,24 @@
+<!--pages/search/search.wxml-->
+<view class="search_box">
+  <!-- 顶部搜索栏 -->
+  <view class="search_input_box">
+    <view class="search_left">
+      <image class="search_icon" src="../../images/search_icon.png"></image>
+      <input class="search_input" placeholder-style="color:#fff" value="{{search_val}}" placeholder="输入标签关键词或点击热门标签" bindinput="searchInput" />
+    </view>
+    <view class="search_but">搜索</view>
+  </view>
+  <!-- 标签列表或列表为空 -->
+  <view class="taps_box" wx:if="{{isNull}}">
+    <view class="tap_title">热门标签</view>
+    <view class="taps_list">
+      <view class="tap_item" wx:for="{{taps_list}}" wx:key="*this">{{item}}</view>
+    </view>
+    <!-- 空 -->
+    <null_page toast_text="这里啥都没有，换个标签试试～"/>
+  </view>
+  <!-- 底部列表 -->
+  <view class="search_list" wx:else>
+    <push_item wx:for="{{service_list}}" wx:key="id" infoItem="{{item}}" />
+  </view>
+</view>

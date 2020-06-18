@@ -72,6 +72,10 @@ Page({
     //   })
     // }
   },
+  //分享自定义
+  onShareAppMessage: function (res) {
+    return app.globalData.shareObj
+  },
   //输入框输入
   changeInput(e) {
     this.setData({

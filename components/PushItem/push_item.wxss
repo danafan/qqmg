@@ -52,7 +52,7 @@
   border-radius: 8rpx;
   background: #f7a908;
   color: #fff;
-  font-size: 22rpx;
+  font-size: 26rpx;
   padding: 8rpx 12rpx;
 }
 .tap{
@@ -60,7 +60,7 @@
   border-radius: 8rpx;
   background: #a1e81a;
   color: #fff;
-  font-size: 20rpx;
+  font-size: 24rpx;
   padding: 5rpx 8rpx;
 }
 .describe {

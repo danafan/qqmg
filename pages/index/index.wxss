@@ -1,20 +1,17 @@
 /**index.wxss**/
+
 .index_container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
-}
-.top_back {
-  background: #a1e81a;
-  width: 100%;
-  height: 230rpx;
-  border-radius: 0 0 28rpx 28rpx;
+  display: flex;
+  flex-direction: column;
 }
 
 .search_box {
+  background: #a1e81a;
   padding-left: 15rpx;
   padding-right: 15rpx;
   width: 100%;
@@ -42,7 +39,7 @@
   color: #fff;
 }
 
-/* .search_input {
+.search_input {
   border-radius: 32rpx;
   background: rgba(255, 255, 255, 0.5);
   width: 500rpx;
@@ -61,7 +58,7 @@
 .input_text {
   font-size: 26rpx;
   color: #fff;
-} */
+}
 
 .message_icon {
   margin-left: 15rpx;
@@ -70,11 +67,9 @@
   z-index: 1;
 }
 
-.content {
-  padding: 0 15rpx 15rpx;
-}
 /* 广播 */
-.swiper_box {
+
+/* .swiper_box {
   border-radius: 32rpx;
   background: rgba(255, 255, 255, 0.3);
   flex: 1;
@@ -96,12 +91,32 @@
 
 .cate_name {
   color: red;
+} */
+
+.content_box {
+  flex: 1;
+  overflow-y: scroll;
 }
 
+.content {
+  padding: 0 15rpx 15rpx;
+}
+
+.top_back {
+  background: #a1e81a;
+  width: 100%;
+  height: 180rpx;
+  border-radius: 0 0 28rpx 28rpx;
+  position: relative;
+}
 /* banner */
 
 .banner_box {
-  margin: 0 auto;
+  position: absolute;
+  top: 20rpx;
+  left: 50%;
+  transform: translate(-50%);
+  /* margin: 0 auto; */
   border-radius: 20rpx;
   width: 98%;
   height: 280rpx;
@@ -112,53 +127,66 @@
   width: 100%;
   height: 100%;
 }
+
 /* 分类 */
-.category_row{
-  margin-top: 30rpx;
+
+.category_row {
+  margin-top: 160rpx;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
-.category_item{
+
+.category_item {
+  width: 25%;
+  margin-bottom: 40rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.cate_icon{
+
+.cate_icon {
   width: 90rpx;
   height: 90rpx;
 }
-.cate_txt{
+
+.cate_txt {
   font-size: 28rpx;
   color: #333;
 }
+
 /* 热门发布 */
-.hot_box{
-  margin-top: 50rpx;
-  margin-bottom: 30rpx;
+
+.hot_box {
+  margin-bottom: 20rpx;
   width: 100%;
   height: 70rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.hot_left{
+
+.hot_left {
   display: flex;
   align-items: center;
 }
-.line{
+
+.line {
   margin-right: 15rpx;
   background: #a1e81a;
-  width:10rpx;
+  width: 10rpx;
   height: 40rpx;
 }
-.hot_text{
+
+.hot_text {
   font-size: 36rpx;
   color: #333;
   font-weight: 800;
 }
-.hot_right{
+
+.hot_right {
   height: 70rpx;
   line-height: 70rpx;
   font-size: 26rpx;

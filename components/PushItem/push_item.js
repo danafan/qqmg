@@ -70,9 +70,10 @@ Component({
       wx.showTabBar()
     },
     //点击进入详情
-    detail() {
+    detail(e) {
+      let id = e.currentTarget.dataset.id;
       wx.navigateTo({
-        url: "/pages/detail/detail"
+        url: "/pages/detail/detail?id=" + id
       })
     },
     //查看用户详情
