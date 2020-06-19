@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="index_container">
   <!-- <official-account></official-account> -->
-  <navigation startBarHeight="{{startBarHeight}}" navgationHeight="{{navgationHeight}}" location="{{location}}"/>
+  <navigation startBarHeight="{{startBarHeight}}" navgationHeight="{{navgationHeight}}" location="{{location}}" bind:onEmit="openSet"/>
   <view class="content_box">
     <view class="top_back">
       <!-- 轮播图 -->

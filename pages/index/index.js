@@ -4,10 +4,9 @@ const app = getApp()
 //获取地理位置
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
-
 Page({
   data: {
-    location: "请选择",
+    location:"请选择",
     banner_list: [{
       id: "1",
       img_url: "../../images/banner_01.png"
@@ -103,39 +102,52 @@ Page({
   onLoad: function(options) {
     //获取顶部导航栏信息
     this.setNavigation();
-    // 实例化API核心类（获取地理位置）
+    //获取地理位置信息
+    this.wxLocationInfo();
+  },
+  //获取地理位置信息
+  wxLocationInfo() {
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success: () => {
+        this.wxGetLocation();
+      }
+    })
+  },
+  openSet(){
+    wx.openSetting({
+      success:(res) => {
+        this.wxGetLocation();
+      }
+    })
+  },
+  // wx.getLocation
+  wxGetLocation(){
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        app.globalData.locationObj.latitude = res.latitude;
+        app.globalData.locationObj.longitude = res.longitude;
+        let req = {
+          latitude: res.latitude,
+          longitude: res.longitude
+        }
+        this.getApi(req);
+      }
+    })
+  },
+  // api
+  getApi(req) {
     qqmapsdk = new QQMapWX({
       key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
     });
-  },
-  onShow: function() {
-    if (!app.globalData.locationObj.latitude) {
-      //获取地理位置信息
-      app.wxLocationInfo().then(res => {
-        //调用api
-        this.getReverse();
-      })
-    } else {
-      //调用api
-      this.getReverse();
-    }
-  },
-  //调用api
-  getReverse() {
-    // 调用接口
     qqmapsdk.reverseGeocoder({
-      location: {
-        latitude: app.globalData.locationObj.latitude,
-        longitude: app.globalData.locationObj.longitude
-      },
+      location: req,
       success: (res) => {
-        console.log(res)
+        app.globalData.locationObj.address = res.result.address_component.city;
         this.setData({
           location: res.result.address_component.city
         })
-      },
-      fail: (err) => {
-        console.log(err)
       }
     })
   },

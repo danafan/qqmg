@@ -1,4 +1,7 @@
 //app.js
+//获取地理位置
+var QQMapWX = require('./utils/qqmap-wx-jssdk.min.js');
+var qqmapsdk;
 App({
   onLaunch: function() {
     wx.getSetting({
@@ -6,10 +9,6 @@ App({
         if (res.authSetting['scope.userInfo']) {
           //获取用户信息
           this.wxUserInfo();
-        }
-        if (res.authSetting['scope.userLocation']) {
-          //获取地理位置信息
-          this.wxLocationInfo();
         }
       }
     })
@@ -22,27 +21,43 @@ App({
         success: res => {
           console.log(res);
           this.globalData.userInfo = res.userInfo;
-          // if (this.userInfoReadyCallback) {
-          //   this.userInfoReadyCallback(res)
-          // }
           resolve(res);
         }
       })
-  
+
     })
   },
   //获取地理位置信息
   wxLocationInfo() {
-    let that = this;
-    return new Promise((resolve, reject) => {
-      wx.getLocation({
-        type: 'wgs84',
-        success: (res) => {
-          that.globalData.locationObj.latitude = res.latitude;
-          that.globalData.locationObj.longitude = res.longitude;
-          resolve(res);
-        }
-      })
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success: () => {
+        wx.getLocation({
+          type: 'wgs84',
+          success: (res) => {
+            this.globalData.locationObj.latitude = res.latitude;
+            this.globalData.locationObj.longitude = res.longitude;
+            let req = {
+              latitude: this.globalData.locationObj.latitude,
+              longitude: this.globalData.locationObj.longitude
+            }
+            this.getApi(req);
+          }
+        })
+      }
+    })
+  },
+  // api
+  getApi(req) {
+    qqmapsdk = new QQMapWX({
+      key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
+    });
+    qqmapsdk.reverseGeocoder({
+      location: req,
+      success: (res) => {
+        this.globalData.locationObj.address = res.result.address_component.city;
+        console.log(this.globalData.locationObj.address)
+      }
     })
   },
   globalData: {
@@ -52,6 +67,8 @@ App({
       imageUrl: "/images/banner_01.png",
       path: '/pages/index/index'
     },
-    locationObj: {}
+    locationObj: {
+      address:"请选择"
+    }
   }
 })

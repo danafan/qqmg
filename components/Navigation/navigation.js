@@ -1,4 +1,5 @@
 // components/Navigation/navigation.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -12,17 +13,17 @@ Component({
       type: Number,
       value: null
     },
-    location:{
-      type:String,
-      value:""
-    }
+    location: {
+      type: String,
+      value: ""
+    },
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    
+
   },
   /**
    * 组件的方法列表
@@ -36,12 +37,8 @@ Component({
     },
     //获取当前位置
     getLocationInfo(){
-      if (this.data.location == '请选择'){
-        wx.openSetting({
-          success(res) {
-            
-          }
-        })
+      if (this.data.location == '请选择') {
+        this.triggerEvent('onEmit');
       }
     }
   }

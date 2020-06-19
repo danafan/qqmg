@@ -2,7 +2,7 @@
 <view>
   <view class='startBar' style='height:{{startBarHeight}}px'></view>
   <view class="search_box" style="height:{{navgationHeight}}px">
-    <image class="location_icon" src="../../images/location_icon.png"></image>
+    <image class="location_icon" src="../../images/location_icon.png" bindtap="getLocationInfo"></image>
     <view class="location_text" bindtap="getLocationInfo">{{location}}</view>
     <view class="search_input" bindtap="search">
       <image class="search_icon" src="../../images/search_icon.png"></image>
