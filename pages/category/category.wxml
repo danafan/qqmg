@@ -2,9 +2,9 @@
 <view class="category_box">
   <view class="title">--- 请选择您的信息类别 ---</view>
   <view class="cate_list">
-    <view class="cate_but cate_but_01 {{index == 1 || index == 5 ? 'cate_but_02' : index == 2 || index == 6 ? 'cate_but_03' : ''}}" wx:for="{{categoryList}}" wx:key="id" data-id="{{item.id}}" bindtap="checkOneLevel">
-     <picker range-key="val" bindchange="bindPickerChange" range="{{item.types}}">
-     {{item.name}}
+    <view class="cate_but cate_but_01 {{index == 1 || index == 5 ? 'cate_but_02' : index == 2 || index == 6 ? 'cate_but_03' : ''}}" wx:for="{{level_01_list}}" wx:key="category_id" data-id="{{item.category_id}}" bindtap="checkOneLevel">
+     <picker range-key="category_name" bindchange="bindPickerChange" range="{{level_02_list}}">
+     {{item.category_name}}
     </picker>
     </view>
   </view>

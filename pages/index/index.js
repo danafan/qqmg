@@ -1,12 +1,14 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
 //获取地理位置
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 Page({
   data: {
-    location:"请选择",
+    location: "请选择",
     banner_list: [{
       id: "1",
       img_url: "../../images/banner_01.png"
@@ -96,14 +98,21 @@ Page({
     startBarHeight: 0,
     navgationHeight: 0
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     //获取顶部导航栏信息
     this.setNavigation();
     //获取地理位置信息
     this.wxLocationInfo();
+    //获取一级分类列表
+    this.getCateGory();
+  },
+  //获取一级分类列表
+  getCateGory() {
+    util.get(api.getCategoryList, {
+      p_id: 0
+    }).then(res => {
+
+    })
   },
   //获取地理位置信息
   wxLocationInfo() {
@@ -114,15 +123,15 @@ Page({
       }
     })
   },
-  openSet(){
+  openSet() {
     wx.openSetting({
-      success:(res) => {
+      success: (res) => {
         this.wxGetLocation();
       }
     })
   },
   // wx.getLocation
-  wxGetLocation(){
+  wxGetLocation() {
     wx.getLocation({
       type: 'wgs84',
       success: (res) => {

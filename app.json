@@ -1,16 +1,16 @@
 {
   "pages": [
+    "pages/category/category",
     "pages/index/index",
     "pages/detail/detail",
     "pages/search/search",
     "pages/userinfo/userinfo",
     "pages/management/management",
-    "pages/category/category",
     "pages/push/push",
-    "pages/auth/auth",
     "pages/service/service",
     "pages/agreement/agreement",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/auth/auth"
     
   ],
   "permission": {

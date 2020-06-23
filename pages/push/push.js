@@ -1,28 +1,19 @@
 // pages/push/push.js
 var app = getApp();
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
 Page({
   data: {
-    heights: null,
-    livestock: "出售", //选中的牲畜交易类型
-    supplies: "出售", //选中的农用物资类型
+    heights: null, //可视高度
+    default_desc: "", //描述的提示内容（后台获取）
+    taps: [], //所有的标签列表（后台获取）
+    active_taps: [], //选中的标签id列表（可传递，需处理）
+    temp_id: "", //模版ID（后台获取，控制页面显示元素）
+    group_list: ["出售", "求购"], //牲、农、二、汽的交易类型
+    check_radio: "出售", //选中的牲畜交易类型
     company: "", //（招聘）公司名称
     work_addres: "", //（招聘）工作地址
-    default_desc: "这是描述提示，按分类从后台获取", //描述的提示内容
     desc: "", //输入的描述内容（可传递）
-    active_taps: [], //选中的标签id列表（可传递，需处理）
-    taps: [{
-      id: "1",
-      text: "膘肥体壮"
-    }, {
-      id: "2",
-      text: "产奶多"
-    }, {
-      id: "3",
-      text: "口小"
-    }, {
-      id: "4",
-      text: "颜色正"
-    }], //所有的标签列表
     wage_list: ["面议", "1000以下", "1000-2000", "2000-3000", "3000-5000", "5000-8000", "8000以上"],
     wage: "", //薪资
     sexs: ["不限", "男", "女"],
@@ -31,9 +22,6 @@ Page({
     experience: "", //选中的工作经验
     age: "", //年龄
     house_location: "", //房屋位置
-    zg_list: ["出售", "求购"], //二手物品和汽车交易的类型
-    zg: "出售", //选中的二手物品类型
-    car: "出售", //选中的汽车交易类型
     origin: "", //出发地
     destination: "", //目的地
     origin_time: "", //乘车时间
@@ -54,27 +42,20 @@ Page({
       heights: wx.getSystemInfoSync().windowHeight * 0.95,
       option: option
     })
-    console.log(this.data.option)
-    // if (!app.globalData.userInfo) {
-    //   wx.showModal({
-    //     title: '提示',
-    //     confirmText: "登录",
-    //     content: '先登录才能发布信息哦～',
-    //     success(res) {
-    //       if (res.confirm) {
-    //         wx.navigateTo({
-    //           url: '/pages/auth/auth',
-    //         });
-    //       } else if (res.cancel) {
-    //         console.log('用户点击取消')
-    //       }
-    //     }
-    //   })
-    // }
+    //获取描述模版等信息（展示）
+    this.getCateAndTag({
+      category_id: this.data.option.level_02_id
+    })
   },
-  //分享自定义
-  onShareAppMessage: function (res) {
-    return app.globalData.shareObj
+  //获取描述模版等信息（展示）
+  getCateAndTag(req) {
+    util.get(api.getCateAndTag, req).then(res => {
+      this.setData({
+        default_desc: res.data.category_desc,
+        taps: res.data.tags,
+        temp_id: res.data.temp_id
+      })
+    })
   },
   //输入框输入
   changeInput(e) {
@@ -125,7 +106,7 @@ Page({
   activeTap(e) {
     let tap_id = e.currentTarget.dataset.id;
     this.data.taps.map(item => {
-      if (item.id == tap_id) {
+      if (item.tag_id == tap_id) {
         if (item.active) {
           item.active = false;
         } else {
@@ -138,7 +119,7 @@ Page({
         }
       }
     });
-     this.setData({
+    this.setData({
       taps: this.data.taps
     })
   },
@@ -194,82 +175,69 @@ Page({
         url: '/pages/auth/auth',
       });
     } else {
-      switch (this.data.option.level_01_id) {
-        case "1": //牲畜交易
-          let req_01 = {
-            trading: this.data.livestock
+      var diff_data = {}
+      switch (this.data.temp_id) {
+        case "1": //牲、农、二、汽
+          diff_data = {
+            check_radio: this.data.check_radio
           }
-          this.submit(req_01);
+          this.submit(JSON.stringify(diff_data));
           break;
-        case "2": //农用物资
-          let req_02 = {
-            trading: this.data.supplies
-          }
-          this.submit(req_02);
-          break;
-        case "3": //招聘求职
-          let req_03 = {
+        case "2": //招聘
+          diff_data = {
             sex: this.data.sex
-          };
-          if (this.data.option.level_02_id == '0') { //招聘
-            if (this.data.company != '') {
-              req_03.company = this.data.company; //招聘单位
-            }
-            if (this.data.work_addres != '') {
-              req_03.work_addres = this.data.work_addres; //工作地址
-            }
-          } else { //求职
-            if (this.data.experience != '') {
-              req_03.experience = this.data.experience; //工作经验
-            }
-            if (this.data.age != '') {
-              req_03.age = this.data.age; //年龄
-            }
+          }
+          if (this.data.company != '') {
+            diff_data.company = this.data.company; //招聘单位
+          }
+          if (this.data.work_addres != '') {
+            diff_data.work_addres = this.data.work_addres; //工作地址
           }
           if (this.data.wage != '') {
-            req_03.wage = this.data.wage; //薪资
+            diff_data.wage = this.data.wage; //薪资
           }
-          this.submit(req_03);
+          this.submit(JSON.stringify(diff_data));
           break;
-        case "4": //房产交易
-          let req_04 = {};
-          if (this.data.option.level_02_id == '0' || this.data.option.level_02_id == '1') { //出售或出租
-            if (this.data.house_location != '') {
-              req_04.house_location = this.data.house_location; //房屋位置
-            }
+        case "3": //求职
+          diff_data = {
+            sex: this.data.sex,
           }
-          this.submit(req_04);
+          if (this.data.experience != '') {
+            diff_data.experience = this.data.experience; //工作经验
+          }
+          if (this.data.age != '') {
+            diff_data.age = this.data.age; //年龄
+          }
+          if (this.data.wage != '') {
+            diff_data.wage = this.data.wage; //薪资
+          }
+          this.submit(JSON.stringify(diff_data));
           break;
-        case "5": //二手物品
-          let req_05 = {
-            zg: this.data.zg
-          };
-          this.submit(req_05);
+        case "4": //出售、出租
+          diff_data = {};
+          if (this.data.house_location != '') {
+            diff_data.house_location = this.data.house_location;
+          }
+          this.submit(JSON.stringify(diff_data));
           break;
-        case "6": //汽车交易
-          let req_06 = {
-            car: this.data.car
-          };
-          this.submit(req_06);
+        case "5": //基本（求租、求购、本地服务）
+          this.submit();
           break;
-        case "7": //本地服务
-          this.submit({});
-          break;
-        case "8": //打车拼车
-          let req_08 = {};
+        case "6": //打车拼车
+          diff_data = {}
           if (this.data.origin != '') {
-            req_08.origin = this.data.origin; //出发地
+            diff_data.origin = this.data.origin; //出发地
           }
           if (this.data.destination != '') {
-            req_08.destination = this.data.destination; //目的地
+            diff_data.destination = this.data.destination; //目的地
           }
           if (this.data.origin_time != '') {
-            req_08.origin_time = this.data.origin_time; //乘车时间
+            diff_data.origin_time = this.data.origin_time; //乘车时间
           }
           if (this.data.number != '') {
-            req_08.number = this.data.number; //人数
+            diff_data.number = this.data.number; //人数
           }
-          this.submit(req_08);
+          this.submit(JSON.stringify(diff_data));
           break;
         default:
           //统一提交
@@ -278,7 +246,7 @@ Page({
     }
   },
   //统一提交
-  submit(req) {
+  submit(diff_data) {
     if (this.data.desc == "") {
       this.toast("请输入描述");
     } else if (this.data.contact == "") {
@@ -288,19 +256,24 @@ Page({
     } else if (!this.data.agree) {
       this.toast("请阅读并同意发布协议！");
     } else {
-      req.level_01_id = this.data.option.level_01_id;
-      req.level_02_id = this.data.option.level_02_id;
-      req.desc = this.data.desc; //描述
+      var submitObj = {
+        level_01_id: this.data.option.level_01_id,
+        level_02_id: this.data.option.level_02_id,
+        info_desc: this.data.desc,
+        contact: this.data.contact,
+        contact_phone: this.data.contact_phone
+      }
+      if (diff_data != "{}") { //传递的区分的参数
+        submitObj.diff_data = diff_data;
+      }
       if (this.data.active_taps.length > 0) { //选中的标签
-        req.active_taps = this.data.active_taps.join("_");
+        submitObj.tap_ids = this.data.active_taps.join("_");
       }
       if (this.data.upload_files.length > 0) { //上传的文件
         console.log(this.data.upload_files)
         req.upload_files = this.data.upload_files.join("_");
       }
-      req.contact = this.data.contact; //联系人
-      req.contact_phone = this.data.contact_phone; //联系电话
-      console.log(req);
+      console.log(submitObj);
       wx.showModal({
         title: '提示',
         content: "先别急发布，后台还没写呢，都做好了才能发布，先看看样式",

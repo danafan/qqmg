@@ -2,38 +2,26 @@
 <scroll-view scroll-y="{{true}}" style="height:{{heights}}px">
   <!-- 顶部提示 -->
   <view class="prompt">
-    <view>青青芒果向您提供免费信息发布服务，发布信息请遵守国家法律法规，信息内容和图片不能包含联系方式、敏感词汇等信息！</view>
+    <view>青青芒果向您提供综合信息服务，发布信息请遵守国家法律法规，信息内容和图片不能包含联系方式、敏感词汇等信息！</view>
     <view class="prompt_bottom">
       <text>温馨提示：</text>
       <text>描述清晰，内容完整，将有机会获得公众号图文推送或首页热门的机会，大大增加信息的曝光率哦！</text>
     </view>
   </view>
-  <!-- 牲畜交易 -->
-  <view class="describe_box" wx:if="{{option.level_01_id == 1}}">
+  <!-- 牲、农、二、汽 -->
+  <view class="describe_box" wx:if="{{temp_id == 1}}">
     <view class="info_label">类型</view>
     <radio-group class="sex_box" data-type="livestock" bindchange="changeRadio">
-      <label class="weui-cell weui-check__label" wx:for="{{zg_list}}" wx:key="*this">
+      <label class="weui-cell weui-check__label" wx:for="{{group_list}}" wx:key="*this">
         <view class="weui-cell__hd">
-          <radio value="{{item}}" checked="{{livestock == item}}" />
-        </view>
-        <view class="weui-cell__bd">{{item}}</view>
-      </label>
-    </radio-group>
-  </view>
-  <!-- 农用物资 -->
-  <view class="describe_box" wx:if="{{option.level_01_id == 2}}">
-    <view class="info_label">类型</view>
-    <radio-group class="sex_box" data-type="supplies" bindchange="changeRadio">
-      <label class="weui-cell weui-check__label" wx:for="{{zg_list}}" wx:key="*this">
-        <view class="weui-cell__hd">
-          <radio value="{{item}}" checked="{{supplies == item}}" />
+          <radio value="{{item}}" checked="{{check_radio == item}}" />
         </view>
         <view class="weui-cell__bd">{{item}}</view>
       </label>
     </radio-group>
   </view>
   <!-- 招聘 -->
-  <view wx:if="{{option.level_01_id == 3 && option.level_02_id == 0}}">
+  <view wx:if="{{temp_id == 2}}">
     <!-- 招聘单位 -->
     <view class="title">
       <view class="title_label">招聘单位</view>
@@ -48,7 +36,7 @@
     <view class="describe_box">
       <view class="info_label">招聘职位</view>
       <view class="info_taps">
-        <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="id" data-id="{{item.id}}" bindtap="activeTap">{{item.text}}</view>
+        <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
       </view>
     </view>
     <!-- 薪资 -->
@@ -75,12 +63,12 @@
     </view>
   </view>
   <!-- 求职 -->
-  <view wx:if="{{option.level_01_id == 3 && option.level_02_id == 1}}">
+  <view wx:if="{{temp_id == 3}}">
     <!-- 期望职位 -->
     <view class="describe_box">
       <view class="info_label">期望职位</view>
       <view class="info_taps">
-        <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="id" data-id="{{item.id}}" bindtap="activeTap">{{item.text}}</view>
+        <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
       </view>
     </view>
     <!-- 性别 -->
@@ -122,36 +110,12 @@
     </view>
   </view>
   <!-- 出售或出租 -->
-  <view class="title" wx:if="{{option.level_01_id == 4 && (option.level_02_id == 0 || option.level_02_id == 1)}}">
+  <view class="title" wx:if="{{temp_id == 4}}">
     <view class="title_label">房屋位置</view>
     <input class="title_input" cursor-spacing="12" value="{{house_location}}" placeholder="小区名称或位置" data-type="house_location" bindinput="changeInput" />
   </view>
-  <!-- 二手物品 -->
-  <view class="describe_box" wx:if="{{option.level_01_id == 5}}">
-    <view class="info_label">类型</view>
-    <radio-group class="sex_box" data-type="zg" bindchange="changeRadio">
-      <label class="weui-cell weui-check__label" wx:for="{{zg_list}}" wx:key="*this">
-        <view class="weui-cell__hd">
-          <radio value="{{item}}" checked="{{zg == item}}" />
-        </view>
-        <view class="weui-cell__bd">{{item}}</view>
-      </label>
-    </radio-group>
-  </view>
-  <!-- 汽车交易 -->
-  <view class="describe_box" wx:if="{{option.level_01_id == 6}}">
-    <view class="info_label">类型</view>
-    <radio-group class="sex_box" data-type="car" bindchange="changeRadio">
-      <label class="weui-cell weui-check__label" wx:for="{{zg_list}}" wx:key="*this">
-        <view class="weui-cell__hd">
-          <radio value="{{item}}" checked="{{car == item}}" />
-        </view>
-        <view class="weui-cell__bd">{{item}}</view>
-      </label>
-    </radio-group>
-  </view>
   <!-- 打车拼车 -->
-  <view wx:if="{{option.level_01_id == 8}}">
+  <view wx:if="{{temp_id == 6}}">
     <!-- 出发地 -->
     <view class="title">
       <view class="title_label">出发地</view>
@@ -170,7 +134,6 @@
       <input class="title_input" cursor-spacing="12" type="number" value="{{number}}" data-type="number" placeholder="请输入乘车人数" bindinput="changeInput" />
     </view>
   </view>
-
   <!-- 公共 -->
   <!-- 描述 -->
   <view class="describe_box">
@@ -181,7 +144,7 @@
   <view class="describe_box" wx:if="{{option.level_01_id !=3 }}">
     <view class="info_label">标签</view>
     <view class="info_taps">
-      <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="id" data-id="{{item.id}}" bindtap="activeTap">{{item.text}}</view>
+      <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
     </view>
   </view>
   <!-- 上传图片 -->
