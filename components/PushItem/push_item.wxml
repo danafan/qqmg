@@ -1,23 +1,28 @@
 <!--components/PushItem/push_item.wxml-->
 <view class="push_container">
-  <image class="user_img" src="{{infoItem.user_img}}" data-userid="{{infoItem.user_id}}" bindtap="getUserInfo"></image>
+  <image class="user_img" src="{{infoItem.create_user_img}}" data-userid="{{infoItem.create_user_id}}" bindtap="getUserInfo"></image>
   <view class="push_content">
     <view class="userinfo">
-      <view class="username" data-userid="{{infoItem.user_id}}" bindtap="getUserInfo">{{infoItem.username}}</view>
-      <view class="phone" data-phone="{{infoItem.phone}}" bindtap="call">拨打电话</view>
+      <view class="username" data-userid="{{infoItem.create_user_id}}" bindtap="getUserInfo">{{infoItem.create_user_nickname}}</view>
+      <view class="phone" data-phone="{{infoItem.contact_phone}}" bindtap="call">拨打电话</view>
     </view>
     <view class="taps" data-id="{{infoItem.id}}" bindtap="detail">
-      <view class="category_item">{{infoItem.info_type}}</view>
-      <view class="tap" wx:for="{{infoItem.taps}}" wx:for-item="tap" wx:key="*this">{{tap}}</view>
+      <view class="category_item">{{infoItem.category_name}}</view>
+      <view class="tap" wx:for="{{infoItem.taggss}}" wx:for-item="tag" wx:key="tag_id">{{tag.tag_name}}</view>
     </view>
-    <view class="describe" data-id="{{infoItem.id}}" bindtap="detail">{{infoItem.desc}}</view>
-    <view class="all" data-id="{{infoItem.id}}" bindtap="detail">全文</view>
-    <view class="images">
-      <image class="goods_img" wx:for="{{infoItem.imgs}}" wx:key="*this" wx:for-item="img_url" src="{{img_url}}" data-index="{{index}}" data-imgs="{{infoItem.imgs}}" bindtap="open"></image>
+    <view class="describe" data-id="{{infoItem.info_id}}" bindtap="detail">{{infoItem.info_desc}}</view>
+    <view class="diff_box" wx:for="{{infoItem.diff_data}}" wx:key="index">
+      <text class="diff_label">{{item.type}}：</text>
+      <text class="diff_val">{{item.val}}</text>
     </view>
+    <view class="all" data-id="{{infoItem.info_id}}" bindtap="detail">全文</view>
+    <view class="images" wx:if="{{infoItem.file_type == 'image'}}">
+      <image class="goods_img" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.files}}" bindtap="open" ></image>
+    </view>
+    <video class="goods_img" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" duration="8" wx:if="{{infoItem.file_type == 'video'}}"></video>
     <view class="bottom_info">
-      <view class="time">{{infoItem.create_time}}</view>
-      <view class="browse">{{infoItem.browse}}浏览</view>
+      <view class="time">{{infoItem.ddd}}</view>
+      <view class="browse">{{infoItem.browse_num}}浏览</view>
     </view>
   </view>
   <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close"/>

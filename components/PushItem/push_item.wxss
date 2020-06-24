@@ -64,6 +64,7 @@
   padding: 5rpx 8rpx;
 }
 .describe {
+  margin-bottom: 8rpx;
   font-size: 28rpx;
   color: #333;
   display: -webkit-box;
@@ -71,6 +72,17 @@
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.diff_box{
+  display: flex;
+  font-size: 26rpx;
+}
+.diff_label{
+  font-weight: bold;
+  color: #333;
+}
+.diff_val{
+  color: #f7a908;
 }
 .all{
   margin-bottom: 10rpx;

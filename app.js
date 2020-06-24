@@ -61,6 +61,7 @@ App({
     })
   },
   globalData: {
+    baseUrl:"http://localhost:8089/static/uploads/",
     userInfo: null,
     shareObj: {
       title: '免费的本地信息服务平台',

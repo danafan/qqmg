@@ -28,7 +28,7 @@
         <view class="hot_right" data-index="-1" bindtap="service">查看全部</view>
       </view>
       <!-- 发布列表 -->
-      <push_item wx:for="{{info_list}}" wx:key="id" infoItem="{{item}}" />
+      <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
     </view>
 
   </view>

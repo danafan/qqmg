@@ -1,4 +1,5 @@
 // components/BigImg/big_img.js
+const app = getApp();
 Component({
   properties: {
     big_imgs:{
@@ -11,6 +12,7 @@ Component({
     }
   },
   data: {
+    baseUrl: app.globalData.baseUrl,
     imgheights: [], //所有图片的高度
   },
   methods: {

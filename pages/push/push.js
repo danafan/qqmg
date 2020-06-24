@@ -4,13 +4,13 @@ const api = require('../../utils/api.js')
 const util = require('../../utils/util.js')
 Page({
   data: {
+    baseUrl: app.globalData.baseUrl,
     heights: null, //可视高度
     default_desc: "", //描述的提示内容（后台获取）
     taps: [], //所有的标签列表（后台获取）
-    active_taps: [], //选中的标签id列表（可传递，需处理）
     temp_id: "", //模版ID（后台获取，控制页面显示元素）
     group_list: ["出售", "求购"], //牲、农、二、汽的交易类型
-    check_radio: "出售", //选中的牲畜交易类型
+    check_sneq: "出售", //选中的牲、农、二、汽的交易类型
     company: "", //（招聘）公司名称
     work_addres: "", //（招聘）工作地址
     desc: "", //输入的描述内容（可传递）
@@ -94,11 +94,8 @@ Page({
     let arr = [];
     this.data.taps.map(item => {
       if (item.active) {
-        arr.push(item.id);
+        arr.push(item.tag_id);
       }
-    });
-    this.setData({
-      active_taps: arr
     });
     return arr.length;
   },
@@ -123,19 +120,49 @@ Page({
       taps: this.data.taps
     })
   },
+  //获取所有被选中的标签
+  getActiveTag() {
+    let arr = [];
+    this.data.taps.map(item => {
+      if (item.active) {
+        arr.push(item.tag_id);
+      }
+    });
+    return arr;
+  },
+  //上传文件
+  upLoadFile(req) {
+    wx.uploadFile({
+      url: api.upLoadImg, //仅为示例，非真实的接口地址
+      filePath: req.path,
+      name: 'file',
+      success: (res) => {
+        const data = JSON.parse(res.data);
+        let fileArr = [];
+        fileArr.push(data.data.imgName)
+        this.setData({
+          upload_files: [...this.data.upload_files, ...fileArr]
+        })
+      }
+    })
+  },
   //选择文件
   chooseImage() {
     var that = this;
-    if (this.data.file_type == 'image' && this.data.upload_files.length > 0) {
+    if (that.data.file_type == 'image' && that.data.upload_files.length > 0) {
       wx.chooseImage({
         count: 9,
         success(res) {
           if (that.data.upload_files.length + res.tempFilePaths.length > 9) {
             that.toast("图片不能超过9张");
           } else {
-            that.setData({
-              upload_files: [...that.data.upload_files, ...res.tempFilePaths]
-            });
+            res.tempFilePaths.map(item => {
+              //上传文件
+              let req = {
+                path: item
+              }
+              that.upLoadFile(req);
+            })
           }
         }
       })
@@ -147,13 +174,15 @@ Page({
         maxDuration: 8,
         camera: 'back',
         success(res) {
-          let arr = [];
           res.tempFiles.map(item => {
-            arr.push(item.tempFilePath);
+            //上传文件
+            let req = {
+              path: item.tempFilePath
+            }
+            that.upLoadFile(req);
           })
           that.setData({
-            file_type: res.type,
-            upload_files: [...that.data.upload_files, ...arr]
+            file_type: res.type
           })
         }
       })
@@ -161,11 +190,16 @@ Page({
   },
   //删除文件
   deleteImg(e) {
-    let index = e.currentTarget.dataset.index;
-    let images = this.data.upload_files;
-    images.splice(index, 1);
-    this.setData({
-      upload_files: images
+    var index = e.currentTarget.dataset.index;
+    var images = this.data.upload_files;
+    let req = {
+      imgurl: images[index]
+    }
+    util.get(api.deleteImg, req).then(res => {
+      images.splice(index, 1);
+      this.setData({
+        upload_files: images
+      })
     })
   },
   //立即发布
@@ -177,13 +211,13 @@ Page({
     } else {
       var diff_data = {}
       switch (this.data.temp_id) {
-        case "1": //牲、农、二、汽
+        case 1: //牲、农、二、汽
           diff_data = {
-            check_radio: this.data.check_radio
+            check_sneq: this.data.check_sneq
           }
           this.submit(JSON.stringify(diff_data));
           break;
-        case "2": //招聘
+        case 2: //招聘
           diff_data = {
             sex: this.data.sex
           }
@@ -198,7 +232,7 @@ Page({
           }
           this.submit(JSON.stringify(diff_data));
           break;
-        case "3": //求职
+        case 3: //求职
           diff_data = {
             sex: this.data.sex,
           }
@@ -213,17 +247,18 @@ Page({
           }
           this.submit(JSON.stringify(diff_data));
           break;
-        case "4": //出售、出租
+        case 4: //出售、出租
           diff_data = {};
           if (this.data.house_location != '') {
             diff_data.house_location = this.data.house_location;
           }
           this.submit(JSON.stringify(diff_data));
           break;
-        case "5": //基本（求租、求购、本地服务）
-          this.submit();
+        case 5: //基本（求租、求购、本地服务）
+          diff_data = {};
+          this.submit(JSON.stringify(diff_data));
           break;
-        case "6": //打车拼车
+        case 6: //打车拼车
           diff_data = {}
           if (this.data.origin != '') {
             diff_data.origin = this.data.origin; //出发地
@@ -257,8 +292,12 @@ Page({
       this.toast("请阅读并同意发布协议！");
     } else {
       var submitObj = {
+        create_user_nickname: app.globalData.userInfo.nickName,
+        create_user_img: app.globalData.userInfo.avatarUrl,
+        create_user_id:'1',
         level_01_id: this.data.option.level_01_id,
         level_02_id: this.data.option.level_02_id,
+        temp_id:this.data.temp_id,
         info_desc: this.data.desc,
         contact: this.data.contact,
         contact_phone: this.data.contact_phone
@@ -266,20 +305,26 @@ Page({
       if (diff_data != "{}") { //传递的区分的参数
         submitObj.diff_data = diff_data;
       }
-      if (this.data.active_taps.length > 0) { //选中的标签
-        submitObj.tap_ids = this.data.active_taps.join("_");
+      if (this.getActiveTag().length > 0) { //选中的标签
+        submitObj.tag_ids = this.getActiveTag().join("_");
       }
       if (this.data.upload_files.length > 0) { //上传的文件
-        console.log(this.data.upload_files)
-        req.upload_files = this.data.upload_files.join("_");
+        submitObj.file_list = this.data.upload_files.join("_");
       }
       console.log(submitObj);
       wx.showModal({
-        title: '提示',
-        content: "先别急发布，后台还没写呢，都做好了才能发布，先看看样式",
-        success(res) {
+        title: '温馨提示',
+        content: "你发布的信息将被全兴安盟的人看到，确认发布吗？",
+        success:(res) => {
           if (res.confirm) {
-            console.log('用户点击确定')
+            util.post(api.pushInfo, submitObj).then(res => {
+              this.toast("发布成功！");
+              setTimeout(() => {
+                wx.switchTab({
+                  url: "/pages/index/index"
+                })
+              },1500);
+            })
           } else if (res.cancel) {
             console.log('取消')
           }

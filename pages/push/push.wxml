@@ -11,10 +11,10 @@
   <!-- 牲、农、二、汽 -->
   <view class="describe_box" wx:if="{{temp_id == 1}}">
     <view class="info_label">类型</view>
-    <radio-group class="sex_box" data-type="livestock" bindchange="changeRadio">
+    <radio-group class="sex_box" data-type="check_sneq" bindchange="changeRadio">
       <label class="weui-cell weui-check__label" wx:for="{{group_list}}" wx:key="*this">
         <view class="weui-cell__hd">
-          <radio value="{{item}}" checked="{{check_radio == item}}" />
+          <radio value="{{item}}" checked="{{check_sneq == item}}" />
         </view>
         <view class="weui-cell__bd">{{item}}</view>
       </label>
@@ -74,7 +74,7 @@
     <!-- 性别 -->
     <view class="describe_box">
       <view class="info_label">性别</view>
-      <radio-group class="sex_box" bindchange="changeSex">
+      <radio-group class="sex_box" data-type="sex"  bindchange="changeRadio">
         <label class="weui-cell weui-check__label" wx:for="{{sexs}}" wx:key="*this">
           <view class="weui-cell__hd">
             <radio value="{{item}}" checked="{{sex == item}}" />
@@ -141,21 +141,21 @@
     <textarea class="textarea" maxlength="120" value="{{desc}}" data-type="desc" bindinput="changeInput" placeholder="{{default_desc}}" />
   </view>
   <!-- 标签(除招聘求职) -->
-  <view class="describe_box" wx:if="{{option.level_01_id !=3 }}">
+  <view class="describe_box" wx:if="{{temp_id != 2 && temp_id != 3}}">
     <view class="info_label">标签</view>
     <view class="info_taps">
       <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
     </view>
   </view>
-  <!-- 上传图片 -->
+  <!-- 上传文件 -->
   <view class="upload_content">
     <view class="upload_label">图片或视频
       <text class="max_imgs">（可上传最多9张图片或一个视频）</text>
     </view>
     <view class="camera_box">
       <view class="show_img_box" wx:for="{{upload_files}}" wx:key="index">
-        <image class="show_img" src="{{item}}" wx:if="{{file_type=='image' }}"></image>
-        <video class="show_img" src="{{item}}" duration="8" wx:if="{{file_type=='video' }}"></video>
+        <image class="show_img" src="{{baseUrl + item}}" wx:if="{{file_type=='image' }}"></image>
+        <video class="show_img" src="{{baseUrl + item}}" duration="8" wx:if="{{file_type=='video' }}"></video>
         <view class="close" data-index="{{index}}" bindtap="deleteImg">
           <image class="close_icon" src="../../images/close.png"></image>
         </view>

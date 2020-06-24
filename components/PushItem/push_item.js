@@ -11,6 +11,7 @@ Component({
     },
   },
   data: {
+    baseUrl: app.globalData.baseUrl,
     show_img: false, //默认不显示大图  
     imgheights: [], //所有图片的高度
     big_imgs: [], //所有大图列表
