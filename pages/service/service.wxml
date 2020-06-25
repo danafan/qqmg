@@ -2,9 +2,9 @@
 <view class="service_container">
   <!-- 顶部导航 -->
   <swiper class="tab_list" display-multiple-items="4" current="{{show_index}}">
-    <swiper-item wx:for="{{category_list}}" wx:key="id">
-      <view class="tab {{active_index == index? 'active_color' : ''}}" data-index="{{index}}" bindtap="changeCurrent">
-        {{item.name}}
+    <swiper-item wx:for="{{category_list}}" wx:key="category_id">
+      <view class="tab {{active_index == index? 'active_color' : ''}}" data-id="{{item.category_id}}" data-index="{{index}}" bindtap="changeCurrent">
+        {{item.category_name}}
         <view class="active_tab" wx:if="{{active_index == index}}"></view>
       </view>
     </swiper-item>

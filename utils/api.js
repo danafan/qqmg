@@ -8,4 +8,5 @@ module.exports = {
   deleteImg: ApiRootUrl + 'deleteImg',                //删除文件
   pushInfo: ApiRootUrl + 'pushInfo',                  //发布信息
   infoList: ApiRootUrl + 'infoList',                  //获取信息列表
+  getInfoDetail: ApiRootUrl + 'getInfoDetail',        //获取信息详情
 }

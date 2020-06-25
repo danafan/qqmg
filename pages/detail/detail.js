@@ -1,46 +1,58 @@
 // pages/detail/detail.js
 var app = getApp();
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
+const dateTime = require('../../utils/dateTime.js')
 Page({
   data: {
-    dateilObj: {
-      id: "1",
-      images: [
-        "../../images/banner_01.png",
-        "../../images/banner_02.jpg",
-        "../../images/banner_03.jpg"
-      ],
-      taps: ["天然气", "家电齐全", "拎包入住"],
-      cate_item:"出售",
-      category_name: "房屋租售",
-      create_time: "2020-05-26",
-      browse: "132",
-      user_img: "../../images/banner_01.png",
-      username: "姜大卫",
-      contact: "范老五",
-      phone: "13067882143",
-      desc: "有专门的管家给您贴心带看，床、衣柜、床头柜、书桌、座椅、台灯、床头灯，更多空间自己搭配，成为你一个温馨的家",
-    }, //详情
+    baseUrl: app.globalData.baseUrl,
+    info_detail: {}, //详情
     current_index: 0, //默认选中图片的下标
     show_img: false, //默认不显示大图
     shu: 1, //默认banner当前数
-    isShare:false,    //是否是分享页面进来的
-    current_id:"",    //当前信息的id
+    isShare: false, //是否是分享页面进来的
+    current_id: "", //当前信息的id
   },
-  onLoad(option){
+  onLoad(option) {
     this.setData({
       current_id: option.id
     })
-    if(option.isShare){
+    if (option.isShare) {
       this.setData({
         isShare: option.isShare
       })
     }
+    //获取信息详情
+    this.getInfoDetail();
+  },
+  //获取信息详情
+  getInfoDetail() {
+    let req = {
+      info_id: this.data.current_id
+    }
+    util.get(api.getInfoDetail, req).then(res => {
+      let data = res.data;
+      //处理时间显示
+      data.create_time = dateTime.getFormatTime(data.create_time);
+      //处理文件数组
+      if (data.file_list) {
+        data.files = data.file_list.split("_");
+      }
+      //区分图片或视频
+      if (data.file_list && data.file_list.indexOf('mp4') > -1) {
+        data.file_type = 'video'
+      } else {
+        data.file_type = 'image'
+      }
+      this.setData({
+        info_detail: res.data
+      })
+    })
   },
   //分享自定义
   onShareAppMessage: function(res) {
     return {
-      title: this.data.dateilObj.desc,
-      imageUrl: this.data.dateilObj.images[0],
+      title: this.data.info_detail.info_desc,
       path: '/pages/detail/detail?id=' + this.data.current_id + "&isShare=" + this.data.isShare
     }
   },
@@ -71,7 +83,7 @@ Page({
         url: '/pages/auth/auth',
       });
     } else {
-      let phone = this.data.dateilObj.phone;
+      let phone = e.currentTarget.dataset.phone;
       wx.makePhoneCall({
         phoneNumber: phone
       })

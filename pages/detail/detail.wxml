@@ -7,21 +7,29 @@
   </view>
   <view class="scroll_box">
     <!-- 轮播图 -->
-    <view class="banner_box">
-      <swiper class="banner_content" autoplay="true" interval="5000" circular="true" bindchange="changeBanner">
-        <swiper-item wx:for="{{dateilObj.images}}" wx:key="*this" data-index="{{index}}" bindtap="openBigImg">
-          <image class="banner_img" src="{{item}}"></image>
-        </swiper-item>
-      </swiper>
-      <view class="shu">{{shu}} / {{dateilObj.images.length}}</view>
+    <view wx:if="{{info_detail.file_list}}">
+      <!-- 轮播图 -->
+      <view class="banner_box" wx:if="{{info_detail.file_type == 'image'}}">
+        <swiper class="banner_content" autoplay="true" interval="5000" circular="true" bindchange="changeBanner">
+          <swiper-item wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" bindtap="openBigImg">
+            <image class="banner_img" src="{{baseUrl + item}}"></image>
+          </swiper-item>
+        </swiper>
+        <view class="shu">{{shu}} / {{info_detail.files.length}}</view>
+      </view>
+      <!-- 视频 -->
+      <view wx:if="{{info_detail.file_type == 'video'}}">
+        <video class="banner_box" wx:for="{{info_detail.files}}" wx:key="*this" src="{{baseUrl + item}}" duration="8"></video>
+      </view>
     </view>
+    <image class="banner_box" src="../../images/banner_01.png" wx:else></image>
     <!-- 标题和分享 -->
     <view class="title_box">
       <!-- 个人头像 -->
       <view class="user_info_box">
-        <image class="user_img" src="{{dateilObj.user_img}}"></image>
-        <view class="nickname">{{dateilObj.username}}</view>
-        <view class="cate_item_box">{{dateilObj.cate_item}}</view>
+        <image class="user_img" src="{{info_detail.create_user_img}}"></image>
+        <view class="nickname">{{info_detail.create_user_nickname}}</view>
+        <view class="cate_item_box">{{info_detail.category_name}}</view>
       </view>
       <button class="share_box" open-type="share">
         <image class="share_icon" src="../../images/share.png"></image>
@@ -30,38 +38,38 @@
     </view>
     <!-- 描述 -->
     <view class="desc_box">
-      <text class="desc_title">{{dateilObj.contact}}：</text>
-      <text class="desc_content">{{dateilObj.desc}}</text>
+      <text class="desc_title">{{info_detail.contact}}：</text>
+      <text class="desc_content">{{info_detail.info_desc}}</text>
     </view>
     <!-- 下面内容 -->
     <view class="content_box">
       <!-- 标签列表 -->
       <view class="taps_box">
-        <view class="tap_item" wx:for="{{dateilObj.taps}}" wx:key="*this">{{item}}</view>
+        <view class="tap_item" wx:for="{{info_detail.taggss}}" wx:key="tag_id">{{item.tag_name}}</view>
       </view>
       <!-- 分类显示 -->
       <view class="cate_box">
         <view class="cate_item">
-          <view class="cate_val_01">{{dateilObj.category_name}}</view>
+          <view class="cate_val_01">{{info_detail.category_name}}</view>
           <view class="cate_label">所属分类</view>
         </view>
         <view class="line"></view>
         <view class="cate_item">
-          <view class="cate_val_02">{{dateilObj.create_time}}</view>
+          <view class="cate_val_02">{{info_detail.create_time}}</view>
           <view class="cate_label">发布时间</view>
         </view>
         <view class="line"></view>
         <view class="cate_item">
-          <view class="cate_val_03">{{dateilObj.browse}}</view>
+          <view class="cate_val_03">{{info_detail.browse_num}}</view>
           <view class="cate_label">浏览人数</view>
         </view>
       </view>
       <!-- 图片 -->
-      <view class="big_imgs">
-        <image class="img_item" wx:for="{{dateilObj.images}}" wx:key="*this" data-index="{{index}}" src="{{item}}" bindtap="openBigImg"></image>
+      <view class="big_imgs" wx:if="{{info_detail.file_type == 'image'}}">
+        <image class="img_item" wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" src="{{baseUrl + item}}" bindtap="openBigImg"></image>
       </view>
     </view>
   </view>
-  <view class="phone_button" bindtap="call">拨打电话</view>
-  <big_img wx:if="{{show_img}}" big_imgs="{{dateilObj.images}}" current_index="{{current_index}}" bind:onEmit="close" />
+  <view class="phone_button" data-phone="{{info_detail.contact_phone}}" bindtap="call">拨打电话</view>
+  <big_img wx:if="{{show_img}}" big_imgs="{{info_detail.files}}" current_index="{{current_index}}" bind:onEmit="close" />
 </view>

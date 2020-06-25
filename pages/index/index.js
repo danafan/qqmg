@@ -21,39 +21,7 @@ Page({
       img_url: "../../images/banner_03.jpg"
     }], //轮播图
     info_list: [], //信息列表
-    category_list: [{
-      id: "1",
-      icon: "../../images/cate_01.png",
-      name: "牲畜交易"
-    }, {
-      id: "2",
-      icon: "../../images/cate_07.png",
-      name: "农用物资"
-    }, {
-      id: "3",
-      icon: "../../images/cate_03.png",
-      name: "招聘求职"
-    }, {
-      id: "4",
-      icon: "../../images/cate_04.png",
-      name: "房产交易"
-    }, {
-      id: "5",
-      icon: "../../images/cate_05.png",
-      name: "二手物品"
-    }, {
-      id: "6",
-      icon: "../../images/cate_06.png",
-      name: "汽车交易"
-    }, {
-      id: "7",
-      icon: "../../images/cate_02.png",
-      name: "本地服务"
-    }, {
-      id: "8",
-      icon: "../../images/cate_08.png",
-      name: "打车拼车"
-    }],
+    category_list: [],
     startBarHeight: 0,
     navgationHeight: 0
   },
@@ -65,19 +33,26 @@ Page({
     //获取一级分类列表
     this.getCateGory();
     //获取信息列表
-    this.getInfoList();
+    let req = {level_01_id:0}
+    this.getInfoList(req);
   },
   //获取一级分类列表
   getCateGory() {
     util.get(api.getCategoryList, {
       p_id: 0
     }).then(res => {
-
+      let data = res.data;
+      data.map((item,index) => {
+        item.icon = '../../images/cate_0' + (index + 1) + '.png'
+      })
+      this.setData({
+        category_list: data
+      })
     })
   },
   //获取信息列表
-  getInfoList(){
-    util.get(api.infoList).then(res => {
+  getInfoList(req){
+    util.get(api.infoList, req).then(res => {
       res.data.map(item => {
         //处理文件数组
         if(item.file_list){ 
@@ -217,17 +192,12 @@ Page({
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 2000)
   },
-  //点击进入详情
-  detail() {
-    wx.navigateTo({
-      url: "/pages/detail/detail"
-    })
-  },
   //点击跳转到服务页面
   service(e) {
-    let i = e.currentTarget.dataset.index;
+    let id = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '/pages/service/service?index=' + i
+      url: '/pages/service/service?id=' + id + '&index=' + index
     })
   },
 
