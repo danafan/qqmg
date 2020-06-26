@@ -79,9 +79,9 @@ Component({
     },
     //查看用户详情
     getUserInfo(e){
-      let user_id = e.currentTarget.dataset.userid;
+      let user_id = e.currentTarget.dataset.user_id;
       wx.navigateTo({
-        url: '/pages/userinfo/userinfo?userid=' + user_id,
+        url: '/pages/userinfo/userinfo?user_id=' + user_id,
       });
     }
   }

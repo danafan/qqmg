@@ -5,5 +5,5 @@
     为了给用户提供优质准确的信息服务，已成交的信息请您及时下架！
   </view>
   <!-- 信息列表 -->
-  <record_item wx:for="{{push_list}}" wx:key="id" Item="{{item}}" bind:getDetail="detail" bind:Shelves="shelves" page_type="1"/>
+  <record_item wx:for="{{push_list}}" wx:key="info_id" Item="{{item}}" bind:getDetail="detail" bind:Shelves="shelves" page_type="1"/>
 </scroll-view>

@@ -10,10 +10,10 @@
       <view class="my_name {{authStatus?'':'hui_name'}}">{{authStatus?wx_user_info.nickName:'未登录'}}</view>
       <view class="vip_box">
         <view class="level_box">
-          <view class="current_level" style="width:{{res_user_info.vip_level_count}}%">
+          <view class="current_level" style="width:{{user_obj.active_day + user_obj.num}}%">
             <view class="xian">
               <image class="vip_icon" src="../../images/vip_icon.png"></image>
-              <view class="vip_txt">{{res_user_info.vip_level_count}}</view>
+              <view class="vip_txt">{{user_obj.vip}}</view>
             </view>
           </view>
           <view class="vip_toast">
@@ -28,17 +28,17 @@
       </view>
       <view class="menu_list">
         <view class="menu_item">
-          <view class="item_num">{{res_user_info.signing_count}}</view>
+          <view class="item_num">{{user_obj.active_day}}</view>
           <view class="item_label">活跃天数</view>
         </view>
         <view class="line"></view>
         <view class="menu_item">
-          <view class="item_num">{{res_user_info.vip_level}}</view>
+          <view class="item_num">{{user_obj.vip}}</view>
           <view class="item_label">VIP等级</view>
         </view>
         <view class="line"></view>
         <view class="menu_item">
-          <view class="item_num">{{res_user_info.push_count}}</view>
+          <view class="item_num">{{user_obj.num}}</view>
           <view class="item_label">发布数量</view>
         </view>
       </view>

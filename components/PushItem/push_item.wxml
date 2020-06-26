@@ -1,9 +1,9 @@
 <!--components/PushItem/push_item.wxml-->
 <view class="push_container">
-  <image class="user_img" src="{{infoItem.create_user_img}}" data-userid="{{infoItem.create_user_id}}" bindtap="getUserInfo"></image>
+  <image class="user_img" src="{{infoItem.create_user_img}}" data-user_id="{{infoItem.create_user_id}}" bindtap="getUserInfo"></image>
   <view class="push_content">
     <view class="userinfo">
-      <view class="username" data-userid="{{infoItem.create_user_id}}" bindtap="getUserInfo">{{infoItem.create_user_nickname}}</view>
+      <view class="username" data-user_id="{{infoItem.create_user_id}}" bindtap="getUserInfo">{{infoItem.create_user_nickname}}</view>
       <view class="phone" data-phone="{{infoItem.contact_phone}}" bindtap="call">拨打电话</view>
     </view>
     <view class="taps" data-id="{{infoItem.info_id}}" bindtap="detail">

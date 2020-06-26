@@ -63,6 +63,7 @@ App({
   globalData: {
     baseUrl:"http://localhost:8089/static/uploads/",
     userInfo: null,
+    user_id:"1",
     shareObj: {
       title: '免费的本地信息服务平台',
       imageUrl: "/images/banner_01.png",

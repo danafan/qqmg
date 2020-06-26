@@ -1,13 +1,14 @@
 <!--pages/userinfo/userinfo.wxml-->
 <view class="user_info_box">
   <view class="info_content">
-    <image class="user_img" src="../../images/banner_02.jpg"></image>
+    <image class="user_img" src="{{user_obj.user_img}}"></image>
     <view class="user_text">
-      <view class="nickname">Ranbol</view>
-      <view class="menu_item">发布总数：12</view>
-      <view class="menu_item">活跃天数：8</view>
+      <view class="nickname">{{user_obj.nickname}}</view>
+      <view class="menu_item">发布总数：{{user_obj.num}}</view>
+      <view class="menu_item">活跃天数：{{user_obj.active_day}}</view>
+      <view class="menu_item">VIP等级：{{user_obj.vip}}</view>
     </view>
   </view>
   <!-- 信息列表 -->
-  <record_item wx:for="{{push_list}}" wx:key="id" Item="{{item}}" page_type="2" bind:getDetail="detail"/>
+  <record_item wx:for="{{push_list}}" wx:key="info_id" Item="{{item}}" page_type="2" bind:getDetail="detail" />
 </view>

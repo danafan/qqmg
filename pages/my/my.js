@@ -1,27 +1,14 @@
 // pages/my/my.js
 var app = getApp();
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
 Page({
   data: {
     authStatus: false, //默认未登录
-    res_user_info: {
-      vip_level_count: 0,
-      vip_level: "--",
-      push_count: "--",
-      signing_count: "--"
-    }, //后台获取的用户信息
+    user_obj:{}, //后台获取的用户信息
     wx_user_info: {}, //微信用户信息
   },
-  //登录
-  login() {
-    wx.navigateTo({
-      url: '/pages/auth/auth',
-    });
-  },
-  //分享自定义
-  onShareAppMessage: function(res) {
-    return app.globalData.shareObj
-  },
-  onShow() {
+  onLoad() {
     if (!app.globalData.userInfo) {
       console.log("未登录")
       this.setData({
@@ -33,21 +20,30 @@ Page({
         authStatus: true,
         wx_user_info: app.globalData.userInfo
       })
-      //获取用户信息（根据微信用户获取）
-      this.getUserInfo();
+      //获取用户信息
+      this.getUserInfo({ user_id: app.globalData.user_id });
     }
   },
-  //获取用户信息（根据微信用户获取）
-  getUserInfo() {
-    let userObj = {
-      vip_level_count: 28,
-      vip_level: "8",
-      push_count: "13",
-      signing_count: "45"
-    }
-    this.setData({
-      res_user_info: userObj
+  //获取用户信息
+  getUserInfo(req) {
+    util.get(api.getUserInfo, req).then(res => {
+      let userData = res.data;
+      let number = userData.num + userData.active_day;
+      userData.vip = Math.floor(number / 10);
+      this.setData({
+        user_obj: userData
+      })
     })
+  },
+  //登录
+  login() {
+    wx.navigateTo({
+      url: '/pages/auth/auth',
+    });
+  },
+  //分享自定义
+  onShareAppMessage: function(res) {
+    return app.globalData.shareObj
   },
   //发布管理
   pushManagement() {

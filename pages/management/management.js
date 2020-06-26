@@ -1,47 +1,42 @@
 // pages/management/management.js
 const app = getApp()
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
 Page({
   data: {
-    push_list:[
-      {
-        id:"1",
-        goods_img:"../../images/banner_02.jpg",
-        title:"室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer:"268"
-      },
-      {
-        id: "2",
-        goods_img: "../../images/banner_01.png",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "3",
-        goods_img: "../../images/banner_03.jpg",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "4",
-        goods_img: "../../images/banner_02.jpg",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "5",
-        goods_img: "../../images/banner_01.png",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "6",
-        goods_img: "../../images/banner_01.png",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-    ],
-    active_id:"",   //点击的消息id
-
+    baseUrl:app.globalData.baseUrl,
+    push_list:[],   //信息列表
+  },
+  onLoad(){
+    //获取信息列表
+    this.getInfoList({create_user_id:app.globalData.user_id});
+  },
+  //获取信息列表
+  getInfoList(req) {
+    util.get(api.infoList, req).then(res => {
+      res.data.map(item => {
+        //处理显示图片
+        if (item.file_list) {
+          item.file_url = this.data.baseUrl + item.file_list.split("_")[0];
+        } else {
+          item.file_url = '../../images/banner_01.png';
+        }
+        //区分图片或视频
+        if (item.file_list && item.file_list.indexOf('mp4') > -1) {
+          item.file_type = 'video'
+        } else {
+          item.file_type = 'image'
+        }
+        //处理时间显示
+        var time = new Date(parseInt(item.create_time));
+        var y = time.getFullYear();
+        item.m = (time.getMonth() + 1) + '月';
+        item.d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+      })
+      this.setData({
+        push_list: res.data
+      })
+    })
   },
   //分享自定义
   onShareAppMessage: function (res) {
@@ -55,74 +50,28 @@ Page({
   },
   //下架
   shelves(e){
-    this.setData({
-      active_id:e.detail
-    })
     wx.showModal({
       title: '提示',
       content: "确认下架该信息？",
-      success(res) {
+      success:(res) => {
         if (res.confirm) {
-          console.log('用户点击确定')
+          let req = { info_id: e.detail}
+          util.post(api.deleteInfo, req).then(res => {
+            wx.showToast({
+              title: '下架成功',
+              icon: "none",
+              mask: true,
+              duration: 1500, 
+              success:() => {
+                //获取信息列表
+                this.getInfoList({ create_user_id: app.globalData.user_id });
+              }
+            })
+          })
         } else if (res.cancel) {
           console.log('取消')
         }
       }
     })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

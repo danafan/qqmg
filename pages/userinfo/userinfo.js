@@ -1,48 +1,61 @@
 // pages/userinfo/userinfo.js
 const app = getApp();
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
 Page({
   data: {
-    push_list: [
-      {
-        id: "1",
-        goods_img: "../../images/banner_02.jpg",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "2",
-        goods_img: "../../images/banner_01.png",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "3",
-        goods_img: "../../images/banner_03.jpg",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "4",
-        goods_img: "../../images/banner_02.jpg",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "5",
-        goods_img: "../../images/banner_01.png",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-      {
-        id: "6",
-        goods_img: "../../images/banner_01.png",
-        title: "室内配置：配备品牌家具家电、配套床垫、抱枕、台灯、桌椅、衣柜、空调、洗衣机、冰箱和宽带。",
-        boswer: "268"
-      },
-    ],
+    baseUrl:app.globalData.baseUrl,
+    user_obj:{},    //用户信息
+    push_list: [],  //信息列表
+    user_id:"",   //用户id
   },
   onLoad(option){
-    console.log(option)
+    this.setData({
+      user_id: option.user_id
+    })
+    //获取信息列表
+    this.getInfoList({ create_user_id: option.user_id });
+  },
+  //获取用户信息
+  getUserInfo(req){
+    util.get(api.getUserInfo, req).then(res => {
+      let userData = res.data;
+      let number = userData.num + userData.active_day;
+      userData.vip = Math.floor(number / 10);
+      this.setData({
+        user_obj: userData
+      })
+    })
+  },
+  //获取信息列表
+  getInfoList(req) {
+    util.get(api.infoList, req).then(res => {
+      res.data.map(item => {
+        //处理显示图片
+        if (item.file_list) {
+          item.file_url = this.data.baseUrl + item.file_list.split("_")[0];
+        }else{
+          item.file_url = '../../images/banner_01.png';
+        }
+        //区分图片或视频
+        if (item.file_list && item.file_list.indexOf('mp4') > -1) {
+          item.file_type = 'video'
+        } else {
+          item.file_type = 'image'
+        }
+        //处理时间显示
+        var time = new Date(parseInt(item.create_time));
+        var y = time.getFullYear();
+        item.m = (time.getMonth() + 1) + '月';
+        item.d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+      })
+      console.log(res.data)
+      this.setData({
+        push_list: res.data
+      })
+      //获取用户信息
+      this.getUserInfo({ user_id: this.data.user_id });
+    })
   },
   //分享自定义
   onShareAppMessage: function (res) {
