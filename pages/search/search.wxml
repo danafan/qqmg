@@ -6,19 +6,19 @@
       <image class="search_icon" src="../../images/search_icon.png"></image>
       <input class="search_input" placeholder-style="color:#fff" value="{{search_val}}" placeholder="输入标签关键词或点击热门标签" bindinput="searchInput" />
     </view>
-    <view class="search_but">搜索</view>
+    <view class="search_but" bindtap="search">搜索</view>
   </view>
   <!-- 标签列表或列表为空 -->
-  <view class="taps_box" wx:if="{{isNull}}">
+  <view class="taps_box" wx:if="{{search_val == '' || !isNull}}">
     <view class="tap_title">热门标签</view>
     <view class="taps_list">
-      <view class="tap_item" wx:for="{{taps_list}}" wx:key="*this">{{item}}</view>
+      <view class="tap_item" wx:for="{{taps_list}}" data-name="{{item.category_name}}" wx:key="category_id" bindtap="checkTag">{{item.category_name}}</view>
     </view>
-    <!-- 空 -->
-    <null_page toast_text="这里啥都没有，换个标签试试～"/>
   </view>
+  <!-- 空 -->
+  <null_page toast_text="这里啥都没有，换个标签试试～" wx:if="{{service_list.length == 0 && isNull}}" bind:goPush="goPush"/>
   <!-- 底部列表 -->
-  <view class="search_list" wx:else>
-    <push_item wx:for="{{service_list}}" wx:key="id" infoItem="{{item}}" />
+  <view class="search_list" wx:if="{{service_list.length > 0 && isNull}}">
+    <push_item wx:for="{{service_list}}" wx:key="info_id" infoItem="{{item}}"/>
   </view>
 </view>

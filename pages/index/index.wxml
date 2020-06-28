@@ -1,8 +1,8 @@
 <!--index.wxml-->
 <view class="index_container">
   <!-- <official-account></official-account> -->
-  <navigation startBarHeight="{{startBarHeight}}" navgationHeight="{{navgationHeight}}" location="{{location}}" bind:onEmit="openSet"/>
-  <view class="content_box">
+  <navigation class="fixed" startBarHeight="{{startBarHeight}}" navgationHeight="{{navgationHeight}}" location="{{location}}" bind:onEmit="openSet" />
+  <view class="content_box" style="margin-top:{{startBarHeight + navgationHeight}}px">
     <view class="top_back">
       <!-- 轮播图 -->
       <swiper class="banner_box" autoplay="true" interval="5000" duration="80" circular="true" indicator-dots="{{true}}" indicator-color="rgba(0,0,0,.1)" indicator-active-color="#a1e81a">
@@ -15,7 +15,7 @@
       <!-- 分类 -->
       <view class="category_row">
         <view class="category_item" wx:for="{{category_list}}" wx:key="category_id" data-id="{{item.category_id}}" data-index="{{index}}" bindtap="service">
-          <image class="cate_icon" src="{{item.icon}}"></image>
+          <image class="cate_icon" src="{{baseUrl + item.icon}}"></image>
           <view class="cate_txt">{{item.category_name}}</view>
         </view>
       </view>
@@ -30,9 +30,8 @@
       <!-- 发布列表 -->
       <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
     </view>
-
   </view>
-
+  <bottom wx:if="{{!isLoad}}"/>
 
 
 </view>

@@ -14,4 +14,5 @@
     <!-- 发布列表 -->
     <push_item wx:for="{{service_list}}" wx:key="id" infoItem="{{item}}" />
   </view>
+  <bottom wx:if="{{!isLoad}}"/>
 </view>

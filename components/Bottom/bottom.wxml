@@ -1,0 +1,2 @@
+<!--components/Bottom/bottom.wxml-->
+<view class="isBot">-----  别滑了，到底了  -----</view>

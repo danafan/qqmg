@@ -30,8 +30,13 @@ Component({
       this.triggerEvent('getDetail',id);
     },
     shelves(e) {
-      let id  = e.currentTarget.dataset.id;
-      this.triggerEvent('Shelves', id);
+      let id = e.currentTarget.dataset.id;
+      let file_list = e.currentTarget.dataset.filelist;
+      let req = {
+        info_id: id,
+        file_list: file_list
+      }
+      this.triggerEvent('Shelves', req);
     },
   }
 })

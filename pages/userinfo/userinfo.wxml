@@ -11,4 +11,5 @@
   </view>
   <!-- 信息列表 -->
   <record_item wx:for="{{push_list}}" wx:key="info_id" Item="{{item}}" page_type="2" bind:getDetail="detail" />
+  <bottom wx:if="{{!isLoad}}"/>
 </view>

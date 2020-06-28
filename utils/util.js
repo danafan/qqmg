@@ -1,19 +1,3 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-}
-
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
-
 /**
  * GET请求封装
  */
@@ -32,6 +16,9 @@ function post(url, data = {}) {
  * 微信的request
  */
 function request(url, data = {}, method = "GET") {
+  wx.showLoading({
+    title: '加载中',
+  })
   var contentType = 'application/json'
   return new Promise(function (resolve, reject) {
     wx.request({
@@ -42,6 +29,7 @@ function request(url, data = {}, method = "GET") {
         'Content-Type': contentType
       },
       success: function (res) {
+        wx.hideLoading()
         if (res.data.code == 0) {
           //请求正常200
           resolve(res.data);
@@ -51,6 +39,7 @@ function request(url, data = {}, method = "GET") {
         }
       },
       fail: function (err) {
+        wx.hideLoading()
         //服务器连接异常
         reject("服务器连接异常，请检查网络再试")
       }
@@ -60,6 +49,5 @@ function request(url, data = {}, method = "GET") {
 
 module.exports = {
   get: get,
-  post:post,
-  formatTime: formatTime
+  post:post
 }

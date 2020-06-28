@@ -11,7 +11,7 @@
       <view class="info_title">{{Item.info_desc}}</view>
       <view class="content_bottom">
         <view class="time">浏览：{{Item.browse_num}}</view>
-        <view class="shelves" data-id="{{Item.info_id}}" catchtap="shelves" wx:if="{{page_type == '1'}}">下架</view>
+        <view class="shelves" data-id="{{Item.info_id}}" data-filelist="{{Item.file_list}}" catchtap="shelves" wx:if="{{page_type == '1'}}">下架</view>
       </view>
     </view>
   </view>

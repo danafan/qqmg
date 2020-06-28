@@ -11,9 +11,14 @@
 }
 
 .tab_list {
+  background: #fff;
   border-bottom: 1rpx solid #dbdbdb;
   width: 100%;
   height: 85rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .tab {
@@ -40,112 +45,9 @@
 }
 
 .advertising_list {
+  margin-top: 85rpx;
   width: 100%;
-  flex: 1;
-  overflow-y: scroll;
+  /* flex: 1; */
+  /* overflow-y: scroll; */
   padding: 40rpx 20rpx 0;
 }
-
-/* .adver_item {
-  margin-bottom: 50rpx;
-  border-radius: 15rpx;
-  width: 100%;
-  height: 260rpx;
-  background: #fff;
-  box-shadow: 0 0 5px #e6e6e6;
-  padding: 15rpx;
-  display: flex;
-  align-items: center;
-}
-
-.goods_img {
-  margin-right: 20rpx;
-  border-radius: 10rpx;
-  position: relative;
-  top: -15rpx;
-  width: 200rpx;
-  height: 260rpx;
-}
-
-.item_right {
-  height: 100%;
-  flex: 1;
-  position: relative;
-}
-
-.right_top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.username {
-  font-size: 30rpx;
-  color: #333;
-  font-weight: 700;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.tap {
-  border-radius: 20rpx 0 0 20rpx;
-  width:100rpx;
-  text-align: center;
-  padding-top: 5rpx;
-  padding-bottom: 5rpx;
-  background: rgb(254, 244, 199);
-  font-size: 18rpx;
-  color: #f7a908;
-  position: relative;
-  right: -15rpx;
-}
-
-.describes {
-  margin-top: 10rpx;
-  font-size: 26rpx;
-  color: #8a8a8a;
-  font-weight: 600;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.subs {
-  margin-top: 10rpx;
-  font-size: 24rpx;
-  color: red;
-  display: flex;
-  align-items: center;
-}
-.sub{
-  margin-right: 8rpx;
-  border-radius: 8rpx;
-  background: #a1e81a;
-  color: #fff;
-  font-size: 20rpx;
-  padding: 5rpx 8rpx;
-}
-.right_bottom{
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.browse{
-  font-size: 24rpx;
-  color: #707070;
-}
-.buttons{
-  display: flex;
-  align-items: center;
-}
-.phone_icon{
-  width: 48rpx;
-  height: 48rpx;
-} */

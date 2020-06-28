@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "发布管理",
   "usingComponents": {
-    "record_item": "../../components/RecordItem/record_item"
+    "record_item": "../../components/RecordItem/record_item",
+    "bottom": "../../components/Bottom/bottom"
   }
 }

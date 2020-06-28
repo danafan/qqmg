@@ -1,8 +1,10 @@
 {
   "navigationBarTitleText": "首页",
   "navigationStyle": "custom",
+  "enablePullDownRefresh":true,
   "usingComponents": {
     "push_item":"../../components/PushItem/push_item",
-    "navigation": "../../components/Navigation/navigation"
+    "navigation": "../../components/Navigation/navigation",
+    "bottom": "../../components/Bottom/bottom"
   }
 }

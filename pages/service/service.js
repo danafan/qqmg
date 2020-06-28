@@ -9,6 +9,9 @@ Page({
     active_index: 0, //默认选中的顶部导航下标
     service_list: [], //信息列表
     show_index: 0, //解决顶部滑动bug
+    info_id:"",
+    isLoad:true,
+    page:1
   },
   //分享自定义
   onShareAppMessage: function(res) {
@@ -17,13 +20,13 @@ Page({
   onLoad(option) {
     this.setData({
       active_index: option.index == '-1' ? 0 : parseInt(option.index) + 1,
-      show_index: option.index >= 5 ? 5 : option.index == '-1' ? 0 : option.index
+      show_index: option.index >= 5 ? 5 : option.index == '-1' ? 0 : option.index,
+      info_id: option.id
     })
     //获取一级分类列表
     this.getCateGory();
     //获取信息列表
-    let req = { level_01_id: option.id };
-    this.getInfoList(req);
+    this.getInfoList();
   },
   //获取一级分类列表
   getCateGory() {
@@ -43,18 +46,35 @@ Page({
   },
   //点击切换顶部导航
   changeCurrent(e) {
-    let id = e.currentTarget.dataset.id;
-    let index = e.currentTarget.dataset.index;
     this.setData({
-      active_index: index
+      info_id: e.currentTarget.dataset.id,
+      service_list:[],
+      active_index: e.currentTarget.dataset.index,
+      isLoad:true,
+      page:1
     })
-    let req = { level_01_id: id };
     //获取信息列表
-    this.getInfoList(req);
+    this.getInfoList();
+  },
+  //上拉加载
+  onReachBottom() {
+    if (this.data.isLoad) {
+      this.setData({
+        page: this.data.page + 1
+      })
+      //获取信息列表
+      this.getInfoList();
+    }
   },
   //获取信息列表
-  getInfoList(req) {
+  getInfoList() {
+    let req = { level_01_id: this.data.info_id, page: this.data.page };
     util.get(api.infoList, req).then(res => {
+      if (res.data.length < 8) {
+        this.setData({
+          isLoad: false
+        })
+      }
       res.data.map(item => {
         //处理文件数组
         if (item.file_list) {
@@ -110,7 +130,7 @@ Page({
       })
       console.log(res.data)
       this.setData({
-        service_list: res.data
+        service_list: [...this.data.service_list, ...res.data]
       })
     })
   },

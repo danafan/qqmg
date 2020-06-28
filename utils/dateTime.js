@@ -33,10 +33,11 @@ function getLastDate(time) {
   }
   //    转换时间
 function getFormatTime (timestamp) {
+  let ss = new Date(timestamp).getTime()
     let now = getUnix()
     let today = getTodayUnix()
     let year = getYearUnix()
-    let timer = (now - timestamp) / 1000
+  let timer = (now - ss) / 1000
     let tip = ''
 
     if (timer <= 0) {
@@ -50,7 +51,7 @@ function getFormatTime (timestamp) {
     } else if (timer / 86400 <= 31) {
       tip = Math.floor(timer / 86400) + '天前'
     } else {
-      tip = this.getLastDate(timestamp)
+      tip = this.getLastDate(ss)
     }
     return tip
   }

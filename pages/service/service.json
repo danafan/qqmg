@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "服务",
   "usingComponents": {
-    "push_item": "../../components/PushItem/push_item"
+    "push_item": "../../components/PushItem/push_item",
+    "bottom": "../../components/Bottom/bottom"
   }
 }

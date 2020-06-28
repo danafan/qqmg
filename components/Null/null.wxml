@@ -2,5 +2,5 @@
 <view class="null_box">
   <image class="null_icon" src="../../images/null.png"></image>
   <view class="null_text">{{toast_text}}</view>
-  <view class="go_push" bindtap="goPush">我要发布</view>
+  <view class="go_push" bindtap="goPush">去发布</view>
 </view>

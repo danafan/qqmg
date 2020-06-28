@@ -22,7 +22,7 @@
     <video class="goods_img" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" duration="8" wx:if="{{infoItem.file_type == 'video'}}"></video>
     <view class="bottom_info">
       <view class="time">{{infoItem.ddd}}</view>
-      <view class="browse">{{infoItem.browse_num}}浏览</view>
+      <view class="browse">{{infoItem.browse_num}} 浏览</view>
     </view>
   </view>
   <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close"/>

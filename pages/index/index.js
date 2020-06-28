@@ -9,6 +9,7 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 Page({
   data: {
+    baseUrl:app.globalData.baseUrl,
     location: "请选择",
     banner_list: [{
       id: "1",
@@ -20,7 +21,9 @@ Page({
       id: "3",
       img_url: "../../images/banner_03.jpg"
     }], //轮播图
+    page:1,       //当前页码
     info_list: [], //信息列表
+    isLoad:true,    //默认可以加载
     category_list: [],
     startBarHeight: 0,
     navgationHeight: 0
@@ -42,9 +45,6 @@ Page({
       p_id: 0
     }).then(res => {
       let data = res.data;
-      data.map((item,index) => {
-        item.icon = '../../images/cate_0' + (index + 1) + '.png'
-      })
       this.setData({
         category_list: data
       })
@@ -52,7 +52,13 @@ Page({
   },
   //获取信息列表
   getInfoList(req){
+    req.page = this.data.page;
     util.get(api.infoList, req).then(res => {
+      if (res.data.length < 8){
+        this.setData({
+          isLoad:false
+        })
+      }
       res.data.map(item => {
         //处理文件数组
         if(item.file_list){ 
@@ -108,7 +114,7 @@ Page({
       })
       console.log(res.data)
       this.setData({
-        info_list:res.data
+        info_list: [...this.data.info_list,...res.data]
       })
     })
   },
@@ -179,18 +185,27 @@ Page({
   onShareAppMessage: function(res) {
     return app.globalData.shareObj
   },
-  onPullDownRefresh: function() {
-    //显示加载动画
-    wx.showNavigationBarLoading();
-    //获取数据
-    this.getData();
+  //下拉刷新
+  onPullDownRefresh() {
+    this.setData({
+      isLoad:true,
+      page: 1,
+      info_list:[]
+    })
+    //获取信息列表
+    let req = { level_01_id: 0, page: this.data.page}
+    this.getInfoList(req);
   },
-  //获取数据
-  getData() {
-    setTimeout(() => {
-      wx.hideNavigationBarLoading() //完成停止加载
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 2000)
+  //上拉加载
+  onReachBottom(){
+    if (this.data.isLoad){
+      this.setData({
+        page: this.data.page + 1
+      })
+      //获取信息列表
+      let req = { level_01_id: 0, page: this.data.page }
+      this.getInfoList(req);
+    }
   },
   //点击跳转到服务页面
   service(e) {

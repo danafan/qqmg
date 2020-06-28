@@ -10,94 +10,13 @@
   flex-direction: column;
 }
 
-.search_box {
-  background: #a1e81a;
-  padding-left: 15rpx;
-  padding-right: 15rpx;
+.fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  z-index: 9;
 }
-
-.search_left {
-  margin-right: 15rpx;
-  display: flex;
-  align-items: center;
-  z-index: 1;
-}
-
-.location_icon {
-  width: 34rpx;
-  height: 34rpx;
-}
-
-.location_text {
-  margin-left: 5rpx;
-  font-size: 24rpx;
-  color: #fff;
-}
-
-.search_input {
-  border-radius: 32rpx;
-  background: rgba(255, 255, 255, 0.5);
-  width: 500rpx;
-  height: 70rpx;
-  display: flex;
-  align-items: center;
-}
-
-.search_icon {
-  margin-right: 10rpx;
-  margin-left: 20rpx;
-  width: 35rpx;
-  height: 35rpx;
-}
-
-.input_text {
-  font-size: 26rpx;
-  color: #fff;
-}
-
-.message_icon {
-  margin-left: 15rpx;
-  width: 48rpx;
-  height: 48rpx;
-  z-index: 1;
-}
-
-/* 广播 */
-
-/* .swiper_box {
-  border-radius: 32rpx;
-  background: rgba(255, 255, 255, 0.3);
-  flex: 1;
-  height: 60rpx;
-  z-index: 1;
-}
-
-.radio_txt {
-  padding-left: 10rpx;
-  padding-right: 10rpx;
-  font-size: 28rpx;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cate_name {
-  color: red;
-} */
-
-.content_box {
-  flex: 1;
-  overflow-y: scroll;
-}
-
 .content {
   padding: 0 15rpx 15rpx;
 }
