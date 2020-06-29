@@ -15,6 +15,8 @@ Page({
     this.setData({
       user_id: option.user_id
     })
+    //获取用户信息
+    this.getUserInfo({ user_id: this.data.user_id });
     //获取信息列表
     this.getInfoList();
   },
@@ -69,12 +71,9 @@ Page({
         item.m = datetime.getMonth() + 1 + '月'
         item.d = addDateZero(datetime.getDate())
       })
-      console.log(res.data)
       this.setData({
         push_list: [...this.data.push_list,...res.data]
       })
-      //获取用户信息
-      this.getUserInfo({ user_id: this.data.user_id});
     })
   },
   //分享自定义

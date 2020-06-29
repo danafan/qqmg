@@ -4,6 +4,22 @@ var QQMapWX = require('./utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 App({
   onLaunch: function() {
+     // wx.login({
+    //   success(res) {
+    //     if (res.code) {
+    //       console.log(res.code)
+    //       //发起网络请求
+    //       // wx.request({
+    //       //   url: 'https://test.com/onLogin',
+    //       //   data: {
+    //       //     code: res.code
+    //       //   }
+    //       // })
+    //     } else {
+    //       console.log('登录失败！' + res.errMsg)
+    //     }
+    //   }
+    // })
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {

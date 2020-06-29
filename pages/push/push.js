@@ -123,12 +123,18 @@ Page({
   //获取所有被选中的标签
   getActiveTag() {
     let arr = [];
+    let tags = [];
     this.data.taps.map(item => {
       if (item.active) {
         arr.push(item.tag_id);
+        tags.push(item.tag_name)
       }
     });
-    return arr;
+    let obj = {
+      arr: arr,
+      tags: tags
+    }
+    return obj;
   },
   //上传文件
   upLoadFile(req) {
@@ -305,8 +311,9 @@ Page({
       if (diff_data != "{}") { //传递的区分的参数
         submitObj.diff_data = diff_data;
       }
-      if (this.getActiveTag().length > 0) { //选中的标签
-        submitObj.tag_ids = this.getActiveTag().join("_");
+      if (this.getActiveTag().arr.length > 0) { //选中的标签
+        submitObj.tag_ids = this.getActiveTag().arr.join("_");
+        submitObj.tag_txts = this.getActiveTag().tags.join("_");
       }
       if (this.data.upload_files.length > 0) { //上传的文件
         submitObj.file_list = this.data.upload_files.join("_");

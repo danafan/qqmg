@@ -67,8 +67,8 @@ Page({
           item.file_type = 'image'
         }
         //处理标签数组
-        if (item.tag_ids) {
-          item.tags = item.tag_ids.split("_");
+        if (item.tag_txts) {
+          item.tag_txts = item.tag_txts.split("_");
         }
         //处理时间显示
         item.ddd = dateTime.getFormatTime(item.create_time);

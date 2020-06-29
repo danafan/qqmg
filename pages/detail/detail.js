@@ -38,6 +38,10 @@ Page({
       if (data.file_list) {
         data.files = data.file_list.split("_");
       }
+      //处理标签数组
+      if (data.tag_txts) {
+        data.tag_txts = data.tag_txts.split("_");
+      }
       //区分图片或视频
       if (data.file_list && data.file_list.indexOf('mp4') > -1) {
         data.file_type = 'video'

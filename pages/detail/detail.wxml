@@ -45,12 +45,12 @@
     <view class="content_box">
       <!-- 标签列表 -->
       <view class="taps_box">
-        <view class="tap_item" wx:for="{{info_detail.taggss}}" wx:key="tag_id">{{item.tag_name}}</view>
+        <view class="tap_item" wx:for="{{info_detail.tag_txts}}" wx:key="*this">{{item}}</view>
       </view>
       <!-- 分类显示 -->
       <view class="cate_box">
         <view class="cate_item">
-          <view class="cate_val_01">{{info_detail.category_name}}</view>
+          <view class="cate_val_01">{{info_detail.cate_01_name}}</view>
           <view class="cate_label">所属分类</view>
         </view>
         <view class="line"></view>

@@ -8,7 +8,7 @@
     </view>
     <view class="taps" data-id="{{infoItem.info_id}}" bindtap="detail">
       <view class="category_item">{{infoItem.category_name}}</view>
-      <view class="tap" wx:for="{{infoItem.taggss}}" wx:for-item="tag" wx:key="tag_id">{{tag.tag_name}}</view>
+      <view class="tap" wx:for="{{infoItem.tag_txts}}" wx:key="*this">{{item}}</view>
     </view>
     <view class="describe" data-id="{{infoItem.info_id}}" bindtap="detail">{{infoItem.info_desc}}</view>
     <view class="diff_box" wx:for="{{infoItem.diff_data}}" wx:key="index">
