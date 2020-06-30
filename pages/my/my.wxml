@@ -7,7 +7,7 @@
       <view class="user_img_box" wx:else bindtap="login">
         <image class="user_img" src="../../images/user_img.png"></image>
       </view>
-      <view class="my_name {{authStatus?'':'hui_name'}}">{{authStatus?wx_user_info.nickName:'未登录'}}</view>
+      <view class="my_name {{authStatus?'':'hui_name'}}">{{authStatus?wx_user_info.nickName:'点击头像获取信息'}}</view>
       <view class="vip_box">
         <view class="level_box">
           <view class="current_level" style="width:{{user_obj.active_day + user_obj.num}}%">
@@ -61,5 +61,5 @@
       <image class="right_icon" src="../../images/right.png"></image>
     </view> -->
   </view>
-  <view class="my_push" bindtap="login" wx:if="{{!authStatus}}">登录</view>
+  <view class="my_push" bindtap="login" wx:if="{{!app.globalData.userInfo}}">登录</view>
 </view>

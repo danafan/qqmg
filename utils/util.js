@@ -34,14 +34,21 @@ function request(url, data = {}, method = "GET") {
           //请求正常200
           resolve(res.data);
         } else {
-          //请求失败
-          reject("请求失败：" + res.data.code)
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1500
+          })
         }
       },
       fail: function (err) {
         wx.hideLoading()
         //服务器连接异常
-        reject("服务器连接异常，请检查网络再试")
+        wx.showToast({
+          title: "服务器连接异常，请检查网络再试",
+          icon: 'none',
+          duration: 1500
+        })
       }
     })
   });

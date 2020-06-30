@@ -82,9 +82,9 @@ Page({
   },
   //拨打电话
   call(e) {
-    if (!app.globalData.userInfo) {
+    if (!app.globalData.wxUser || !app.globalData.userInfo) {
       wx.navigateTo({
-        url: '/pages/auth/auth',
+        url: "/pages/auth/auth",
       });
     } else {
       let phone = e.currentTarget.dataset.phone;

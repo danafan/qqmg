@@ -5,23 +5,25 @@ const util = require('../../utils/util.js')
 Page({
   data: {
     authStatus: false, //默认未登录
-    user_obj:{}, //后台获取的用户信息
+    user_obj:{
+      active_day:"--",
+      vip:"--",
+      num:"--"
+    }, //后台获取的用户信息
     wx_user_info: {}, //微信用户信息
   },
   onLoad() {
-    if (!app.globalData.userInfo) {
-      console.log("未登录")
+    if (!app.globalData.wxUser) {
       this.setData({
         authStatus: false,
       })
     } else {
-      console.log("登录")
       this.setData({
         authStatus: true,
-        wx_user_info: app.globalData.userInfo
+        wx_user_info: app.globalData.wxUser
       })
       //获取用户信息
-      this.getUserInfo({ user_id: app.globalData.user_id });
+      // this.getUserInfo({ user_id: app.globalData.userInfo.user_id });
     }
   },
   //获取用户信息

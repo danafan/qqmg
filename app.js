@@ -4,22 +4,9 @@ var QQMapWX = require('./utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 App({
   onLaunch: function() {
-     // wx.login({
-    //   success(res) {
-    //     if (res.code) {
-    //       console.log(res.code)
-    //       //发起网络请求
-    //       // wx.request({
-    //       //   url: 'https://test.com/onLogin',
-    //       //   data: {
-    //       //     code: res.code
-    //       //   }
-    //       // })
-    //     } else {
-    //       console.log('登录失败！' + res.errMsg)
-    //     }
-    //   }
-    // })
+    const userLogin = require('./utils/userLogin.js')
+    userLogin.login();
+    //获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -36,7 +23,7 @@ App({
       wx.getUserInfo({
         success: res => {
           console.log(res);
-          this.globalData.userInfo = res.userInfo;
+          this.globalData.wxUser = res.userInfo;
           resolve(res);
         }
       })
@@ -78,13 +65,13 @@ App({
   },
   globalData: {
     baseUrl:"http://localhost:8089/static/uploads/",
-    userInfo: null,
-    user_id:"1",
+    wxUser:null,      //微信用户信息
+    userInfo: null,   //后台用户信息
     shareObj: {
       title: '免费的本地信息服务平台',
       imageUrl: "/images/banner_01.png",
       path: '/pages/index/index'
-    },
+    },                //自定义分享的内容
     locationObj: {
       address:"请选择"
     }

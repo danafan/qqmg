@@ -3,11 +3,15 @@
   <image class="logo" src="../../images/mangguo.png"></image>
   <view class="title">-- 青青芒果 便利生活 --</view>
   <view class="toast">欢迎加入青青芒果综合信息服务平台</view>
-  <view class="auth_content">
+  <view class="auth_content" wx:if="{{type == '1'}}">
     <view class="qing">请确认授权以下信息</view>
     <view class="ti">获取你的公开信息（昵称、头像等）</view>
     <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信授权</button>
-    <!-- <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">一键登录</button> -->
+  </view>
+  <view class="auth_content" wx:if="{{type == '2'}}">
+    <view class="qing">请确认授权以下信息</view>
+    <view class="ti">获取你的手机号</view>
+    <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">一键登录</button>
   </view>
   
   

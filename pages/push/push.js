@@ -210,9 +210,9 @@ Page({
   },
   //立即发布
   pushNow() {
-    if (!app.globalData.userInfo) {
+    if (!app.globalData.wxUser || !app.globalData.userInfo) {
       wx.navigateTo({
-        url: '/pages/auth/auth',
+        url: "/pages/auth/auth",
       });
     } else {
       var diff_data = {}

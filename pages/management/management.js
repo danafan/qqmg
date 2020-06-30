@@ -25,7 +25,7 @@ Page({
   },
   //获取信息列表
   getInfoList() {
-    let req = { create_user_id: app.globalData.user_id,page:this.data.page }
+    let req = { create_user_id: app.globalData.userInfo.user_id,page:this.data.page }
     util.get(api.infoList, req).then(res => {
       if (res.data.length < 8) {
         this.setData({
