@@ -27,8 +27,8 @@
     <view class="title_box">
       <!-- 个人头像 -->
       <view class="user_info_box">
-        <image class="user_img" src="{{info_detail.create_user_img}}"></image>
-        <view class="nickname">{{info_detail.create_user_nickname}}</view>
+        <image class="user_img" src="{{info_detail.create_user_img}}" bindtap="getUserInfo"></image>
+        <view class="nickname" bindtap="getUserInfo">{{info_detail.create_user_nickname}}</view>
         <view class="cate_item_box">{{info_detail.category_name}}</view>
       </view>
       <button class="share_box" open-type="share">

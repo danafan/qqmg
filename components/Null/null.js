@@ -23,7 +23,9 @@ Component({
   methods: {
     //去发布
     goPush(){
-      this.triggerEvent('goPush');
+      wx.reLaunch({
+        url: '/pages/category/category'
+      })
     }
   }
 })

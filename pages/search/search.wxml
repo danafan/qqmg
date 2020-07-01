@@ -16,9 +16,10 @@
     </view>
   </view>
   <!-- 空 -->
-  <null_page toast_text="这里啥都没有，换个标签试试～" wx:if="{{service_list.length == 0 && isNull}}" bind:goPush="goPush"/>
+  <null_page toast_text="换个标签试试～" wx:if="{{service_list.length == 0 && isNull}}" bind:goPush="goPush"/>
   <!-- 底部列表 -->
   <view class="search_list" wx:if="{{service_list.length > 0 && isNull}}">
     <push_item wx:for="{{service_list}}" wx:key="info_id" infoItem="{{item}}"/>
   </view>
+  <bottom wx:if="{{!isLoad && page >= 2}}"/>
 </view>

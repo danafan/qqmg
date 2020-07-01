@@ -1,12 +1,14 @@
 //app.js
 //获取地理位置
 var QQMapWX = require('./utils/qqmap-wx-jssdk.min.js');
+const api = require('./utils/api.js')
+const utils = require('./utils/util.js')
 var qqmapsdk;
 App({
   onLaunch: function() {
-    const userLogin = require('./utils/userLogin.js')
-    userLogin.login();
-    //获取用户信息
+    //获取后台用户信息
+    this.login();
+    //获取微信用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -16,7 +18,68 @@ App({
       }
     })
   },
-  //获取用户信息
+  login() {
+    const openid = wx.getStorageSync('openid');
+    if (openid) {
+      //判断微信服务端是否过期
+      this._checkWXSession();
+    } else {
+      //微信登录
+      this. _wxLogin();
+    }
+  },
+
+  //判断微信服务端是否过期
+  _checkWXSession() {
+    wx.checkSession({
+      success: () => {
+        //微信未过期，获取用户状态
+        this.getUserStatus();
+      },
+      fail: () => {
+        //已过期，先微信登录，再用户登录
+        this._wxLogin();
+      }
+    })
+  },
+
+  //获取用户状态
+  getUserStatus() {
+    utils.get(api.getUserStatus, {
+      openid: wx.getStorageSync('openid')
+    }).then(res => {
+      if (res.userInfo) {
+        this.globalData.userInfo = res.userInfo;
+      } else {
+        this.globalData.userInfo = null;
+      }
+    })
+  },
+
+  //先微信登录，再用户登录
+  _wxLogin() {
+    wx.login({
+      success: (res) => {
+        this._serLogin(res.code)
+      },
+      fail: (err) => {
+        console.log(err);
+      }
+    })
+  },
+
+  //用户登录
+  _serLogin(code) {
+    utils.get(api.getOpenId, {
+      code: code
+    }).then(res => {
+      wx.setStorageSync('openid', res.openid);
+      this.globalData.session_key = res.session_key;
+      //获取用户状态
+      this.getUserStatus();
+    })
+  },
+  //获取微信用户信息
   wxUserInfo() {
     let that = this;
     return new Promise((resolve, reject) => {
@@ -30,50 +93,16 @@ App({
 
     })
   },
-  //获取地理位置信息
-  wxLocationInfo() {
-    wx.authorize({
-      scope: 'scope.userLocation',
-      success: () => {
-        wx.getLocation({
-          type: 'wgs84',
-          success: (res) => {
-            this.globalData.locationObj.latitude = res.latitude;
-            this.globalData.locationObj.longitude = res.longitude;
-            let req = {
-              latitude: this.globalData.locationObj.latitude,
-              longitude: this.globalData.locationObj.longitude
-            }
-            this.getApi(req);
-          }
-        })
-      }
-    })
-  },
-  // api
-  getApi(req) {
-    qqmapsdk = new QQMapWX({
-      key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
-    });
-    qqmapsdk.reverseGeocoder({
-      location: req,
-      success: (res) => {
-        this.globalData.locationObj.address = res.result.address_component.city;
-        console.log(this.globalData.locationObj.address)
-      }
-    })
-  },
   globalData: {
-    baseUrl:"http://localhost:8089/static/uploads/",
-    wxUser:null,      //微信用户信息
-    userInfo: null,   //后台用户信息
+    baseUrl: "http://localhost:8089/static/uploads/",
+    wxUser: null, //微信用户信息
+    userInfo: null, //后台用户信息
+    session_key:null,
     shareObj: {
       title: '免费的本地信息服务平台',
       imageUrl: "/images/banner_01.png",
       path: '/pages/index/index'
-    },                //自定义分享的内容
-    locationObj: {
-      address:"请选择"
-    }
+    }, //自定义分享的内容
+    locationObj: {},//用户地址信息（市，经纬度）
   }
 })

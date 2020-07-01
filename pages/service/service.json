@@ -1,7 +1,8 @@
 {
-  "navigationBarTitleText": "服务",
+  "navigationBarTitleText": "服务列表",
   "usingComponents": {
     "push_item": "../../components/PushItem/push_item",
-    "bottom": "../../components/Bottom/bottom"
+    "bottom": "../../components/Bottom/bottom",
+    "null_page": "../../components/Null/null"
   }
 }

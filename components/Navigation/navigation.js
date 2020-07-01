@@ -37,7 +37,7 @@ Component({
     },
     //获取当前位置
     getLocationInfo(){
-      if (this.data.location == '请选择') {
+      if (this.data.location == '点击获取') {
         this.triggerEvent('onEmit');
       }
     }

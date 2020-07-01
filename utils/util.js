@@ -18,6 +18,7 @@ function post(url, data = {}) {
 function request(url, data = {}, method = "GET") {
   wx.showLoading({
     title: '加载中',
+    mask:true
   })
   var contentType = 'application/json'
   return new Promise(function (resolve, reject) {
@@ -33,6 +34,20 @@ function request(url, data = {}, method = "GET") {
         if (res.data.code == 0) {
           //请求正常200
           resolve(res.data);
+        } else if (res.data.code == -1){
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1500,
+            mask: true,
+            success:() => {
+              setTimeout(() => {
+                wx.navigateBack({
+                  delta: 1
+                })
+              },1500);
+            }
+          })
         } else {
           wx.showToast({
             title: res.data.msg,

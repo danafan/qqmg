@@ -100,10 +100,10 @@
 .xian {
   position: absolute;
   top: -50rpx;
-  right: -58rpx;
+  right: -78rpx;
   display: flex;
   align-items: center;
-  width: 80rpx;
+  width: 180rpx;
 }
 
 .vip_icon {

@@ -10,7 +10,7 @@ var qqmapsdk;
 Page({
   data: {
     baseUrl:app.globalData.baseUrl,
-    location: "请选择",
+    location: "",
     banner_list: [{
       id: "1",
       img_url: "../../images/banner_01.png"
@@ -120,10 +120,23 @@ Page({
   },
   //获取地理位置信息
   wxLocationInfo() {
-    wx.authorize({
-      scope: 'scope.userLocation',
-      success: () => {
-        this.wxGetLocation();
+    wx.getSetting({
+      success:(res) => {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success:() => {
+              this.wxGetLocation();
+            },
+            fail:(err) => {
+              this.setData({
+                location: "点击获取"
+              })
+            }
+          })
+        }else{
+          this.wxGetLocation();
+        }
       }
     })
   },
@@ -154,6 +167,9 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
     });
+    this.setData({
+      location: "获取中"
+    })
     qqmapsdk.reverseGeocoder({
       location: req,
       success: (res) => {

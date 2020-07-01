@@ -5,7 +5,7 @@
     <text class="mm">{{Item.m}}</text>
   </view>
   <view class="info_item">
-    <image class="goods_img" src="{{Item.file_url}}" wx:if="{{Item.file_type == 'image'}}"></image>
+    <image class="goods_img" lazy-load="true" src="{{Item.file_url}}" wx:if="{{Item.file_type == 'image'}}"></image>
     <video class="goods_img" src="{{Item.file_url}}" duration="8" wx:if="{{Item.file_type == 'video'}}"></video>
     <view class="right_content">
       <view class="info_title">{{Item.info_desc}}</view>

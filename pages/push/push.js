@@ -2,6 +2,7 @@
 var app = getApp();
 const api = require('../../utils/api.js')
 const util = require('../../utils/util.js')
+const userStatus = require('../../utils/userStatus.js')
 Page({
   data: {
     baseUrl: app.globalData.baseUrl,
@@ -298,9 +299,9 @@ Page({
       this.toast("请阅读并同意发布协议！");
     } else {
       var submitObj = {
-        create_user_nickname: app.globalData.userInfo.nickName,
-        create_user_img: app.globalData.userInfo.avatarUrl,
-        create_user_id:'1',
+        create_user_nickname: app.globalData.wxUser.nickName,
+        create_user_img: app.globalData.wxUser.avatarUrl,
+        create_user_id: app.globalData.userInfo.user_id,
         level_01_id: this.data.option.level_01_id,
         level_02_id: this.data.option.level_02_id,
         temp_id:this.data.temp_id,
@@ -324,13 +325,17 @@ Page({
         content: "你发布的信息将被全兴安盟的人看到，确认发布吗？",
         success:(res) => {
           if (res.confirm) {
-            util.post(api.pushInfo, submitObj).then(res => {
-              this.toast("发布成功！");
-              setTimeout(() => {
-                wx.switchTab({
-                  url: "/pages/index/index"
+            userStatus.getUserStatus().then(res => {
+              if (res) {
+                util.post(api.pushInfo, submitObj).then(res => {
+                  this.toast("发布成功！");
+                  setTimeout(() => {
+                    wx.switchTab({
+                      url: "/pages/index/index"
+                    })
+                  }, 1500);
                 })
-              },1500);
+              }
             })
           } else if (res.cancel) {
             console.log('取消')

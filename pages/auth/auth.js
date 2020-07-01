@@ -2,7 +2,7 @@
 var app = getApp();
 Page({
   data: {
-    type: "0"
+    type: "1"
   },
   onLoad(option) {
     //判断哪一个没授权
@@ -32,6 +32,15 @@ Page({
         delta: 1
       })
     }
+    
+  },
+  //获取用户手机号
+  getPhoneNumber(e) {
+    let iv = e.detail.iv;
+    let encryptedData = e.detail.encryptedData;
+    let address = app.globalData.locationObj.address ? app.globalData.locationObj.address : app.globalData.wxUser.province;
+    let openid = wx.getStorageSync('openid');
+    let session_key = app.globalData.session_key;
     
   },
   //分享自定义

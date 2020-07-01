@@ -9,9 +9,10 @@
     <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信授权</button>
   </view>
   <view class="auth_content" wx:if="{{type == '2'}}">
-    <view class="qing">请确认授权以下信息</view>
-    <view class="ti">获取你的手机号</view>
-    <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">一键登录</button>
+    <view class="qing">青青芒果申请使用</view>
+    <view class="ti">你的手机号码</view>
+    <button class="login" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">快速登录</button>
+    <!-- <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">快速登录</button> -->
   </view>
   
   

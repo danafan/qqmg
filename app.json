@@ -2,16 +2,15 @@
   "pages": [
     "pages/index/index",
     "pages/category/category",
-    "pages/detail/detail",
     "pages/search/search",
     "pages/userinfo/userinfo",
     "pages/management/management",
     "pages/push/push",
+    "pages/detail/detail",
     "pages/service/service",
     "pages/agreement/agreement",
     "pages/my/my",
     "pages/auth/auth"
-    
   ],
   "permission": {
     "scope.userLocation": {

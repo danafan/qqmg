@@ -156,18 +156,6 @@ Page({
     })
     //获取信息列表
     this.getInfoList();
-  },
-  //点击我要发布
-  goPush() {
-    if (!app.globalData.userInfo) {
-      wx.navigateTo({
-        url: '/pages/auth/auth',
-      });
-    } else {
-      wx.reLaunch({
-        url: '/pages/category/category'
-      })
-    }
-  },
+  }
 
 })

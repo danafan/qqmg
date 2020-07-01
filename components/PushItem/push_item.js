@@ -1,5 +1,8 @@
 // components/PushItem/push_item.js
 var app = getApp();
+const api = require('../../utils/api.js')
+const utils = require('../../utils/util.js')
+const userStatus = require('../../utils/userStatus.js')
 Component({
   /**
    * 组件的属性列表
@@ -42,16 +45,13 @@ Component({
     },
     //拨打电话
     call(e) {
-      if (!app.globalData.wxUser || !app.globalData.userInfo) {
-        wx.navigateTo({
-          url: "/pages/auth/auth",
-        });
-      } else {
-        let phone = e.currentTarget.dataset.phone;
-        wx.makePhoneCall({
-          phoneNumber: phone
-        })
-      }
+      userStatus.getUserStatus().then(res => {
+        if (res) {
+          wx.makePhoneCall({
+            phoneNumber: e.currentTarget.dataset.phone
+          })
+        }
+      })
     },
     //点击显示大图
     open(e) {
@@ -78,10 +78,12 @@ Component({
       })
     },
     //查看用户详情
-    getUserInfo(e){
-      let user_id = e.currentTarget.dataset.user_id;
+    getUserInfo(e) {
+      let user_id = e.currentTarget.dataset.infoobj.create_user_id;
+      let create_user_img = e.currentTarget.dataset.infoobj.create_user_img;
+      let create_user_nickname = e.currentTarget.dataset.infoobj.create_user_nickname;
       wx.navigateTo({
-        url: '/pages/userinfo/userinfo?user_id=' + user_id,
+        url: '/pages/userinfo/userinfo?user_id=' + user_id + '&create_user_img=' + create_user_img + '&create_user_nickname=' + create_user_nickname
       });
     }
   }

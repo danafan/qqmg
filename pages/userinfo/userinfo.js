@@ -7,13 +7,17 @@ Page({
     baseUrl:app.globalData.baseUrl,
     user_obj:{},    //用户信息
     push_list: [],  //信息列表
-    user_id:"",   //用户id
+    user_id: "",   //用户id
+    create_user_img: "",   //用户头像
+    create_user_nickname:"",   //用户昵称
     isLoad:true,
     page:1
   },
   onLoad(option){
     this.setData({
-      user_id: option.user_id
+      user_id: option.user_id,
+      create_user_img: option.create_user_img,
+      create_user_nickname: option.create_user_nickname
     })
     //获取用户信息
     this.getUserInfo({ user_id: this.data.user_id });
@@ -35,7 +39,7 @@ Page({
     util.get(api.getUserInfo, req).then(res => {
       let userData = res.data;
       let number = userData.num + userData.active_day;
-      userData.vip = Math.floor(number / 10);
+      userData.vip = Math.floor(number / 10) > 10 ? 10 : Math.floor(number / 10);
       this.setData({
         user_obj: userData
       })

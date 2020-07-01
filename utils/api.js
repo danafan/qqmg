@@ -10,6 +10,7 @@ module.exports = {
   infoList: ApiRootUrl + 'infoList',                  //获取信息列表
   getInfoDetail: ApiRootUrl + 'getInfoDetail',        //获取信息详情
   deleteInfo: ApiRootUrl + 'deleteInfo',              //删除信息
+  getUserInfo: ApiRootUrl + 'getUserInfo',            //根据用户ID获取用户信息
   getOpenId: ApiRootUrl + 'getOpenId',                //根据code获取openid
   getUserStatus: ApiRootUrl + 'getUserStatus',        //根据openid获取用户信息
 }

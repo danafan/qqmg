@@ -31,7 +31,7 @@
       <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
     </view>
   </view>
-  <bottom wx:if="{{!isLoad}}"/>
+  <bottom wx:if="{{!isLoad && page >= 2}}"/>
 
 
 </view>

@@ -14,5 +14,7 @@
     <!-- 发布列表 -->
     <push_item wx:for="{{service_list}}" wx:key="id" infoItem="{{item}}" />
   </view>
-  <bottom wx:if="{{!isLoad}}"/>
+  <!-- 空 -->
+  <null_page toast_text="这里啥都没有，赶快去发布吧～" wx:if="{{service_list.length == 0}}" bind:goPush="goPush"/>
+  <bottom wx:if="{{!isLoad && page >= 2}}"/>
 </view>

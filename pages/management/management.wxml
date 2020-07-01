@@ -6,5 +6,7 @@
   </view>
   <!-- 信息列表 -->
   <record_item wx:for="{{push_list}}" wx:key="info_id" Item="{{item}}" bind:getDetail="detail" bind:Shelves="shelves" page_type="1"/>
-  <bottom wx:if="{{!isLoad}}"/>
+  <!-- 空 -->
+  <null_page toast_text="你还一条都没发过哦～" wx:if="{{push_list.length == 0}}" bind:goPush="goPush"/>
+  <bottom wx:if="{{!isLoad && page >= 2}}"/>
 </scroll-view>

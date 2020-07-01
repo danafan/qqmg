@@ -2,6 +2,7 @@
 var app = getApp();
 const api = require('../../utils/api.js')
 const util = require('../../utils/util.js')
+const userStatus = require('../../utils/userStatus.js')
 const dateTime = require('../../utils/dateTime.js')
 Page({
   data: {
@@ -82,15 +83,31 @@ Page({
   },
   //拨打电话
   call(e) {
-    if (!app.globalData.wxUser || !app.globalData.userInfo) {
-      wx.navigateTo({
-        url: "/pages/auth/auth",
-      });
-    } else {
-      let phone = e.currentTarget.dataset.phone;
-      wx.makePhoneCall({
-        phoneNumber: phone
-      })
-    }
+    userStatus.getUserStatus().then(res => {
+      if (res) {
+        wx.makePhoneCall({
+          phoneNumber: e.currentTarget.dataset.phone
+        })
+      }
+    })
+    // if (!app.globalData.wxUser || !app.globalData.userInfo) {
+    //   wx.navigateTo({
+    //     url: "/pages/auth/auth",
+    //   });
+    // } else {
+    //   let phone = e.currentTarget.dataset.phone;
+    //   wx.makePhoneCall({
+    //     phoneNumber: phone
+    //   })
+    // }
+  },
+  //点击用户
+  getUserInfo(){
+    let user_id = this.data.info_detail.create_user_id;
+    let create_user_img = this.data.info_detail.create_user_img;
+    let create_user_nickname = this.data.info_detail.create_user_nickname;
+    wx.navigateTo({
+      url: '/pages/userinfo/userinfo?user_id=' + user_id + '&create_user_img=' + create_user_img + '&create_user_nickname=' + create_user_nickname
+    });
   }
 })
