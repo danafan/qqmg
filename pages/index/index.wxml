@@ -1,7 +1,17 @@
 <!--index.wxml-->
 <view class="index_container">
-  <!-- <official-account></official-account> -->
-  <navigation class="fixed" startBarHeight="{{startBarHeight}}" navgationHeight="{{navgationHeight}}" location="{{location}}" bind:onEmit="openSet" />
+  <view class="fixed">
+    <view class='startBar' style='height:{{startBarHeight}}px'></view>
+    <view class="search_box" style="height:{{navgationHeight}}px">
+      <image class="location_icon" src="../../images/location_icon.png" bindtap="getLocationInfo"></image>
+      <view class="location_text" bindtap="getLocationInfo">{{location}}</view>
+      <view class="search_input" bindtap="search">
+        <image class="search_icon" src="../../images/search_icon.png"></image>
+        <view class="input_text">请输入搜索内容</view>
+      </view>
+      <view class="zhan"></view>
+    </view>
+  </view>
   <view class="content_box" style="margin-top:{{startBarHeight + navgationHeight}}px">
     <view class="top_back">
       <!-- 轮播图 -->
@@ -31,7 +41,7 @@
       <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
     </view>
   </view>
-  <bottom wx:if="{{!isLoad && page >= 2}}"/>
+  <bottom wx:if="{{!isLoad && page >= 2}}" />
 
 
 </view>

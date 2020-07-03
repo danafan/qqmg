@@ -112,11 +112,23 @@ Page({
           item.diff_data = diffArr
         }
       })
-      console.log(res.data)
       this.setData({
         info_list: [...this.data.info_list,...res.data]
       })
     })
+  },
+  //搜索
+  search() {
+    wx.navigateTo({
+      url: "/pages/search/search"
+    })
+  },
+  //获取当前位置
+  getLocationInfo() {
+    if (this.data.location == '点击获取') {
+      //获取地理位置信息
+      this.openSet();
+    }
   },
   //获取地理位置信息
   wxLocationInfo() {
@@ -173,7 +185,10 @@ Page({
     qqmapsdk.reverseGeocoder({
       location: req,
       success: (res) => {
-        app.globalData.locationObj.address = res.result.address_component.city;
+        let address_obj = res.result.address_component;
+        app.globalData.locationObj.address = address_obj.city;
+        let detail_address = address_obj.city + address_obj.district + address_obj.street;
+        app.globalData.locationObj.detail_address = detail_address;
         this.setData({
           location: res.result.address_component.city
         })

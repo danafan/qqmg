@@ -97,23 +97,12 @@
   left: 0;
 }
 
-.xian {
+.vip_icon {
   position: absolute;
   top: -50rpx;
-  right: -78rpx;
-  display: flex;
-  align-items: center;
-  width: 180rpx;
-}
-
-.vip_icon {
+  right: -20rpx;
   width: 40rpx;
   height: 40rpx;
-}
-
-.vip_txt {
-  font-size: 24rpx;
-  color: #f7a908;
 }
 
 .vip_toast {
@@ -184,6 +173,16 @@
   padding-left: 15rpx;
   padding-right: 15rpx;
   margin-bottom: 15rpx;
+  position: relative;
+}
+.feek_but{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%!important;
+  height: 98rpx!important;
+  z-index: 1;
+  opacity: 0;
 }
 .option_left{
   display: flex;

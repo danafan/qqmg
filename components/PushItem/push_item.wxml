@@ -17,13 +17,17 @@
     </view>
     <view class="all" data-id="{{infoItem.info_id}}" bindtap="detail">全文</view>
     <view class="images" wx:if="{{infoItem.file_type == 'image'}}">
-      <image class="goods_img" lazy-load="true" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.files}}" bindtap="open" ></image>
+      <image class="goods_img" lazy-load="true" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.files}}" bindtap="open"></image>
     </view>
     <video class="goods_img" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" duration="8" wx:if="{{infoItem.file_type == 'video'}}"></video>
     <view class="bottom_info">
-      <view class="time">{{infoItem.ddd}}</view>
+      <view class="info_left">
+        <view>{{infoItem.ddd}}</view>
+        <view class="detail_address" wx:if="{{infoItem.detail_address}}">{{infoItem.detail_address}}</view>
+      </view>
+
       <view class="browse">{{infoItem.browse_num}} 浏览</view>
     </view>
   </view>
-  <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close"/>
+  <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close" />
 </view>

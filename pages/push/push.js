@@ -318,6 +318,9 @@ Page({
       }
       if (this.data.upload_files.length > 0) { //上传的文件
         submitObj.file_list = this.data.upload_files.join("_");
+      } 
+      if (app.globalData.locationObj.detail_address) { //发布地址
+        submitObj.detail_address = app.globalData.locationObj.detail_address;
       }
       console.log(submitObj);
       wx.showModal({

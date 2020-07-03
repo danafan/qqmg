@@ -128,7 +128,6 @@ Page({
           item.diff_data = diffArr
         }
       })
-      console.log(res.data)
       this.setData({
         service_list: [...this.data.service_list, ...res.data]
       })

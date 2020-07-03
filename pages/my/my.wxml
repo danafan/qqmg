@@ -11,10 +11,7 @@
       <view class="vip_box">
         <view class="level_box">
           <view class="current_level" style="width:{{user_obj.vip*10}}%">
-            <view class="xian">
-              <image class="vip_icon" src="../../images/vip_icon.png"></image>
-              <view class="vip_txt">等级:{{user_obj.vip}}</view>
-            </view>
+            <image class="vip_icon" src="../../images/vip_icon.png"></image>
           </view>
           <view class="vip_toast">
             <text class="special">积分说明：</text>
@@ -22,7 +19,7 @@
             <text class="special">10</text>
             <text>积分为一个等级，达到</text>
             <text class="special">6</text>
-            <text>级以上服务号每周热门推送</text>
+            <text>级以上可获得服务号图文推送</text>
           </view>
         </view>
       </view>
@@ -53,13 +50,22 @@
       </view>
       <image class="right_icon" src="../../images/right.png"></image>
     </view>
-    <!-- <view class="option">
+    <view class="option">
+    <button class="feek_but" open-type="feedback"></button>
+      <view class="option_left">
+        <image class="option_icon" src="../../images/feek_icon.png"></image>
+        <view class="option_label">意见反馈</view>
+      </view>
+      <image class="right_icon" src="../../images/right.png"></image>
+    </view>
+  </view>
+  <!-- <view class="option">
       <view class="option_left">
         <image class="option_icon" src="../../images/top_up.png"></image>
         <view class="option_label">充值</view>
       </view>
       <image class="right_icon" src="../../images/right.png"></image>
-    </view> -->
-  </view>
+    </view>
+  </view> -->
   <view class="my_push" bindtap="login" wx:if="{{!isLogin}}">登录</view>
 </view>

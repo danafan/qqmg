@@ -92,6 +92,7 @@
   color: #234d76;
 }
 .images {
+  margin-bottom: 15rpx;
   display: flex;
   flex-wrap: wrap;
 }
@@ -110,6 +111,13 @@
   justify-content: space-between;
   font-size: 24rpx;
   color: #707070;
+}
+.info_left{
+  display: flex;
+  align-items: center;
+}
+.detail_address{
+  margin-left: 20rpx;
 }
 /* 大图弹框 */
 .imgs{

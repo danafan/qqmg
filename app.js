@@ -1,9 +1,6 @@
 //app.js
-//获取地理位置
-var QQMapWX = require('./utils/qqmap-wx-jssdk.min.js');
 const api = require('./utils/api.js')
 const utils = require('./utils/util.js')
-var qqmapsdk;
 App({
   onLaunch: function() {
     //获取后台用户信息
@@ -50,6 +47,7 @@ App({
     }).then(res => {
       if (res.userInfo) {
         this.globalData.userInfo = res.userInfo;
+        console.log(this.globalData.userInfo)
       } else {
         this.globalData.userInfo = null;
       }
@@ -85,7 +83,6 @@ App({
     return new Promise((resolve, reject) => {
       wx.getUserInfo({
         success: res => {
-          console.log(res);
           this.globalData.wxUser = res.userInfo;
           resolve(res);
         }

@@ -34,7 +34,7 @@ function request(url, data = {}, method = "GET") {
         if (res.data.code == 0) {
           //请求正常200
           resolve(res.data);
-        } else if (res.data.code == -1){
+        } else if (res.data.code == -1){  //信息被下架之后进入详情
           wx.showToast({
             title: res.data.msg,
             icon: 'none',

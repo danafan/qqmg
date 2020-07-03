@@ -48,10 +48,10 @@ function getFormatTime (timestamp) {
       tip = Math.floor(timer / 60) + '分钟前'
     } else if (timer >= 3600 && timer < 86400) {
       tip = Math.floor(timer / 3600) + '小时前'
-    } else if (timer / 86400 <= 31) {
+    } else if (timer / 86400 <= 16) {
       tip = Math.floor(timer / 86400) + '天前'
     } else {
-      tip = this.getLastDate(ss)
+      tip = getLastDate(ss)
     }
     return tip
   }

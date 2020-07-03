@@ -90,16 +90,6 @@ Page({
         })
       }
     })
-    // if (!app.globalData.wxUser || !app.globalData.userInfo) {
-    //   wx.navigateTo({
-    //     url: "/pages/auth/auth",
-    //   });
-    // } else {
-    //   let phone = e.currentTarget.dataset.phone;
-    //   wx.makePhoneCall({
-    //     phoneNumber: phone
-    //   })
-    // }
   },
   //点击用户
   getUserInfo(){
