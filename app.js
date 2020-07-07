@@ -22,10 +22,9 @@ App({
       this._checkWXSession();
     } else {
       //微信登录
-      this. _wxLogin();
+      this._wxLogin();
     }
   },
-
   //判断微信服务端是否过期
   _checkWXSession() {
     wx.checkSession({
@@ -94,12 +93,12 @@ App({
     baseUrl: "http://localhost:8089/static/uploads/",
     wxUser: null, //微信用户信息
     userInfo: null, //后台用户信息
-    session_key:null,
+    session_key: null,
     shareObj: {
       title: '免费的本地信息服务平台',
       imageUrl: "/images/banner_01.png",
       path: '/pages/index/index'
     }, //自定义分享的内容
-    locationObj: {},//用户地址信息（市，经纬度）
+    locationObj: {}, //用户地址信息（市，经纬度）
   }
 })

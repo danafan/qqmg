@@ -73,16 +73,16 @@
   height: 180rpx;
   border-radius: 0 0 28rpx 28rpx;
   position: relative;
+  padding-right: 20rpx;
+  padding-left: 20rpx;
 }
 /* banner */
 
 .banner_box {
-  position: absolute;
+  position: relative;
   top: 20rpx;
-  left: 50%;
-  transform: translate(-50%);
   border-radius: 20rpx;
-  width: 95%;
+  width: 100%;
   height: 280rpx;
 }
 
@@ -101,8 +101,21 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
+  position: relative;
 }
-
+.fans_box{
+  position: absolute;
+  top: 36rpx;
+  right: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: #ef4833;
+  z-index: 1;
+}
 .category_item {
   width: 25%;
   margin-bottom: 40rpx;

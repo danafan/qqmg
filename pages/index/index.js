@@ -10,6 +10,7 @@ var qqmapsdk;
 Page({
   data: {
     baseUrl:app.globalData.baseUrl,
+    fans_total: 0,
     location: "",
     banner_list: [{
       id: "1",
@@ -29,6 +30,8 @@ Page({
     navgationHeight: 0
   },
   onLoad: function(options) {
+    //获取粉丝总数
+    this.getFansTotal();
     //获取顶部导航栏信息
     this.setNavigation();
     //获取地理位置信息
@@ -38,6 +41,14 @@ Page({
     //获取信息列表
     let req = {level_01_id:0}
     this.getInfoList(req);
+  },
+  //获取粉丝总数
+  getFansTotal() {
+    util.get(api.getFansTotal).then(res => {
+      this.setData({
+        fans_total: res.data + 8520
+      })
+    })
   },
   //获取一级分类列表
   getCateGory() {

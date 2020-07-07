@@ -20,6 +20,7 @@
           <image class="banner_img" src="{{item.img_url}}"></image>
         </swiper-item>
       </swiper>
+      <view class="fans_box">粉丝：{{fans_total}}</view>
     </view>
     <view class="content">
       <!-- 分类 -->

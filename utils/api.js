@@ -2,6 +2,7 @@
 const ApiRootUrl = 'http://localhost:8089/admin/';
 
 module.exports = {
+  getFansTotal: ApiRootUrl + 'getFansTotal',          //获取总粉丝数（banner待完成）   
   getCategoryList: ApiRootUrl + 'getCategoryList',		//获取一级二级分类
   getCateAndTag: ApiRootUrl + 'getCateAndTag',		    //获取二级分类和标签（发布页面）
   upLoadImg: ApiRootUrl + 'uploadImg',                //上传文件
