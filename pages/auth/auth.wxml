@@ -3,6 +3,11 @@
   <image class="logo" src="../../images/mangguo.png"></image>
   <view class="title">-- 青青芒果 便利生活 --</view>
   <view class="toast">欢迎加入青青芒果综合信息服务平台</view>
+  <view class="auth_content" wx:if="{{type == '-1'}}">
+    <view class="qing">请确认授权以下信息</view>
+    <view class="ti">获取当前地址，才能精准的展示附近的信息</view>
+    <button class="login" bindtap="wxLocationInfo">确认授权</button>
+  </view>
   <view class="auth_content" wx:if="{{type == '1'}}">
     <view class="qing">请确认授权以下信息</view>
     <view class="ti">获取你的公开信息（昵称、头像等）</view>

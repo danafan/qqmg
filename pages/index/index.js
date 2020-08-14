@@ -9,7 +9,7 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 Page({
   data: {
-    baseUrl:app.globalData.baseUrl,
+    baseUrl: app.globalData.baseUrl,
     fans_total: 0,
     location: "",
     banner_list: [{
@@ -22,25 +22,101 @@ Page({
       id: "3",
       img_url: "../../images/banner_03.jpg"
     }], //轮播图
-    page:1,       //当前页码
+    page: 1, //当前页码
     info_list: [], //信息列表
-    isLoad:true,    //默认可以加载
+    isLoad: true, //默认可以加载
     category_list: [],
     startBarHeight: 0,
     navgationHeight: 0
   },
-  onLoad: function(options) {
-    //获取粉丝总数
-    this.getFansTotal();
-    //获取顶部导航栏信息
-    this.setNavigation();
+  onLoad() {
     //获取地理位置信息
     this.wxLocationInfo();
-    //获取一级分类列表
-    this.getCateGory();
-    //获取信息列表
-    let req = {level_01_id:0}
-    this.getInfoList(req);
+  },
+  //搜索
+  search() {
+    wx.navigateTo({
+      url: "/pages/search/search"
+    })
+  },
+  //重新选择位置
+  chooseLocation() {
+    wx.chooseLocation({
+      success: (res) => {
+        let req = {
+          latitude: res.latitude,
+          longitude: res.longitude
+        }
+        this.getApi(req);
+      },
+    })
+  },
+  //获取地理位置信息
+  wxLocationInfo() {
+    wx.getSetting({
+      success: (res) => {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success: () => {
+              this.wxGetLocation();
+            },
+            fail: (err) => {
+              wx.reLaunch({
+                url: '/pages/auth/auth'
+              })
+            }
+          })
+        } else {
+          this.wxGetLocation();
+        }
+      }
+    })
+  },
+  // wx.getLocation
+  wxGetLocation() {
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        let req = {
+          latitude: res.latitude,
+          longitude: res.longitude
+        }
+        this.getApi(req);
+      }
+    })
+  },
+  // api
+  getApi(req) {
+    qqmapsdk = new QQMapWX({
+      key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
+    });
+    this.setData({
+      location: "获取中..."
+    })
+    qqmapsdk.reverseGeocoder({
+      location: req,
+      success: (res) => {
+        let result = res.result;
+        app.globalData.locationObj.address = result.address_reference.town.title; //镇名称
+        app.globalData.locationObj.adcode = result.ad_info.adcode; //行政区代码
+        app.globalData.locationObj.detail_address = result.address; //注册地址（详细）
+        this.setData({
+          location: result.address_reference.town.title
+        })
+        //获取粉丝总数
+        this.getFansTotal();
+        //获取顶部导航栏信息
+        this.setNavigation();
+        //获取一级分类列表
+        this.getCateGory();
+        //获取信息列表
+        let req = {
+          level_01_id: 0
+        }
+        this.getInfoList(req);
+      }
+    })
   },
   //获取粉丝总数
   getFansTotal() {
@@ -62,23 +138,23 @@ Page({
     })
   },
   //获取信息列表
-  getInfoList(req){
+  getInfoList(req) {
     req.page = this.data.page;
     util.get(api.infoList, req).then(res => {
-      if (res.data.length < 8){
+      if (res.data.length < 8) {
         this.setData({
-          isLoad:false
+          isLoad: false
         })
       }
       res.data.map(item => {
         //处理文件数组
-        if(item.file_list){ 
+        if (item.file_list) {
           item.files = item.file_list.split("_");
         }
         //区分图片或视频
-        if (item.file_list && item.file_list.indexOf('mp4') > -1){
+        if (item.file_list && item.file_list.indexOf('mp4') > -1) {
           item.file_type = 'video'
-        }else{
+        } else {
           item.file_type = 'image'
         }
         //处理标签数组
@@ -91,11 +167,11 @@ Page({
         if (item.diff_data) {
           let diffObj = JSON.parse(item.diff_data);
           var diffArr = [];
-          for (var k in diffObj){
+          for (var k in diffObj) {
             var type = "";
-            if (k == 'check_sneq'){
+            if (k == 'check_sneq') {
               type = "类型";
-            } else if (k == 'sex'){
+            } else if (k == 'sex') {
               type = "性别";
             } else if (k == 'company') {
               type = "公司名称";
@@ -118,92 +194,17 @@ Page({
             } else if (k == 'origin_time') {
               type = "乘车时间";
             }
-            diffArr.push({ type: type, val: diffObj[k] })
+            diffArr.push({
+              type: type,
+              val: diffObj[k]
+            })
           }
           item.diff_data = diffArr
         }
       })
       this.setData({
-        info_list: [...this.data.info_list,...res.data]
+        info_list: [...this.data.info_list, ...res.data]
       })
-    })
-  },
-  //搜索
-  search() {
-    wx.navigateTo({
-      url: "/pages/search/search"
-    })
-  },
-  //获取当前位置
-  getLocationInfo() {
-    if (this.data.location == '点击获取') {
-      //获取地理位置信息
-      this.openSet();
-    }
-  },
-  //获取地理位置信息
-  wxLocationInfo() {
-    wx.getSetting({
-      success:(res) => {
-        if (!res.authSetting['scope.userLocation']) {
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success:() => {
-              this.wxGetLocation();
-            },
-            fail:(err) => {
-              this.setData({
-                location: "点击获取"
-              })
-            }
-          })
-        }else{
-          this.wxGetLocation();
-        }
-      }
-    })
-  },
-  openSet() {
-    wx.openSetting({
-      success: (res) => {
-        this.wxGetLocation();
-      }
-    })
-  },
-  // wx.getLocation
-  wxGetLocation() {
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        app.globalData.locationObj.latitude = res.latitude;
-        app.globalData.locationObj.longitude = res.longitude;
-        let req = {
-          latitude: res.latitude,
-          longitude: res.longitude
-        }
-        this.getApi(req);
-      }
-    })
-  },
-  // api
-  getApi(req) {
-    qqmapsdk = new QQMapWX({
-      key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
-    });
-    this.setData({
-      location: "获取中"
-    })
-    qqmapsdk.reverseGeocoder({
-      location: req,
-      success: (res) => {
-        let address_obj = res.result.address_component;
-        app.globalData.locationObj.address = address_obj.city;
-        let detail_address = address_obj.city + address_obj.district + address_obj.street;
-        app.globalData.locationObj.detail_address = detail_address;
-        this.setData({
-          location: res.result.address_component.city
-        })
-      }
     })
   },
   //获取顶部导航栏信息
@@ -230,22 +231,28 @@ Page({
   //下拉刷新
   onPullDownRefresh() {
     this.setData({
-      isLoad:true,
+      isLoad: true,
       page: 1,
-      info_list:[]
+      info_list: []
     })
     //获取信息列表
-    let req = { level_01_id: 0, page: this.data.page}
+    let req = {
+      level_01_id: 0,
+      page: this.data.page
+    }
     this.getInfoList(req);
   },
   //上拉加载
-  onReachBottom(){
-    if (this.data.isLoad){
+  onReachBottom() {
+    if (this.data.isLoad) {
       this.setData({
         page: this.data.page + 1
       })
       //获取信息列表
-      let req = { level_01_id: 0, page: this.data.page }
+      let req = {
+        level_01_id: 0,
+        page: this.data.page
+      }
       this.getInfoList(req);
     }
   },

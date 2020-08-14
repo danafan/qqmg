@@ -1,25 +1,36 @@
 <!--pages/search/search.wxml-->
 <view class="search_box">
-  <!-- 顶部搜索栏 -->
-  <view class="search_input_box">
-    <view class="search_left">
-      <image class="search_icon" src="../../images/search_icon.png"></image>
-      <input class="search_input" placeholder-style="color:#fff" value="{{search_val}}" placeholder="输入标签关键词或点击热门标签" bindinput="searchInput" />
-    </view>
-    <view class="search_but" bindtap="search">搜索</view>
-  </view>
-  <!-- 标签列表或列表为空 -->
-  <view class="taps_box" wx:if="{{search_val == '' || !isNull}}">
-    <view class="tap_title">热门标签</view>
-    <view class="taps_list">
-      <view class="tap_item" wx:for="{{taps_list}}" data-name="{{item.category_name}}" wx:key="category_id" bindtap="checkTag">{{item.category_name}}</view>
+  <view class="navgation_box">
+    <view class="start_bar" style='height:{{startBarHeight}}px'></view>
+    <!-- 标题 -->
+    <view class="input_box" style="height:{{navgationHeight}}px">
+      <image class="goback_icon" src="../../images/right.png" bindtap="goBack"></image>
+      <view class="search_input">
+        <input class="input" placeholder="请输入搜索内容" value="{{search_val}}" bindinput="changeInput"></input>
+        <image class="clear_icon" src="../../images/clear_icon.png" bindtap="clearInput" wx:if="{{search_val != ''}}"></image>
+      </view>
+      <view class="zhan"></view>
     </view>
   </view>
-  <!-- 空 -->
-  <null_page toast_text="换个标签试试～" wx:if="{{service_list.length == 0 && isNull}}" bind:goPush="goPush"/>
-  <!-- 底部列表 -->
-  <view class="search_list" wx:if="{{service_list.length > 0 && isNull}}">
-    <push_item wx:for="{{service_list}}" wx:key="info_id" infoItem="{{item}}"/>
+  <!-- 下面内容 -->
+  <view class="content_box" style='margin-top:{{startBarHeight + navgationHeight + 1}}px'>
+    <!-- 热门搜索 -->
+    <view class="hot_search_box">
+      <view class="hot_title">热门搜索</view>
+      <view class="hot_store_list">
+        <view class="hot_store_item">肉本家·碳烤肉</view>
+        <view class="hot_store_item">辛湘鱼·辣不怕开胃菜</view>
+        <view class="hot_store_item">coco·都可</view>
+        <view class="hot_store_item">一种味道·香卤饭</view>
+        <view class="hot_store_item">康有四季</view>
+      </view>
+    </view>
+    <!-- 空 -->
+    <!-- <null_page toast_text="换个标签试试～" wx:if="{{service_list.length == 0 && isNull}}" bind:goPush="goPush"/> -->
+    <!-- 底部列表 -->
+    <!-- <view class="search_list" wx:if="{{service_list.length > 0 && isNull}}">
+      <push_item wx:for="{{service_list}}" wx:key="info_id" infoItem="{{item}}" />
+    </view> -->
+    <!-- <bottom wx:if="{{!isLoad && page >= 2}}" /> -->
   </view>
-  <bottom wx:if="{{!isLoad && page >= 2}}"/>
 </view>

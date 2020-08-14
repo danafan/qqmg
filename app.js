@@ -99,6 +99,10 @@ App({
       imageUrl: "/images/banner_01.png",
       path: '/pages/index/index'
     }, //自定义分享的内容
-    locationObj: {}, //用户地址信息（市，经纬度）
+    locationObj: {
+      address:null,
+      adcode:null,
+      detail_address:null
+    }, //用户地址信息（镇名称，行政区划代码，注册地址）
   }
 })

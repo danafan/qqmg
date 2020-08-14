@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "搜索",
+  "navigationStyle": "custom",
   "usingComponents": {
     "null_page":"../../components/Null/null",
     "push_item":"../../components/PushItem/push_item",

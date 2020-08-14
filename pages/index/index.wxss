@@ -1,29 +1,52 @@
 /**index.wxss**/
 
-.index_container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+/* 导航栏 */
 
-.fixed{
+.navgation_box {
+  background: #287fe6;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 9;
+  z-index: 2;
 }
-.startBar{
-  background: #a1e81a;
-}
-.search_box {
-  background: #a1e81a;
+
+.title_text {
   padding-left: 15rpx;
   width: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 800rpx;
+}
+
+/* 顶部背景色 */
+
+.top_back {
+  background: #287fe6;
+  width: 100%;
+  height: 400rpx;
+}
+
+/* 下面内容 */
+
+.content_box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 15rpx 15rpx;
+}
+
+/* 搜索框 */
+
+.search_box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.location_box {
   display: flex;
   align-items: center;
 }
@@ -60,34 +83,32 @@
   font-size: 26rpx;
   color: #fff;
 }
-.zhan{
-  width: 210rpx;
-}
-.content {
-  padding: 0 15rpx 15rpx;
+
+.fans_box {
+  position: relative;
+  right: -15rpx;
+  border-radius: 25rpx 0 0 25rpx;
+  background: #ff5858;
+  padding-left: 20rpx;
+  padding-right: 15rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-left: 15rpx;
+  font-size: 24rpx;
+  color: #fff;
 }
 
-.top_back {
-  background: #a1e81a;
-  width: 100%;
-  height: 180rpx;
-  border-radius: 0 0 28rpx 28rpx;
-  position: relative;
-  padding-right: 20rpx;
-  padding-left: 20rpx;
-}
 /* banner */
 
 .banner_box {
-  position: relative;
-  top: 20rpx;
-  border-radius: 20rpx;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
   width: 100%;
   height: 280rpx;
 }
 
 .banner_img {
-  border-radius: 20rpx;
+  border-radius: 10rpx;
   width: 100%;
   height: 100%;
 }
@@ -95,7 +116,7 @@
 /* 分类 */
 
 .category_row {
-  margin-top: 160rpx;
+  margin-top: 30rpx;
   width: 100%;
   display: flex;
   align-items: center;
@@ -103,19 +124,7 @@
   flex-wrap: wrap;
   position: relative;
 }
-.fans_box{
-  position: absolute;
-  top: 36rpx;
-  right: 20rpx;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  font-size: 24rpx;
-  color: #fff;
-  background: #ef4833;
-  z-index: 1;
-}
+
 .category_item {
   width: 25%;
   margin-bottom: 40rpx;
