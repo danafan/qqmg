@@ -1,7 +1,7 @@
 /* pages/management/management.wxss */
 .prompt{
   padding: 10rpx;
-  background: #e6e6e6;
+  background: #f6f6f6;
   width: 100%;
   font-size: 24rpx;
   color:red;
@@ -13,7 +13,7 @@
   align-items: center;
   height: 240rpx;
   background: #fff;
-  box-shadow: 0 5rpx 5rpx #e6e6e6;
+  box-shadow: 0 5rpx 5rpx #f6f6f6;
   padding: 15rpx;
 }
 .goods_img{

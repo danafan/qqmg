@@ -18,8 +18,8 @@
     }
   },
   "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#a1e81a",
+    "color": "#8a8a8a",
+    "selectedColor": "#287fe6",
     "borderStyle": "black",
     "list": [
       {
@@ -44,7 +44,6 @@
   },
   "window": {
     "backgroundColor": "#a1e81a",
-    "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#287fe6",
     "navigationBarTitleText": "青青芒果",

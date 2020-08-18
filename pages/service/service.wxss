@@ -33,13 +33,14 @@
 }
 
 .active_color {
-  color: #f7a908;
+  font-weight: 700;
+  color: #0b0d1d;
 }
 
 .active_tab {
   position: relative;
   top: 15rpx;
-  height: 5rpx;
+  height: 6rpx;
   width: 60rpx;
   background: #f7a908;
 }
@@ -47,7 +48,5 @@
 .advertising_list {
   margin-top: 85rpx;
   width: 100%;
-  /* flex: 1; */
-  /* overflow-y: scroll; */
   padding: 40rpx 20rpx 0;
 }

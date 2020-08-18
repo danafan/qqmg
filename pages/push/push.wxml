@@ -156,9 +156,7 @@
       <view class="show_img_box" wx:for="{{upload_files}}" wx:key="index">
         <image class="show_img" src="{{baseUrl + item}}" wx:if="{{file_type=='image' }}"></image>
         <video class="show_img" src="{{baseUrl + item}}" duration="8" wx:if="{{file_type=='video' }}"></video>
-        <view class="close" data-index="{{index}}" bindtap="deleteImg">
-          <image class="close_icon" src="../../images/close.png"></image>
-        </view>
+        <image class="close" src="../../images/close.png" data-index="{{index}}" bindtap="deleteImg"></image>
       </view>
       <view class="upload_box" bindtap="chooseImage" wx:if="{{file_type=='' || file_type=='image' && upload_files.length < 9 || file_type=='video' && upload_files.length < 1}}">
         <image class="camera_icon" src="../../images/camera.png"></image>

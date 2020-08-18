@@ -1,13 +1,13 @@
 <!--pages/my/my.wxml-->
-<view class="my_container">
+<view>
   <view class="my_back">
-    <image class="my_back_img" src="../../images/top_back.png"></image>
+    <view class="my_back_img"></view>
     <view class="my_info">
       <image class="my_icon" src="{{wx_user_info.avatarUrl}}" wx:if="{{authStatus}}"></image>
-      <view class="user_img_box" wx:else bindtap="login">
+      <view class="user_img_box" wx:else>
         <image class="user_img" src="../../images/user_img.png"></image>
       </view>
-      <view class="my_name {{authStatus?'':'hui_name'}}">{{authStatus?wx_user_info.nickName:'点击头像获取信息'}}</view>
+      <view class="my_name {{authStatus?'':'hui_name'}}">{{authStatus?wx_user_info.nickName:'用户未登录'}}</view>
       <view class="vip_box">
         <view class="level_box">
           <view class="current_level" style="width:{{user_obj.vip*10}}%">
@@ -39,7 +39,6 @@
           <view class="item_label">发布数量</view>
         </view>
       </view>
-
     </view>
   </view>
   <view class="my_options">
@@ -48,24 +47,15 @@
         <image class="option_icon" src="../../images/push_guan.png"></image>
         <view class="option_label">我的发布</view>
       </view>
-      <image class="right_icon" src="../../images/right.png"></image>
+      <image class="right_icon" src="../../images/right_my.png"></image>
     </view>
     <view class="option">
-    <button class="feek_but" open-type="feedback"></button>
+      <button class="feek_but" open-type="feedback"></button>
       <view class="option_left">
         <image class="option_icon" src="../../images/feek_icon.png"></image>
         <view class="option_label">意见反馈</view>
       </view>
-      <image class="right_icon" src="../../images/right.png"></image>
+      <image class="right_icon" src="../../images/right_my.png"></image>
     </view>
   </view>
-  <!-- <view class="option">
-      <view class="option_left">
-        <image class="option_icon" src="../../images/top_up.png"></image>
-        <view class="option_label">充值</view>
-      </view>
-      <image class="right_icon" src="../../images/right.png"></image>
-    </view>
-  </view> -->
-  <view class="my_push" bindtap="login" wx:if="{{!isLogin}}">登录</view>
 </view>

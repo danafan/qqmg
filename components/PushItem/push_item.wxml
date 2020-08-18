@@ -1,6 +1,6 @@
 <!--components/PushItem/push_item.wxml-->
 <view class="push_container">
-  <image class="user_img" lazy-load="true" src="{{infoItem.create_user_img}}" data-infoObj="{{infoItem}}" bindtap="getUserInfo"></image>
+  <image class="user_img" lazy-load="true" mode="aspectFill" src="{{infoItem.create_user_img}}" data-infoObj="{{infoItem}}" bindtap="getUserInfo"></image>
   <view class="push_content">
     <view class="userinfo">
       <view class="username" data-infoObj="{{infoItem}}" bindtap="getUserInfo">{{infoItem.create_user_nickname}}</view>
@@ -17,7 +17,7 @@
     </view>
     <view class="all" data-id="{{infoItem.info_id}}" bindtap="detail">全文</view>
     <view class="images" wx:if="{{infoItem.file_type == 'image'}}">
-      <image class="goods_img" lazy-load="true" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.files}}" bindtap="open"></image>
+      <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.files}}" bindtap="open"></image>
     </view>
     <video class="goods_img" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" duration="8" wx:if="{{infoItem.file_type == 'video'}}"></video>
     <view class="bottom_info">

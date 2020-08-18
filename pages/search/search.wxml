@@ -7,7 +7,7 @@
       <image class="goback_icon" src="../../images/right.png" bindtap="goBack"></image>
       <view class="search_input">
         <input class="input" placeholder="请输入搜索内容" value="{{search_val}}" bindinput="changeInput"></input>
-        <image class="clear_icon" src="../../images/clear_icon.png" bindtap="clearInput" wx:if="{{search_val != ''}}"></image>
+        <image class="clear_icon" src="../../images/close.png" bindtap="clearInput" wx:if="{{search_val != ''}}"></image>
       </view>
       <view class="zhan"></view>
     </view>

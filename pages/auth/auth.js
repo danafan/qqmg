@@ -17,13 +17,22 @@ Page({
       this.setData({
         type: '-1'
       })
+      wx.setNavigationBarTitle({
+        title: '获取位置'    // 其他页面传过来的标题名
+      })
     } else if (!app.globalData.wxUser) { //微信信息
       this.setData({
         type: '1'
       })
+      wx.setNavigationBarTitle({
+        title: '微信授权'   // 其他页面传过来的标题名
+      })
     } else if (!app.globalData.userInfo) { //手机号
       this.setData({
         type: '2'
+      })
+      wx.setNavigationBarTitle({
+        title: '用户注册'    // 其他页面传过来的标题名
       })
     }
   },
@@ -75,8 +84,8 @@ Page({
       })
     } else {
       app.globalData.wxUser = e.detail.userInfo;
-      wx.navigateBack({
-        delta: 1
+      wx.switchTab({
+        url: '/pages/index/index'
       })
     }
 

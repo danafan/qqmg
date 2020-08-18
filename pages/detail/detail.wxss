@@ -1,21 +1,12 @@
 /* pages/detail/detail.wxss */
-
-.detail_box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+/* 分享进入的顶部提示 */
 .toast_box{
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60rpx;
-  background: rgba(0, 0, 0, 0.6);
+  height: 65rpx;
+  background: rgba(0, 0, 0, 0.8);
   z-index: 1;
   font-size: 24rpx;
   color: #fff;
@@ -26,14 +17,9 @@
 .finger{
   margin-right: 5rpx;
   width: 46rpx;
-  height: 50rpx;
+  height: 46rpx;
 }
-.scroll_box {
-  box-sizing: border-box;
-  flex: 1;
-  overflow-y: scroll;
-}
-
+/* banner */
 .banner_box {
   width: 100%;
   height: 480rpx;
@@ -50,9 +36,8 @@
   width: 100%;
   height: 100%;
 }
-
+/* banner计数器 */
 .shu {
-  background: red;
   position: absolute;
   bottom: 20rpx;
   right: 20rpx;
@@ -66,26 +51,74 @@
   font-size: 24rpx;
   z-index: 1;
 }
+/* 中间用户和信息内容 */
+.push_container {
+  padding: 20rpx 0 20rpx 15rpx;
+  width: 100%;
+  display: flex;
+}
 
-.title_box {
-  margin-top: 20rpx;
-  padding-left: 15rpx;
+.user_img {
+  margin-right: 15rpx;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.push_content {
+  flex: 1;
+}
+.content_top{
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
-
-.user_info_box {
-  flex: 1;
+.userinfo{
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-
+.username {
+  font-size: 32rpx;
+  color: #234d76;
+  font-weight: 700;
+}
+.taps {
+  display: flex;
+  align-items: flex-end;
+}
+.category_item{
+  margin-right: 8rpx;
+  border-radius: 8rpx;
+  background: #f7a908;
+  color: #fff;
+  font-size: 26rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  padding-left: 12rpx;
+  padding-right: 12rpx;
+}
+.tap{
+  border:1rpx solid #a1e81a;
+  margin-right: 8rpx;
+  border-radius: 8rpx;
+  color: #a1e81a;
+  font-size: 22rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+}
 .share_box {
-  margin-left: 10rpx;
+  position: absolute;
+  right: 0;
   border-radius: 45rpx 0 0 45rpx;
   background: #f7a908;
   width: 170rpx!important;
-  height: 90rpx;
+  height: 70rpx;
   display: flex;
   align-items: center;
   padding: 0!important;
@@ -94,37 +127,33 @@
 .share_icon {
   margin-left: 10rpx;
   margin-right: 10rpx;
-  width: 48rpx;
-  height: 48rpx;
+  width: 42rpx;
+  height: 42rpx;
 }
 
 .share_text {
   font-size: 34rpx;
   color: #fff;
 }
-
-.content_box {
-  width: 100%;
-  padding-left: 15rpx;
+.describe {
+  margin-top: 20rpx;
+  margin-bottom: 8rpx;
   padding-right: 15rpx;
+  font-size: 28rpx;
+  color: #333;
 }
-
-.taps_box {
-  width: 100%;
+.diff_box{
   display: flex;
-  flex-wrap: wrap;
+  font-size: 26rpx;
 }
-
-.tap_item {
-  border-radius: 5rpx;
-  margin-right: 15rpx;
-  margin-bottom: 15rpx;
-  background: #a1e81a;
-  padding:5rpx 8rpx;
-  font-size: 24rpx;
-  color: #fff;
+.diff_label{
+  font-weight: bold;
+  color: #333;
 }
-
+.diff_val{
+  color: #f7a908;
+}
+/* 信息分类显示 */
 .cate_box {
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
@@ -140,22 +169,10 @@
   align-items: center;
 }
 
-.cate_val_01 {
-  margin-bottom: 8rpx;
-  font-size: 32rpx;
-  color: #f71808;
-}
-
-.cate_val_02 {
+.cate_val {
   margin-bottom: 8rpx;
   font-size: 32rpx;
   color: #f7a908;
-}
-
-.cate_val_03 {
-  margin-bottom: 8rpx;
-  font-size: 32rpx;
-  color: #a1e81a;
 }
 
 .cate_label {
@@ -168,25 +185,6 @@
   height: 60rpx;
   border-right: 1px solid #e6e6e6;
 }
-
-.user_info_box {
-  flex: 1;
-  height: 90rpx;
-  display: flex;
-  align-items: center;
-}
-
-.user_img {
-  margin-right: 10rpx;
-  width: 90rpx;
-  height: 90rpx;
-  border-radius: 50%;
-}
-
-.nickname {
-  font-size: 28rpx;
-  color: #234d76;
-}
 .cate_item_box{
   border-radius: 5rpx;
   margin-left: 15rpx;
@@ -195,22 +193,10 @@
   font-size: 26rpx;
   color: #fff;
 }
-.desc_box {
-  padding: 15rpx;
-  font-size: 28rpx;
-}
-
-.desc_title {
-  color: #f7a908;
-}
-
-.desc_content {
-  color: #333;
-}
-
+/* 图片 */
 .big_imgs {
   margin-top: 30rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 100rpx;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -221,13 +207,17 @@
   width: 100%;
   margin-bottom: 10rpx;
 }
-
+/* 拨打电话按钮 */
 .phone_button {
+  position: fixed;
+  left: 0;
+  bottom: 0;
   width: 100%;
   text-align: center;
   height: 100rpx;
   line-height: 100rpx;
-  background: #f7a908;
+  background: #46AC52;
   font-size: 32rpx;
   color: #fff;
+  z-index: 1;
 }

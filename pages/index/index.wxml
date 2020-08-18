@@ -9,8 +9,16 @@
   <view class="top_back"></view>
   <!-- 下面内容 -->
   <view class="content_box" style="margin-top:{{startBarHeight + navgationHeight}}px">
-    <view class="search_box" bindtap="chooseLocation">
-      <view class="location_box">
+    <!-- 添加到桌面提示 -->
+    <view class="add_desktop" wx:if="{{show_desktop}}">
+      <view class="add_desktop_content">
+        <view class="add_desktop_text">点击右上角「添加到桌面」查看信息更方便</view>
+        <image class="add_desktop_icon" src="../../images/clear_icon.png" bindtap="closeDeskTop"></image>
+      </view>
+    </view>
+    <!-- 搜索框 -->
+    <view class="search_box">
+      <view class="location_box" bindtap="chooseLocation">
         <image class="location_icon" src="../../images/location_icon.png"></image>
         <view class="location_text">{{location}}</view>
       </view>
@@ -23,7 +31,7 @@
     <!-- 轮播图 -->
     <swiper class="banner_box" autoplay="true" interval="5000" duration="80" circular="true">
       <swiper-item wx:for="{{banner_list}}" wx:key="id">
-        <image class="banner_img" src="{{item.img_url}}"></image>
+        <image class="banner_img" mode="aspectFill" src="{{item.img_url}}"></image>
       </swiper-item>
     </swiper>
     <!-- 分类 -->
@@ -42,7 +50,7 @@
       <view class="hot_right" data-index="-1" data-id="0" bindtap="service">查看全部</view>
     </view>
     <!-- 发布列表 -->
-    <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
+    <push_item wx:for="{{info_list}}" wx:key="info_id" page_type="index" infoItem="{{item}}" />
   </view>
   <bottom wx:if="{{!isLoad && page >= 2}}" />
 

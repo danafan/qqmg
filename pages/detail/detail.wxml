@@ -1,75 +1,74 @@
 <!--pages/detail/detail.wxml-->
-<view class="detail_box">
+<view>
   <!-- 分享进入的小提示 -->
   <view class="toast_box" wx:if="{{isShare}}">
     <image class="finger" src="../../images/finger.png"></image>
-    <view>点击左上角，有更多你可能感兴趣的信息哦～</view>
+    <view>进入首页，发现更多你可能感兴趣的信息哦～</view>
   </view>
-  <view class="scroll_box">
-    <!-- 轮播图 -->
-    <view wx:if="{{info_detail.file_list}}">
-      <!-- 轮播图 -->
-      <view class="banner_box" wx:if="{{info_detail.file_type == 'image'}}">
-        <swiper class="banner_content" autoplay="true" interval="5000" circular="true" bindchange="changeBanner">
-          <swiper-item wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" bindtap="openBigImg">
-            <image class="banner_img" src="{{baseUrl + item}}"></image>
-          </swiper-item>
-        </swiper>
-        <view class="shu">{{shu}} / {{info_detail.files.length}}</view>
-      </view>
-      <!-- 视频 -->
-      <view wx:if="{{info_detail.file_type == 'video'}}">
-        <video class="banner_box" wx:for="{{info_detail.files}}" wx:key="*this" src="{{baseUrl + item}}" duration="8"></video>
-      </view>
+  <!-- 轮播图 -->
+  <view wx:if="{{info_detail.file_list}}">
+    <!-- 图片 -->
+    <view class="banner_box" wx:if="{{info_detail.file_type == 'image'}}">
+      <swiper class="banner_content" autoplay="true" interval="5000" circular="true" bindchange="changeBanner">
+        <swiper-item wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" bindtap="openBigImg">
+          <image class="banner_img" mode="aspectFill" src="{{baseUrl + item}}"></image>
+        </swiper-item>
+      </swiper>
+      <view class="shu">{{shu}} / {{info_detail.files.length}}</view>
     </view>
-    <image class="banner_box" src="../../images/banner_01.png" wx:else></image>
-    <!-- 标题和分享 -->
-    <view class="title_box">
-      <!-- 个人头像 -->
-      <view class="user_info_box">
-        <image class="user_img" src="{{info_detail.create_user_img}}" bindtap="getUserInfo"></image>
-        <view class="nickname" bindtap="getUserInfo">{{info_detail.create_user_nickname}}</view>
-        <view class="cate_item_box">{{info_detail.category_name}}</view>
-      </view>
-      <button class="share_box" open-type="share">
-        <image class="share_icon" src="../../images/share.png"></image>
-        <view class="share_text">分享</view>
-      </button>
+    <!-- 视频 -->
+    <view wx:if="{{info_detail.file_type == 'video'}}">
+      <video class="banner_box" wx:for="{{info_detail.files}}" wx:key="*this" src="{{baseUrl + item}}" duration="8"></video>
     </view>
-    <!-- 描述 -->
-    <view class="desc_box">
-      <text class="desc_title">{{info_detail.contact}}：</text>
-      <text class="desc_content">{{info_detail.info_desc}}</text>
-    </view>
-    <!-- 下面内容 -->
-    <view class="content_box">
-      <!-- 标签列表 -->
-      <view class="taps_box">
-        <view class="tap_item" wx:for="{{info_detail.tag_txts}}" wx:key="*this">{{item}}</view>
+  </view>
+  <!-- 没上传文件使用默认图片 -->
+  <image class="banner_box" src="../../images/banner_01.png" wx:else></image>
+  <!-- 中间用户和信息内容 -->
+  <view class="push_container">
+    <image class="user_img" lazy-load="true" mode="aspectFill" src="{{info_detail.create_user_img}}" data-infoObj="{{info_detail}}" bindtap="getUserInfo"></image>
+    <view class="push_content">
+      <view class="content_top">
+        <view class="userinfo">
+          <view class="username" data-infoObj="{{info_detail}}" bindtap="getUserInfo">{{info_detail.create_user_nickname}}</view>
+          <view class="taps">
+            <view class="category_item">{{info_detail.category_name}}</view>
+            <view class="tap" wx:for="{{info_detail.tag_txts}}" wx:key="*this">{{item}}</view>
+          </view>
+        </view>
+        <button class="share_box" open-type="share">
+          <image class="share_icon" src="../../images/share.png"></image>
+          <view class="share_text">分享</view>
+        </button>
       </view>
-      <!-- 分类显示 -->
-      <view class="cate_box">
-        <view class="cate_item">
-          <view class="cate_val_01">{{info_detail.cate_01_name}}</view>
-          <view class="cate_label">所属分类</view>
-        </view>
-        <view class="line"></view>
-        <view class="cate_item">
-          <view class="cate_val_02">{{info_detail.create_time}}</view>
-          <view class="cate_label">发布时间</view>
-        </view>
-        <view class="line"></view>
-        <view class="cate_item">
-          <view class="cate_val_03">{{info_detail.browse_num}}</view>
-          <view class="cate_label">浏览人数</view>
-        </view>
-      </view>
-      <!-- 图片 -->
-      <view class="big_imgs" wx:if="{{info_detail.file_type == 'image'}}">
-        <image class="img_item" wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" src="{{baseUrl + item}}" bindtap="openBigImg"></image>
+      <view class="describe">{{info_detail.info_desc}}</view>
+      <view class="diff_box">
+        <text class="diff_label">地址：</text>
+        <text class="diff_val">杭州市萧山区金惠路</text>
       </view>
     </view>
   </view>
+  <!-- 信息分类显示 -->
+  <view class="cate_box">
+    <view class="cate_item">
+      <view class="cate_val">{{info_detail.cate_01_name}}</view>
+      <view class="cate_label">所属分类</view>
+    </view>
+    <view class="line"></view>
+    <view class="cate_item">
+      <view class="cate_val">{{info_detail.create_time}}</view>
+      <view class="cate_label">发布时间</view>
+    </view>
+    <view class="line"></view>
+    <view class="cate_item">
+      <view class="cate_val">{{info_detail.browse_num}}</view>
+      <view class="cate_label">浏览人数</view>
+    </view>
+  </view>
+  <!-- 图片 -->
+  <view class="big_imgs" wx:if="{{info_detail.file_type == 'image'}}">
+    <image class="img_item" mode="aspectFit" wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" src="{{baseUrl + item}}" bindtap="openBigImg"></image>
+  </view>
+  <!-- 拨打电话按钮 -->
   <view class="phone_button" data-phone="{{info_detail.contact_phone}}" bindtap="call">拨打电话</view>
   <big_img wx:if="{{show_img}}" big_imgs="{{info_detail.files}}" current_index="{{current_index}}" bind:onEmit="close" />
 </view>

@@ -1,7 +1,7 @@
 /* components/BigImg/big_img.wxss */
 .imgs{
   padding: 15rpx;
-  background: #000;
+  background: #0b0d1d;
   position: fixed;
   top: 0;
   left: 0;

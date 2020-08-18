@@ -14,24 +14,31 @@ Page({
     location: "",
     banner_list: [{
       id: "1",
-      img_url: "../../images/banner_01.png"
+      img_url: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2226120516,635940438&fm=26&gp=0.jpg"
     }, {
       id: "2",
-      img_url: "../../images/banner_02.jpg"
+      img_url: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1171506515,2273340378&fm=26&gp=0.jpg"
     }, {
       id: "3",
-      img_url: "../../images/banner_03.jpg"
+      img_url: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3457886639,2496382393&fm=26&gp=0.jpg"
     }], //轮播图
     page: 1, //当前页码
     info_list: [], //信息列表
     isLoad: true, //默认可以加载
     category_list: [],
     startBarHeight: 0,
-    navgationHeight: 0
+    navgationHeight: 0,
+    show_desktop:true
   },
   onLoad() {
     //获取地理位置信息
     this.wxLocationInfo();
+  },
+  //关闭左上角提示
+  closeDeskTop(){
+    this.setData({
+      show_desktop:false
+    })
   },
   //搜索
   search() {

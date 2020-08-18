@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "信息详情",
+  "navigationBarBackgroundColor": "#0b0d1d",
   "usingComponents": {
     "big_img": "../../components/BigImg/big_img"
   }

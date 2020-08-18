@@ -23,8 +23,8 @@ page{
 .goback_icon{
   margin-right: 10rpx;
   transform: rotate(180deg);
-  width: 36rpx;
-  height: 36rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 .search_input{
   border-radius: 10rpx;

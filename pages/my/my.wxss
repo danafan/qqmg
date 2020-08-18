@@ -1,11 +1,6 @@
 /* pages/my/my.wxss */
-
-.my_container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+page {
+  background-color: #F6F6F6;
 }
 
 .my_back {
@@ -15,6 +10,7 @@
   position: relative;
 }
 .my_back_img{
+  background: #0b0d1d;
   position: absolute;
   top: 0;
   left: 0;
@@ -33,7 +29,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 0 5px #dbdbdb;
 }
 
 .my_icon {
@@ -164,9 +159,9 @@
   padding-right: 25rpx;
 }
 .option{
+  background: #fff;
   width: 100%;
   height: 98rpx;
-  box-shadow: 0 0 5px #dbdbdb;
   display: flex;
   align-items: center;
   justify-content: space-between;

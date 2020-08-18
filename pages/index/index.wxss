@@ -37,6 +37,36 @@
   padding: 0 15rpx 15rpx;
 }
 
+/* 添加到桌面提示 */
+
+.add_desktop {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add_desktop_content {
+  border-radius: 28rpx;
+  margin-bottom: 15rpx;
+  background: rgba(0, 0, 0, 0.6);
+  padding-left: 30rpx;
+  padding-right: 15rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+}
+
+.add_desktop_text {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.add_desktop_icon {
+  margin-left: 10rpx;
+  width: 42rpx;
+  height: 42rpx;
+}
+
 /* 搜索框 */
 
 .search_box {
@@ -52,8 +82,8 @@
 }
 
 .location_icon {
-  width: 34rpx;
-  height: 34rpx;
+  width: 32rpx;
+  height: 32rpx;
 }
 
 .location_text {
@@ -75,8 +105,8 @@
 .search_icon {
   margin-right: 10rpx;
   margin-left: 20rpx;
-  width: 35rpx;
-  height: 35rpx;
+  width: 32rpx;
+  height: 32rpx;
 }
 
 .input_text {
@@ -104,7 +134,7 @@
   margin-top: 30rpx;
   border-radius: 10rpx;
   width: 100%;
-  height: 280rpx;
+  height: 285rpx;
 }
 
 .banner_img {
@@ -161,7 +191,7 @@
 
 .line {
   margin-right: 15rpx;
-  background: #a1e81a;
+  background: #287fe6;
   width: 10rpx;
   height: 40rpx;
 }
@@ -176,5 +206,5 @@
   height: 70rpx;
   line-height: 70rpx;
   font-size: 26rpx;
-  color: #f7a908;
+  color: #8a8a8a;
 }

@@ -12,6 +12,10 @@ Component({
       type: Object, //类型
       value: {} //默认值
     },
+    page_type: {
+      type: String, //类型
+      value: 'index' //默认值
+    }
   },
   data: {
     baseUrl: app.globalData.baseUrl,
@@ -61,14 +65,18 @@ Component({
         current_index: img_obj.index,
         show_img: true
       })
-      wx.hideTabBar()
+      if (this.data.page_type == 'index') {
+        wx.hideTabBar()
+      }
     },
     //点击关闭大图
     close() {
       this.setData({
         show_img: false
       })
-      wx.showTabBar()
+      if (this.data.page_type == 'index') {
+        wx.showTabBar()
+      }
     },
     //点击进入详情
     detail(e) {
