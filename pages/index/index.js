@@ -106,7 +106,7 @@ Page({
       success: (res) => {
         let result = res.result;
         app.globalData.locationObj.address = result.address_reference.town.title; //镇名称
-        app.globalData.locationObj.adcode = result.ad_info.adcode; //行政区代码
+        app.globalData.locationObj.adcode = result.address_reference.town.id;     //镇代码
         app.globalData.locationObj.detail_address = result.address; //注册地址（详细）
         this.setData({
           location: result.address_reference.town.title
@@ -232,9 +232,9 @@ Page({
     })
   },
   //分享自定义
-  onShareAppMessage: function(res) {
-    return app.globalData.shareObj
-  },
+  // onShareAppMessage: function(res) {
+  //   return app.globalData.shareObj
+  // },
   //下拉刷新
   onPullDownRefresh() {
     this.setData({

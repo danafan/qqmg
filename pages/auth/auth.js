@@ -5,9 +5,13 @@ var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 Page({
   data: {
-    type: ""
+    type: "",
+    page_type:""
   },
   onLoad(option) {
+    this.setData({
+      page_type: option.page_type
+    })
     //判断哪一个没授权
     this.judgeAuth();
   },
@@ -68,10 +72,10 @@ Page({
         let result = res.result;
         console.log(res.result)
         app.globalData.locationObj.address = result.address_reference.town.title; //镇名称
-        app.globalData.locationObj.adcode = result.ad_info.adcode; //行政区代码
+        app.globalData.locationObj.adcode = result.address_reference.town.id;     //镇代码
         app.globalData.locationObj.detail_address = result.address;               //注册地址（详细）
         wx.switchTab({
-          url: '/pages/index/index'
+          url: `/pages/index/index`
         })
       }
     })
@@ -84,8 +88,8 @@ Page({
       })
     } else {
       app.globalData.wxUser = e.detail.userInfo;
-      wx.switchTab({
-        url: '/pages/index/index'
+      wx.navigateBack({
+        delta: 1
       })
     }
 
@@ -94,7 +98,7 @@ Page({
   getPhoneNumber(e) {
     let iv = e.detail.iv;
     let encryptedData = e.detail.encryptedData;
-    let address = app.globalData.locationObj.address ? app.globalData.locationObj.address : app.globalData.wxUser.province;
+    let address = app.globalData.locationObj.detail_address;
     let openid = wx.getStorageSync('openid');
     let session_key = app.globalData.session_key;
 

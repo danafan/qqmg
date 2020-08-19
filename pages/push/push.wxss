@@ -197,3 +197,23 @@
   font-size: 30rpx;
   color: #fff;
 }
+.info_location_label{
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+.info_location{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.location_text{
+  flex: 1;
+  font-size: 30rpx;
+  color: #333;
+}
+.right_icon{
+  margin-left: 15rpx;
+  width: 40rpx;
+  height: 40rpx;
+}

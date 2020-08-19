@@ -140,6 +140,14 @@
     <view class="info_label">描述</view>
     <textarea class="textarea" maxlength="120" value="{{desc}}" data-type="desc" bindinput="changeInput" placeholder="{{default_desc}}" />
   </view>
+  <!-- 信息展示地址 -->
+  <view class="describe_box">
+    <view class="info_location_label">信息展示地址</view>
+    <view class="info_location" bindtap="chooseLocation">
+      <view class="location_text">{{address_text}}</view>
+      <image class="right_icon" src="../../images/right.png"></image>
+    </view>
+  </view>
   <!-- 标签(除招聘求职) -->
   <view class="describe_box" wx:if="{{temp_id != 2 && temp_id != 3}}">
     <view class="info_label">标签</view>

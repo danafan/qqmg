@@ -39,9 +39,9 @@ Page({
     })
   },
   //分享自定义
-  onShareAppMessage: function(res) {
-    return app.globalData.shareObj
-  },
+  // onShareAppMessage: function(res) {
+  //   return app.globalData.shareObj
+  // },
   //发布管理
   pushManagement() {
     wx.navigateTo({

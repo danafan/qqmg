@@ -36,9 +36,9 @@ Page({
     })
   },
   //分享自定义
-  onShareAppMessage: function (res) {
-    return app.globalData.shareObj
-  },
+  // onShareAppMessage: function (res) {
+  //   return app.globalData.shareObj
+  // },
   //点击一级菜单
   checkOneLevel(e){
     let id = e.currentTarget.dataset.id;

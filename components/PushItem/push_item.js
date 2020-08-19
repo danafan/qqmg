@@ -49,13 +49,15 @@ Component({
     },
     //拨打电话
     call(e) {
-      userStatus.getUserStatus().then(res => {
-        if (res) {
-          wx.makePhoneCall({
-            phoneNumber: e.currentTarget.dataset.phone
-          })
-        }
-      })
+      if (!app.globalData.wxUser || !app.globalData.userInfo) {
+        wx.navigateTo({
+          url: "/pages/auth/auth",
+        });
+      } else {
+        wx.makePhoneCall({
+          phoneNumber: e.currentTarget.dataset.phone
+        })
+      }
     },
     //点击显示大图
     open(e) {
