@@ -18,7 +18,7 @@
     </view>
     <!-- 视频 -->
     <view wx:if="{{info_detail.file_type == 'video'}}">
-      <video class="banner_box" wx:for="{{info_detail.files}}" wx:key="*this" src="{{baseUrl + item}}" duration="8"></video>
+      <video class="banner_box" wx:for="{{info_detail.files}}" wx:key="*this" src="{{baseUrl + item}}" direction="0" duration="8"></video>
     </view>
   </view>
   <!-- 没上传文件使用默认图片 -->

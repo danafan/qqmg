@@ -3,15 +3,17 @@
 const app = getApp()
 const api = require('../../utils/api.js')
 const util = require('../../utils/util.js')
+const locationApi = require('../../utils/getLocation.js')
+
 const dateTime = require('../../utils/dateTime.js')
-//获取地理位置
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
-var qqmapsdk;
+
 Page({
   data: {
     baseUrl: app.globalData.baseUrl,
     fans_total: 0,
-    location: "",
+    village_name: "", //村地址
+    town_name:"",     //镇地址
+    town_code:"",     //镇代码
     banner_list: [{
       id: "1",
       img_url: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2226120516,635940438&fm=26&gp=0.jpg"
@@ -28,16 +30,16 @@ Page({
     category_list: [],
     startBarHeight: 0,
     navgationHeight: 0,
-    show_desktop:true
+    show_desktop: true
   },
   onLoad() {
     //获取地理位置信息
     this.wxLocationInfo();
   },
   //关闭左上角提示
-  closeDeskTop(){
+  closeDeskTop() {
     this.setData({
-      show_desktop:false
+      show_desktop: false
     })
   },
   //搜索
@@ -48,81 +50,33 @@ Page({
   },
   //重新选择位置
   chooseLocation() {
-    wx.chooseLocation({
-      success: (res) => {
-        let req = {
-          latitude: res.latitude,
-          longitude: res.longitude
-        }
-        this.getApi(req);
-      },
+    locationApi.chooseLocation().then(res => {
+      this.setData({
+        village_name: res.village_name,
+        town_name:res.town_name,
+        town_code: res.town_code
+      })
     })
   },
   //获取地理位置信息
   wxLocationInfo() {
-    wx.getSetting({
-      success: (res) => {
-        if (!res.authSetting['scope.userLocation']) {
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success: () => {
-              this.wxGetLocation();
-            },
-            fail: (err) => {
-              wx.reLaunch({
-                url: '/pages/auth/auth'
-              })
-            }
-          })
-        } else {
-          this.wxGetLocation();
-        }
+    locationApi.wxLocationInfo().then(res => {
+      this.setData({
+        village_name: res.village_name,
+        town_name: res.town_name,
+        town_code: res.town_code
+      })
+      //获取粉丝总数
+      this.getFansTotal();
+      //获取顶部导航栏信息
+      this.setNavigation();
+      //获取一级分类列表
+      this.getCateGory();
+      //获取信息列表
+      let req = {
+        level_01_id: 0
       }
-    })
-  },
-  // wx.getLocation
-  wxGetLocation() {
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        let req = {
-          latitude: res.latitude,
-          longitude: res.longitude
-        }
-        this.getApi(req);
-      }
-    })
-  },
-  // api
-  getApi(req) {
-    qqmapsdk = new QQMapWX({
-      key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
-    });
-    this.setData({
-      location: "获取中..."
-    })
-    qqmapsdk.reverseGeocoder({
-      location: req,
-      success: (res) => {
-        let result = res.result;
-        app.globalData.locationObj.address = result.address_reference.town.title; //镇名称
-        app.globalData.locationObj.adcode = result.address_reference.town.id;     //镇代码
-        app.globalData.locationObj.detail_address = result.address; //注册地址（详细）
-        this.setData({
-          location: result.address_reference.town.title
-        })
-        //获取粉丝总数
-        this.getFansTotal();
-        //获取顶部导航栏信息
-        this.setNavigation();
-        //获取一级分类列表
-        this.getCateGory();
-        //获取信息列表
-        let req = {
-          level_01_id: 0
-        }
-        this.getInfoList(req);
-      }
+      this.getInfoList(req);
     })
   },
   //获取粉丝总数
@@ -231,10 +185,6 @@ Page({
       }
     })
   },
-  //分享自定义
-  // onShareAppMessage: function(res) {
-  //   return app.globalData.shareObj
-  // },
   //下拉刷新
   onPullDownRefresh() {
     this.setData({

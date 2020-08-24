@@ -3,9 +3,10 @@ var app = getApp();
 const api = require('../../utils/api.js')
 const util = require('../../utils/util.js')
 const userStatus = require('../../utils/userStatus.js')
+const locationApi = require('../../utils/getLocation.js')
 //获取地理位置
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
-var qqmapsdk;
+// var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+// var qqmapsdk;
 Page({
   data: {
     baseUrl: app.globalData.baseUrl,
@@ -33,8 +34,8 @@ Page({
     upload_files: [], //选择的文件列表（可传递，需处理）
     file_type: "", //上传的文件类型
     contact: "", //联系人（可传递）
-    address_text:"",  //信息展示地址（可传递）
-    adcode:"",    //行政区划代码（可传递）
+    address_text: "", //信息展示地址（可传递）
+    adcode: "", //行政区划代码（可传递）
     contact_phone: "", //联系电话（可传递）
     agree: false, //是否同意发布须知
     option: {}, //上级页面传递的一级和二级分类
@@ -218,65 +219,27 @@ Page({
   },
   //重新选择位置
   chooseLocation() {
-    wx.chooseLocation({
-      success: (res) => {
-        let req = {
-          latitude: res.latitude,
-          longitude: res.longitude
-        }
-        this.getApi(req);
-      },
+    locationApi.chooseLocation().then(res => {
+      console.log(res)
+      this.setData({
+        address_text: res.info_address,
+        adcode: res.town_code
+      })
     })
   },
   //获取地理位置信息
   wxLocationInfo() {
-    wx.getSetting({
-      success: (res) => {
-        if (!res.authSetting['scope.userLocation']) {
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success: () => {
-              this.wxGetLocation();
-            },
-            fail: (err) => {
-              wx.reLaunch({
-                url: '/pages/auth/auth'
-              })
-            }
+    locationApi.judgeAuth().then(res => {
+      if (res) {
+        locationApi.wxGetLocation().then(res => {
+          this.setData({
+            address_text: res.info_address,
+            adcode: res.town_code
           })
-        } else {
-          this.wxGetLocation();
-        }
-      }
-    })
-  },
-  // wx.getLocation
-  wxGetLocation() {
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        let req = {
-          latitude: res.latitude,
-          longitude: res.longitude
-        }
-        this.getApi(req);
-      }
-    })
-  },
-  // api
-  getApi(req) {
-    qqmapsdk = new QQMapWX({
-      key: 'L4BBZ-KNVK6-TAXSF-M4PC6-TLLAZ-5UBGR'
-    });
-    qqmapsdk.reverseGeocoder({
-      location: req,
-      success: (res) => {
-        let result = res.result.address_reference;
-        let adcode = result.town.id;                                      //镇代码
-        let address_text = result.town.title + result.landmark_l2.title;  //信息地址
+        })
+      } else {
         this.setData({
-          adcode: adcode,
-          address_text: address_text
+          address_text: '点击授权获取位置'
         })
       }
     })
@@ -376,7 +339,7 @@ Page({
         create_user_id: app.globalData.userInfo.user_id,
         level_01_id: this.data.option.level_01_id,
         level_02_id: this.data.option.level_02_id,
-        temp_id:this.data.temp_id,
+        temp_id: this.data.temp_id,
         info_desc: this.data.desc,
         contact: this.data.contact,
         contact_phone: this.data.contact_phone
@@ -390,7 +353,7 @@ Page({
       }
       if (this.data.upload_files.length > 0) { //上传的文件
         submitObj.file_list = this.data.upload_files.join("_");
-      } 
+      }
       if (app.globalData.locationObj.detail_address) { //发布地址
         submitObj.detail_address = app.globalData.locationObj.detail_address;
       }
@@ -398,7 +361,7 @@ Page({
       wx.showModal({
         title: '温馨提示',
         content: "你发布的信息将被全兴安盟的人看到，确认发布吗？",
-        success:(res) => {
+        success: (res) => {
           if (res.confirm) {
             userStatus.getUserStatus().then(res => {
               if (res) {

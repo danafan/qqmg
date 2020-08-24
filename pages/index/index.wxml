@@ -20,7 +20,7 @@
     <view class="search_box">
       <view class="location_box" bindtap="chooseLocation">
         <image class="location_icon" src="../../images/location_icon.png"></image>
-        <view class="location_text">{{location}}</view>
+        <view class="location_text">{{village_name}}</view>
       </view>
       <view class="search_input" bindtap="search">
         <image class="search_icon" src="../../images/search_icon.png"></image>
@@ -45,7 +45,7 @@
     <view class="hot_box">
       <view class="hot_left">
         <view class="line"></view>
-        <view class="hot_text">最新发布</view>
+        <view class="hot_text">{{town_name}}最新信息</view>
       </view>
       <view class="hot_right" data-index="-1" data-id="0" bindtap="service">查看全部</view>
     </view>
