@@ -2,6 +2,7 @@
   "navigationBarTitleText": "我的发布",
   "usingComponents": {
     "record_item": "../../components/RecordItem/record_item",
-    "bottom": "../../components/Bottom/bottom"
+    "bottom": "../../components/Bottom/bottom",
+    "null_page": "../../components/Null/null"
   }
 }

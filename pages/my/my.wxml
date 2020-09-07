@@ -33,7 +33,7 @@
         </view>
         <view class="line"></view>
         <view class="menu_item">
-          <view class="item_num">{{userInfo.point}}</view>
+          <view class="item_num">{{(userInfo.publish_num+userInfo.active_days)/10}}</view>
           <view class="item_label">VIP等级</view>
         </view>
         <view class="line"></view>

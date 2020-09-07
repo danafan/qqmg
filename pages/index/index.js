@@ -10,8 +10,8 @@ Page({
   data: {
     fans_total: 0,
     village_name: "", //村地址
-    town_name:"",     //镇地址
-    town_code:"",     //镇代码
+    town_name: "", //镇地址
+    town_code: "", //镇代码
     banner_list: [{
       id: "1",
       img_url: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2226120516,635940438&fm=26&gp=0.jpg"
@@ -23,18 +23,27 @@ Page({
       img_url: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3457886639,2496382393&fm=26&gp=0.jpg"
     }], //轮播图
     page: 1, //当前页码
-    pagesize:6,
+    pagesize: 6,
     info_list: [], //信息列表
     isLoad: true, //默认可以加载
     category_list: [],
     startBarHeight: 0,
     navgationHeight: 0,
-    show_desktop: true,   //顶部添加到桌面提示
-    shouNull:false,       //空页面不显示
+    show_desktop: true, //顶部添加到桌面提示
+    shouNull: false, //空页面不显示
   },
   onLoad() {
     //获取地理位置信息
     this.wxLocationInfo();
+    //判断是否第一次进入（顶部提示）
+    const is_first = wx.getStorageSync('is_first');
+    if (!is_first) {
+      wx.setStorageSync('is_first', 'isfirst');
+    }
+    this.setData({
+      show_desktop: is_first ? false : true
+    })
+
   },
   //关闭顶部添加到桌面提示
   closeDeskTop() {
@@ -45,7 +54,7 @@ Page({
   //搜索
   search() {
     wx.navigateTo({
-      url: "/pages/search/search"
+      url: "/pages/search/search?town_code=" + this.data.town_code
     })
   },
   //重新选择位置
@@ -53,15 +62,14 @@ Page({
     locationApi.chooseLocation().then(res => {
       this.setData({
         village_name: res.village_name,
-        town_name:res.town_name,
+        town_name: res.town_name,
         town_code: res.town_code,
-        info_list:[],
-        shouNull:false,
-        page:1
+        info_list: [],
+        shouNull: false,
+        page: 1
       })
       //获取信息列表
       let req = {
-        type: 2,
         area_code: this.data.town_code,
         page: this.data.page,
         pagesize: this.data.pagesize
@@ -76,7 +84,7 @@ Page({
         village_name: res.village_name,
         town_name: res.town_name,
         town_code: res.town_code,
-        page:1
+        page: 1
       })
       //获取顶部导航栏信息
       this.setNavigation();
@@ -84,7 +92,6 @@ Page({
       this.getCateGory();
       //获取信息列表
       let req = {
-        type: 2,
         area_code: this.data.town_code,
         page: this.data.page,
         pagesize: this.data.pagesize
@@ -94,12 +101,21 @@ Page({
   },
   //获取一级分类列表
   getCateGory() {
-    util.get(api.getCategoryList, { level:1}).then(res => {
-      if(res.code == 1){
+    util.get(api.getCategoryList, {
+      level: 1
+    }).then(res => {
+      if (res.code == 1) {
+        let data = res.data;
+        let all_obj = {
+          cate_id: "0",
+          cate_name: "全部",
+          icon: "../../images/all_cate.png"
+        }
+        data.push(all_obj);
         this.setData({
-          category_list:res.data
+          category_list: data
         })
-      }else{
+      } else {
         wx.showToast({
           title: res.msg,
           icon: 'none',
@@ -116,7 +132,6 @@ Page({
       })
       //获取信息列表
       let req = {
-        type: 2,
         area_code: this.data.town_code,
         page: this.data.page,
         pagesize: this.data.pagesize
@@ -127,7 +142,7 @@ Page({
   //获取信息列表
   getInfoList(req) {
     util.get(api.infoList, req).then(res => {
-      if(res.code == 1){
+      if (res.code == 1) {
         if (res.data.data.length < this.data.pagesize) {
           this.setData({
             isLoad: false
@@ -143,9 +158,9 @@ Page({
         })
         this.setData({
           info_list: [...this.data.info_list, ...res.data.data],
-          shouNull:true
+          shouNull: true
         })
-      }else{
+      } else {
         wx.showToast({
           title: res.msg,
           icon: 'none',

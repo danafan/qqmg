@@ -5,6 +5,7 @@ module.exports = {
   register: ApiRootUrl + 'user/register',               //用户注册
   get3rdSession: ApiRootUrl + 'user/get3rdsession',     //获取3rdsession
   getUserInfo: ApiRootUrl + 'user/getuserinfo',         //获取用户信息
+  getMyInfo: ApiRootUrl + 'info/myinfolist',            //获取我的信息
   updateInfo: ApiRootUrl + 'user/updateinfo',           //更新用户信息
   getCategoryList: ApiRootUrl + 'category/list',		    //获取一级二级分类
   infoList: ApiRootUrl + 'info/infolist',               //获取信息列表

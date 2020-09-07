@@ -15,6 +15,6 @@
     <push_item wx:for="{{info_list}}" wx:key="info_id" page_type="service" infoItem="{{item}}" />
   </view>
   <!-- 空 -->
-  <null_page toast_text="这里啥都没有，赶快去发布吧～" wx:if="{{info_list.length == 0 && shouNull}}" bind:goPush="goPush"/>
+  <null_page toast_text="这里啥都没有，换别的分类试试～" showPush="{{false}}" wx:if="{{info_list.length == 0 && shouNull}}" bind:goPush="goPush"/>
   <bottom wx:if="{{!isLoad && page >= 2}}"/>
 </view>

@@ -24,7 +24,17 @@
       </view>
       <view class="search_input" bindtap="search">
         <image class="search_icon" src="../../images/search_icon.png"></image>
-        <view class="input_text">请输入搜索内容</view>
+        <swiper class="swiper_search" autoplay interval="3000" circular vertical>
+          <swiper-item>
+            <view class="input_text">输入搜索内容</view>
+          </swiper-item>
+          <swiper-item>
+            <view class="input_text">青青芒果 便利生活</view>
+          </swiper-item>
+          <swiper-item>
+            <view class="input_text">便捷 高效 准确</view>
+          </swiper-item>
+        </swiper>
       </view>
       <view class="fans_box">粉丝：{{fans_total}}</view>
     </view>
@@ -43,16 +53,13 @@
     </view>
     <!-- 最新信息 -->
     <view class="hot_box">
-      <view class="hot_left">
-        <view class="line"></view>
+       <view class="line"></view>
         <view class="hot_text">{{town_name}}最新信息</view>
-      </view>
-      <view class="hot_right" data-index="-1" data-id="0" bindtap="service">查看全部</view>
     </view>
     <!-- 发布列表 -->
     <push_item wx:for="{{info_list}}" wx:key="info_id" page_type="index" infoItem="{{item}}" />
     <!-- 空 -->
-    <null_page toast_text="这里的人有点儿懒，还没发过消息哦～" showPush="{{false}}" wx:if="{{info_list.length == 0 && shouNull}}"/>
+    <null_page toast_text="这里的人有点儿懒，还没发过消息哦～" showPush="{{false}}" wx:if="{{info_list.length == 0 && shouNull}}" />
+    <bottom wx:if="{{!isLoad && page >= 2}}" />
   </view>
-  <bottom wx:if="{{!isLoad && page >= 2}}" />
 </view>

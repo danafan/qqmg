@@ -22,8 +22,8 @@ Page({
   },
   onLoad(option) {
     this.setData({
-      active_index: option.index == '-1' ? 0 : parseInt(option.index) + 1,
-      show_index: option.index >= 5 ? 5 : option.index == '-1' ? 0 : option.index,
+      active_index: option.index == '9' ? 0 : parseInt(option.index) + 1,
+      show_index: option.index >= 6 && option.index < 9 ? 6 : option.index == '9' ? 0 : option.index,
       cate_id: option.id,
       town_code: option.town_code
     })
@@ -80,7 +80,6 @@ Page({
   //获取信息列表
   getInfoList() {
     let req = { 
-      type:2,
       page: this.data.page, 
       pagesize:this.data.pagesize,
       cate1: this.data.cate_id, 

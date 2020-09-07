@@ -86,11 +86,9 @@ Page({
   },
   //点击用户
   getUserInfo(){
-    let user_id = this.data.info_detail.create_user_id;
-    let create_user_img = this.data.info_detail.create_user_img;
-    let create_user_nickname = this.data.info_detail.create_user_nickname;
+    let user_id = this.data.info_detail.user_id;
     wx.navigateTo({
-      url: '/pages/userinfo/userinfo?user_id=' + user_id + '&create_user_img=' + create_user_img + '&create_user_nickname=' + create_user_nickname
+      url: '/pages/userinfo/userinfo?user_id=' + user_id
     });
   }
 })

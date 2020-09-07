@@ -3,6 +3,7 @@ page{
   background: #fff;
 }
 .navgation_box {
+  background: #fff;
   border-bottom: 1rpx solid #f6f6f6;
   position: fixed;
   top: 0;

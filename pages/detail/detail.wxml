@@ -11,9 +11,9 @@
     <view class="push_content">
       <view class="userinfo">
         <view class="username" data-infoObj="{{info_detail}}" bindtap="getUserInfo">{{info_detail.wx_nickname}}</view>
-        <view class="taps">
+        <view class="tags">
           <view class="category_item">{{info_detail.cate2_name}}</view>
-          <view class="tap" wx:for="{{info_detail.tags}}" wx:key="*this">{{item}}</view>
+          <view class="tag" wx:for="{{info_detail.tags}}" wx:key="*this">{{item}}</view>
         </view>
       </view>
       <view class="describe">{{info_detail.desc}}</view>

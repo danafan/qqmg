@@ -2,10 +2,13 @@
 <view class="category_box">
   <view class="title">--- 请选择信息类别 ---</view>
   <view class="cate_list">
-    <view class="cate_but cate_but_01 {{index == 1 || index == 5 ? 'cate_but_02' : index == 2 || index == 6 ? 'cate_but_03' : ''}}" wx:for="{{category_list}}" wx:key="cate_id" data-index="{{index}}" data-id="{{item.cate_id}}" bindtap="checkOneLevel">
-     <picker range-key="cate_name" bindchange="bindPickerChange" range="{{item.children}}">
-     {{item.cate_name}}
-    </picker>
+    <view class="cate_but" wx:for="{{category_list}}" wx:key="cate_id" data-index="{{index}}" data-id="{{item.cate_id}}" bindtap="checkOneLevel">
+      <picker range-key="cate_name" bindchange="bindPickerChange" range="{{item.children}}">
+        <view class="but_content">
+          <image class="cate_icon" src="{{item.icon}}"></image>
+          <text>{{item.cate_name}}</text>
+        </view>
+      </picker>
     </view>
   </view>
   <view class="cate_toast">类别越准确，更加容易被其他粉丝看到哦～</view>

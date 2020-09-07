@@ -32,7 +32,7 @@ Component({
         success: (res) => {
           if (res.confirm) {
             let req = {
-              info_id: e.detail.info_id
+              info_id: e.currentTarget.dataset.id
             }
             utils.post(api.deleteInfo, req).then(res => {
               if (res.code == 1) {

@@ -53,7 +53,7 @@
   color: #234d76;
   font-weight: 700;
 }
-.taps {
+.tags {
   display: flex;
   align-items: flex-end;
 }
@@ -68,14 +68,14 @@
   padding-left: 12rpx;
   padding-right: 12rpx;
 }
-.tap{
-  border:1rpx solid #a1e81a;
+.tag{
+  background: #ff5858;
   margin-right: 8rpx;
-  border-radius: 8rpx;
-  color: #a1e81a;
+  border-radius: 5rpx;
+  color: #fff;
   font-size: 22rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 38rpx;
+  line-height: 38rpx;
   padding-left: 8rpx;
   padding-right: 8rpx;
 }

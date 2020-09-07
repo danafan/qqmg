@@ -7,7 +7,8 @@ Page({
     info_list:[],   //信息列表
     isLoad:true,
     page:1,
-    pagesize:6
+    pagesize:10,
+    shouNull: false
   },
   onLoad(){
     //获取信息列表
@@ -17,7 +18,11 @@ Page({
   reload(v){
     let index = v.detail.index;
     // 处理获取信息列表
-   
+    let info_arr = this.data.info_list;
+    info_arr.splice(index, 1);
+    this.setData({
+      info_list: info_arr
+    })
   },
   //上拉加载
   onReachBottom() {
@@ -33,11 +38,10 @@ Page({
   getInfoList() {
     //获取信息列表
     let req = {
-      type: 1,
       page: this.data.page,
       pagesize: this.data.pagesize
     }
-    utils.get(api.infoList, req).then(res => {
+    utils.get(api.getMyInfo, req).then(res => {
       if (res.code == 1) {
         if (res.data.data.length < this.data.pagesize) {
           this.setData({
@@ -54,10 +58,10 @@ Page({
           } else {
             item.file_url = "";
           }
-
         })
         this.setData({
-          info_list: [...this.data.info_list, ...res.data.data]
+          info_list: [...this.data.info_list, ...res.data.data],
+          shouNull: true
         })
       } else {
         wx.showToast({

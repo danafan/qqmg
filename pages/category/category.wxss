@@ -6,33 +6,36 @@
   font-size: 36rpx;
 }
 .cate_list{
+  padding-left: 15rpx;
+  padding-right: 15rpx;
   margin-top: 50rpx;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
+
 .cate_but{
-  border-radius: 8rpx;
+  border:3rpx solid #333;
   margin-bottom: 20rpx;
   width: 350rpx;
-  text-align: center;
   height: 100rpx;
-  line-height: 100rpx;
-  color: #fff;
-  font-size: 36rpx;
+  color: #333;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
-.cate_but_01{
-  box-shadow: 3rpx 3rpx 5rpx rgb(244,180,104);
-  background-image: linear-gradient(rgb(237,121,49), rgb(244,180,104));
+.but_content{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
-.cate_but_02{
-  box-shadow: 3rpx 3rpx 5rpx rgb(213,144,249);
-  background-image: linear-gradient(rgb(176,72,246), rgb(213,144,249));
-}
-.cate_but_03{
-  box-shadow: 3rpx 3rpx 5rpx rgb(84,170,239);
-  background-image: linear-gradient(rgb(43,131,245), rgb(84,170,239));
+.cate_icon{
+  margin-right: 10rpx;
+  display: block;
+  width: 42rpx;
+  height: 42rpx;
 }
 .cate_toast{
   width: 100%;
