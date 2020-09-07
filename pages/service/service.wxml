@@ -1,10 +1,10 @@
 <!--pages/service/service.wxml-->
-<view class="service_container">
+<view>
   <!-- 顶部导航 -->
   <swiper class="tab_list" display-multiple-items="4" current="{{show_index}}">
-    <swiper-item wx:for="{{category_list}}" wx:key="category_id">
-      <view class="tab {{active_index == index? 'active_color' : ''}}" data-id="{{item.category_id}}" data-index="{{index}}" bindtap="changeCurrent">
-        {{item.category_name}}
+    <swiper-item wx:for="{{category_list}}" wx:key="cate_id">
+      <view class="tab {{active_index == index? 'active_color' : ''}}" data-id="{{item.cate_id}}" data-index="{{index}}" bindtap="changeCurrent">
+        {{item.cate_name}}
         <view class="active_tab" wx:if="{{active_index == index}}"></view>
       </view>
     </swiper-item>
@@ -12,9 +12,9 @@
   <!-- 底部列表 -->
   <view class="advertising_list">
     <!-- 发布列表 -->
-    <push_item wx:for="{{service_list}}" wx:key="id" page_type="service" infoItem="{{item}}" />
+    <push_item wx:for="{{info_list}}" wx:key="info_id" page_type="service" infoItem="{{item}}" />
   </view>
   <!-- 空 -->
-  <null_page toast_text="这里啥都没有，赶快去发布吧～" wx:if="{{service_list.length == 0}}" bind:goPush="goPush"/>
+  <null_page toast_text="这里啥都没有，赶快去发布吧～" wx:if="{{info_list.length == 0 && shouNull}}" bind:goPush="goPush"/>
   <bottom wx:if="{{!isLoad && page >= 2}}"/>
 </view>

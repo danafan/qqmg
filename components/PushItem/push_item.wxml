@@ -1,32 +1,28 @@
 <!--components/PushItem/push_item.wxml-->
 <view class="push_container">
-  <image class="user_img" lazy-load="true" mode="aspectFill" src="{{infoItem.create_user_img}}" data-infoObj="{{infoItem}}" bindtap="getUserInfo"></image>
+  <image class="user_img" lazy-load="true" mode="aspectFill" src="{{infoItem.wx_head_img}}" data-user_id="{{infoItem.user_id}}" bindtap="getUserInfo"></image>
   <view class="push_content">
     <view class="userinfo">
-      <view class="username" data-infoObj="{{infoItem}}" bindtap="getUserInfo">{{infoItem.create_user_nickname}}</view>
-      <view class="phone" data-phone="{{infoItem.contact_phone}}" bindtap="call">拨打电话</view>
+      <view class="username" data-user_id="{{infoItem.user_id}}" bindtap="getUserInfo">{{infoItem.wx_nickname}}</view>
+      <view class="phone" data-phone="{{infoItem.link_phone}}" bindtap="call">拨打电话</view>
     </view>
     <view class="taps" data-id="{{infoItem.info_id}}" bindtap="detail">
-      <view class="category_item">{{infoItem.category_name}}</view>
-      <view class="tap" wx:for="{{infoItem.tag_txts}}" wx:key="*this">{{item}}</view>
+      <view class="category_item">{{infoItem.cate2_name}}</view>
+      <view class="tag" wx:for="{{infoItem.tags}}" wx:key="*this">{{item}}</view>
     </view>
-    <view class="describe" data-id="{{infoItem.info_id}}" bindtap="detail">{{infoItem.info_desc}}</view>
-    <view class="diff_box" wx:for="{{infoItem.diff_data}}" wx:key="index" data-id="{{infoItem.info_id}}" bindtap="detail">
-      <text class="diff_label">{{item.type}}：</text>
-      <text class="diff_val">{{item.val}}</text>
-    </view>
+    <view class="describe" data-id="{{infoItem.info_id}}" bindtap="detail">{{infoItem.desc}}</view>
+    <view class="diff_box" wx:for="{{infoItem.temp_content}}" wx:key="*this" data-id="{{infoItem.info_id}}" bindtap="detail">{{item}}</view>
     <view class="all" data-id="{{infoItem.info_id}}" bindtap="detail">全文</view>
-    <view class="images" wx:if="{{infoItem.file_type == 'image'}}">
-      <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.files}}" bindtap="open"></image>
+    <view class="images" wx:if="{{infoItem.view_type == '1'}}">
+      <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{infoItem.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{infoItem.host + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.view_file}}" data-base_url="{{infoItem.host}}" bindtap="open"></image>
     </view>
-    <video class="goods_img" wx:for="{{infoItem.files}}" wx:key="*this" wx:for-item="file_url" src="{{baseUrl + file_url}}" duration="8" direction="0" wx:if="{{infoItem.file_type == 'video'}}"></video>
+    <video class="goods_video" wx:if="{{infoItem.view_type == '2'}}" wx:for="{{infoItem.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{infoItem.host + file_url}}" autoplay object-fit="fill" play-btn-position="center" direction="0"></video>
     <view class="bottom_info">
       <view class="info_left">
-        <view>{{infoItem.ddd}}</view>
-        <view class="detail_address" wx:if="{{infoItem.detail_address}}">{{infoItem.detail_address}}</view>
+        <view>{{infoItem.create_time}}</view>
+        <view class="detail_address">{{infoItem.address}}</view>
       </view>
-
-      <view class="browse">{{infoItem.browse_num}} 浏览</view>
+      <view class="browse">{{infoItem.view_count}} 浏览</view>
     </view>
   </view>
   <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close" />

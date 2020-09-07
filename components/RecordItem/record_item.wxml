@@ -1,17 +1,17 @@
 <!--components/RecordItem/record_item.wxml-->
 <view class="record_item_box" data-id="{{Item.info_id}}" bindtap="detail">
   <view class="create_time">
-    <text class="dd">{{Item.d}}</text>
-    <text class="mm">{{Item.m}}</text>
+    <text class="dd">{{Item.dd}}</text>
+    <text class="mm">{{Item.mm}}</text>
   </view>
   <view class="info_item">
-    <image class="goods_img" lazy-load="true" mode="aspectFill" src="{{Item.file_url}}" wx:if="{{Item.file_type == 'image'}}"></image>
-    <video class="goods_img" src="{{Item.file_url}}" duration="8" wx:if="{{Item.file_type == 'video'}}"></video>
+    <image class="goods_img" lazy-load="true" mode="aspectFill" src="{{Item.file_url}}" wx:if="{{Item.view_type == '1' && Item.file_url != ''}}"></image>
+    <video class="goods_img" src="{{Item.file_url}}" object-fit="fill" wx:if="{{Item.view_type == '2' && Item.file_url != ''}}"></video>
     <view class="right_content">
-      <view class="info_title">{{Item.info_desc}}</view>
+      <view class="info_title">{{Item.desc}}</view>
       <view class="content_bottom">
-        <view class="time">浏览：{{Item.browse_num}}</view>
-        <view class="shelves" data-id="{{Item.info_id}}" data-filelist="{{Item.file_list}}" catchtap="shelves" wx:if="{{page_type == '1'}}">下架</view>
+        <view class="time">浏览：{{Item.view_count}}</view>
+        <view class="shelves" data-id="{{Item.info_id}}" catchtap="shelves" wx:if="{{page_type == '1'}}">下架</view>
       </view>
     </view>
   </view>

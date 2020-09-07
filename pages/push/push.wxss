@@ -7,11 +7,33 @@
   background: #f6f6f6;
   width: 100%;
   font-size: 24rpx;
-  color:red;
+  color:#ff5858;
 }
 .prompt_bottom{
   margin-top: 10rpx;
 }
+/* 模版内容 */
+/* 输入框 */
+.title{
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+  height: 94rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  display: flex;
+  align-items: center;
+}
+.title_label{
+  width: 150rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+.title_input{
+  flex: 1;
+  font-size: 30rpx;
+  color: #333;
+}
+
 .info_type{
   border-bottom: 1px solid #e6e6e6;
   width: 100%;
@@ -44,25 +66,7 @@
   width: 32rpx;
   height: 32rpx;
 }
-.title{
-  border-bottom: 1px solid #e6e6e6;
-  width: 100%;
-  height: 94rpx;
-  padding-left: 15rpx;
-  padding-right: 15rpx;
-  display: flex;
-  align-items: center;
-}
-.title_label{
-  width: 150rpx;
-  font-size: 32rpx;
-  color: #333;
-}
-.title_input{
-  flex: 1;
-  font-size: 30rpx;
-  color: #333;
-}
+
 .describe_box{
   border-bottom: 1px solid #e6e6e6;
   padding: 25rpx 15rpx 15rpx;
@@ -83,17 +87,20 @@
   display: flex;
   flex-wrap: wrap;
 }
-.tap_item{
+.tag_item{
   border-radius: 5rpx;
   margin-right: 15rpx;
   margin-bottom: 15rpx;
-  border:1rpx solid #f7a908;
-  padding: 5rpx 15rpx;
-  font-size: 28rpx;
-  color: #f7a908;
+  border:1rpx solid #ff5858;
+  font-size: 25rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  padding-left: 12rpx;
+  padding-right: 12rpx;
+  color: #ff5858;
 }
-.active_tap{
-  background: #f7a908;
+.active_tag{
+  background: #ff5858;
   color: #fff;
 }
 .sex_box{
@@ -179,16 +186,16 @@
   border-radius: 50%;
   width: 20rpx;
   height: 20rpx;
-  background: #a1e81a;
+  background: #287fe6;
 }
 
 .xuzhi{
-  color: red;
+  color: #ff5858;
 }
 .push_button{
   border-radius: 40rpx;
   margin: 60rpx auto;
-  background: #a1e81a;
+  background: #287fe6;
   width: 600rpx;
   height: 80rpx;
   display: flex;
@@ -214,6 +221,6 @@
 }
 .right_icon{
   margin-left: 15rpx;
-  width: 40rpx;
-  height: 40rpx;
+  width: 32rpx;
+  height: 32rpx;
 }

@@ -1,6 +1,7 @@
 /* pages/my/my.wxss */
+
 page {
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 }
 
 .my_back {
@@ -9,7 +10,8 @@ page {
   height: 250rpx;
   position: relative;
 }
-.my_back_img{
+
+.my_back_img {
   background: #0b0d1d;
   position: absolute;
   top: 0;
@@ -17,6 +19,7 @@ page {
   width: 100%;
   height: 100%;
 }
+
 .my_info {
   border-radius: 15rpx;
   background: #fff;
@@ -38,7 +41,8 @@ page {
   height: 180rpx;
   border-radius: 50%;
 }
-.user_img_box{
+
+.user_img_box {
   background: #fff;
   position: relative;
   top: -80rpx;
@@ -50,11 +54,13 @@ page {
   align-items: center;
   justify-content: center;
 }
-.user_img{
+
+.user_img {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
 }
+
 .my_name {
   position: relative;
   top: -70rpx;
@@ -62,7 +68,8 @@ page {
   color: #333;
   font-weight: 700;
 }
-.hui_name{
+
+.hui_name {
   color: #8a8a8a;
 }
 
@@ -92,12 +99,27 @@ page {
   left: 0;
 }
 
-.vip_icon {
+.vip_icon_box {
+  border-radius: 5rpx;
   position: absolute;
-  top: -50rpx;
-  right: -20rpx;
-  width: 40rpx;
-  height: 40rpx;
+  top: -40rpx;
+  right: -50%;
+  background: #f7a908;
+  padding: 2rpx 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vip_icon {
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.vip_font {
+  font-size: 20rpx;
+  color: #fff;
+  font-weight: 700rpx;
 }
 
 .vip_toast {
@@ -106,9 +128,11 @@ page {
   font-size: 24rpx;
   color: #bfbfbf;
 }
-.special{
+
+.special {
   color: #f7a908;
 }
+
 .menu_list {
   width: 100%;
   padding-left: 30rpx;
@@ -140,7 +164,8 @@ page {
   color: #333;
   font-weight: 700;
 }
-.my_push{
+
+.my_push {
   margin: 50rpx auto 0;
   background: #a1e81a;
   border-radius: 39rpx;
@@ -152,13 +177,14 @@ page {
   color: #fff;
 }
 
-.my_options{
+.my_options {
   margin-top: 340rpx;
   width: 100%;
   padding-left: 25rpx;
   padding-right: 25rpx;
 }
-.option{
+
+.option {
   background: #fff;
   width: 100%;
   height: 98rpx;
@@ -167,32 +193,49 @@ page {
   justify-content: space-between;
   padding-left: 15rpx;
   padding-right: 15rpx;
-  margin-bottom: 15rpx;
+  margin-top: 15rpx;
   position: relative;
 }
-.feek_but{
+
+.feek_but {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%!important;
-  height: 98rpx!important;
+  width: 100% !important;
+  height: 98rpx !important;
   z-index: 1;
   opacity: 0;
 }
-.option_left{
+
+.option_left {
   display: flex;
   align-items: center;
 }
-.option_icon{
+
+.option_icon {
   margin-right: 15rpx;
   width: 42rpx;
   height: 42rpx;
 }
-.option_label{
+
+.option_label {
   font-size: 30rpx;
   color: #333;
 }
-.right_icon{
-  width: 30rpx;
-  height: 30rpx;
+
+.right_icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.contact {
+  margin-top: 15rpx;
+  background: #fff;
+  width: 100%;
+  height: 68rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 15rpx;
+  font-size: 26rpx;
+  color: #333;
 }

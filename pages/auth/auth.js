@@ -1,41 +1,49 @@
 // pages/auth/auth.js
 var app = getApp();
 const locationApi = require('../../utils/getLocation.js')
+const api = require('../../utils/api.js')
+const util = require('../../utils/util.js')
 
 Page({
   data: {
-    type: ""
+    type: "",
+    page_url:""
   },
   onLoad(option) {
+    if (option.page_url){
+      this.setData({
+        page_url: option.page_url
+      })
+    }
     //判断哪一个没授权
     this.judgeAuth();
   },
   //判断哪一个没授权
   judgeAuth() {
-    if (!app.globalData.locationObj.adcode) { //行政区划代码
+    if (!app.globalData.detail_address) { //注册地址
       this.setData({
         type: '-1'
       })
       wx.setNavigationBarTitle({
-        title: '获取位置' // 其他页面传过来的标题名
+        title: '获取当前位置'
       })
     } else if (!app.globalData.wxUser) { //微信信息
       this.setData({
         type: '1'
       })
       wx.setNavigationBarTitle({
-        title: '微信授权' // 其他页面传过来的标题名
+        title: '微信授权' 
       })
     } else if (!app.globalData.userInfo) { //手机号
       this.setData({
         type: '2'
       })
       wx.setNavigationBarTitle({
-        title: '用户注册' // 其他页面传过来的标题名
+        title: '快速注册' 
       })
     }
   },
-  //获取地理位置信息
+  //获取地理位置信息(只有首页用)
   wxLocationInfo() {
     wx.openSetting({
       success: (res) => {
@@ -47,11 +55,18 @@ Page({
       }
     })
   },
-  //获取到用户信息赋值给公共变量
+  //获取微信头像和昵称
   bindGetUserInfo(e) {
+    app.globalData.wxUser = {
+      wx_head_img: e.detail.userInfo.avatarUrl,
+      wx_nickname: e.detail.userInfo.nickName
+    }
     if (!app.globalData.userInfo) {
       this.setData({
         type: '2'
+      })
+      wx.setNavigationBarTitle({
+        title: '用户注册' // 其他页面传过来的标题名
       })
     } else {
       app.globalData.wxUser = e.detail.userInfo;
@@ -61,13 +76,35 @@ Page({
     }
 
   },
-  //获取用户手机号
-  getPhoneNumber(e) {
-    let iv = e.detail.iv;
-    let encryptedData = e.detail.encryptedData;
-    let address = app.globalData.locationObj.detail_address;
-    let openid = wx.getStorageSync('openid');
-    let session_key = app.globalData.session_key;
-
+  // 注册
+  register() {
+    let req = {
+      phone:'13067882143',
+      wx_head_img: app.globalData.wxUser.wx_head_img,
+      wx_nickname: app.globalData.wxUser.wx_nickname,
+      create_addr: app.globalData.detail_address
+    }
+    util.get(api.register, req).then(res => {
+      if (res.code == 1) {
+        wx.switchTab({
+          url: `/pages/${this.data.page_url}/${this.data.page_url}`
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    })
   }
+  //获取用户手机号
+  // getPhoneNumber(e) {
+  //   let iv = e.detail.iv;
+  //   let encryptedData = e.detail.encryptedData;
+  //   let address = app.globalData.locationObj.detail_address;
+  //   let openid = wx.getStorageSync('openid');
+  //   let session_key = app.globalData.session_key;
+
+  // }
 })

@@ -8,137 +8,44 @@
       <text>描述清晰，内容完整，将有机会获得公众号图文推送或首页热门的机会，大大增加信息的曝光率哦！</text>
     </view>
   </view>
-  <!-- 牲、农、二、汽 -->
-  <view class="describe_box" wx:if="{{temp_id == 1}}">
-    <view class="info_label">类型</view>
-    <radio-group class="sex_box" data-type="check_sneq" bindchange="changeRadio">
-      <label class="weui-cell weui-check__label" wx:for="{{group_list}}" wx:key="*this">
-        <view class="weui-cell__hd">
-          <radio value="{{item}}" checked="{{check_sneq == item}}" />
-        </view>
-        <view class="weui-cell__bd">{{item}}</view>
-      </label>
-    </radio-group>
-  </view>
-  <!-- 招聘 -->
-  <view wx:if="{{temp_id == 2}}">
-    <!-- 招聘单位 -->
-    <view class="title">
-      <view class="title_label">招聘单位</view>
-      <input class="title_input" cursor-spacing="12" value="{{company}}" data-type="company" placeholder="请输入公司名称" bindinput="changeInput" />
+  <!-- 模版内容，需遍历 -->
+  <view wx:for="{{temp_items}}" wx:key="index">
+    <!-- 输入框 -->
+    <view class="title" wx:if="{{item.label_type == 1}}">
+      <view class="title_label">{{item.item_name}}</view>
+      <input class="title_input" cursor-spacing="12" placeholder="请输入{{item.item_name}}" 
+     data-index="{{index}}" bindinput="changeInput" />
     </view>
-    <!-- 工作地址 -->
-    <view class="title">
-      <view class="title_label">工作地址</view>
-      <input class="title_input" cursor-spacing="12" value="{{work_addres}}" data-type="work_addres" placeholder="请输入工作地址" bindinput="changeInput" />
-    </view>
-    <!-- 招聘职位 -->
-    <view class="describe_box">
-      <view class="info_label">招聘职位</view>
-      <view class="info_taps">
-        <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
-      </view>
-    </view>
-    <!-- 薪资 -->
-    <picker bindchange="changeWage" range="{{wage_list}}">
-      <view class="info_type">
-        <view class="info_left">
-          <view class="info_label">薪资范围</view>
-          <view class="info_text_null {{wage != '' ? 'info_text':'' }}">{{wage == '' ? '请选择':wage}}</view>
-        </view>
-        <image class="info_right" src="../../images/right.png"></image>
-      </view>
-    </picker>
-    <!-- 性别 -->
-    <view class="describe_box">
-      <view class="info_label">性别</view>
-      <radio-group class="sex_box" data-type="sex"  bindchange="changeRadio">
-        <label class="weui-cell weui-check__label" wx:for="{{sexs}}" wx:key="*this">
+    <!-- 单选框 -->
+    <view class="describe_box" wx:if="{{item.label_type == 2}}">
+      <view class="info_label">{{item.item_name}}</view>
+      <radio-group class="sex_box" data-index="{{index}}" bindchange="changeRadio">
+        <label class="weui-cell weui-check__label" wx:for="{{item.item_value}}" wx:for-item="radioItem"  wx:key="index">
           <view class="weui-cell__hd">
-            <radio value="{{item}}" checked="{{sex == item}}" />
+            <radio value="{{radioItem}}" checked="{{index == 0}}" />
           </view>
-          <view class="weui-cell__bd">{{item}}</view>
+          <view class="weui-cell__bd">{{radioItem}}</view>
         </label>
       </radio-group>
     </view>
-  </view>
-  <!-- 求职 -->
-  <view wx:if="{{temp_id == 3}}">
-    <!-- 期望职位 -->
-    <view class="describe_box">
-      <view class="info_label">期望职位</view>
-      <view class="info_taps">
-        <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
-      </view>
-    </view>
-    <!-- 性别 -->
-    <view class="describe_box">
-      <view class="info_label">性别</view>
-      <radio-group class="sex_box" data-type="sex"  bindchange="changeRadio">
-        <label class="weui-cell weui-check__label" wx:for="{{sexs}}" wx:key="*this">
-          <view class="weui-cell__hd">
-            <radio value="{{item}}" checked="{{sex == item}}" />
-          </view>
-          <view class="weui-cell__bd">{{item}}</view>
-        </label>
-      </radio-group>
-    </view>
-    <!-- 工作经验 -->
-    <picker bindchange="changeExperience" range="{{experience_list}}">
+    <!-- 底部弹框 -->
+    <picker data-index="{{index}}" bindchange="changePick" range="{{item.item_value}}" wx:if="{{item.label_type == 3}}">
       <view class="info_type">
         <view class="info_left">
-          <view class="info_label">工作经验</view>
-          <view class="info_text_null {{experience != '' ? 'info_text':'' }}">{{experience == '' ? '请选择':experience}}</view>
+          <view class="info_label">{{item.item_name}}</view>
+          <view class="info_text">{{item.item_content}}</view>
         </view>
         <image class="info_right" src="../../images/right.png"></image>
       </view>
     </picker>
-    <!-- 期望薪资 -->
-    <picker bindchange="changeWage" range="{{wage_list}}">
-      <view class="info_type">
-        <view class="info_left">
-          <view class="info_label">期望薪资</view>
-          <view class="info_text_null {{wage != '' ? 'info_text':'' }}">{{wage == '' ? '请选择':wage}}</view>
-        </view>
-        <image class="info_right" src="../../images/right.png"></image>
-      </view>
-    </picker>
-    <!-- 年龄 -->
-    <view class="title">
-      <view class="title_label">年龄</view>
-      <input class="title_input" cursor-spacing="12" type="number" value="{{age}}" placeholder="请输入年龄" data-type="age" bindinput="changeInput" />
-    </view>
-  </view>
-  <!-- 出售或出租 -->
-  <view class="title" wx:if="{{temp_id == 4}}">
-    <view class="title_label">房屋位置</view>
-    <input class="title_input" cursor-spacing="12" value="{{house_location}}" placeholder="小区名称或位置" data-type="house_location" bindinput="changeInput" />
-  </view>
-  <!-- 打车拼车 -->
-  <view wx:if="{{temp_id == 6}}">
-    <!-- 出发地 -->
-    <view class="title">
-      <view class="title_label">出发地</view>
-      <input class="title_input" cursor-spacing="12" value="{{origin}}" data-type="origin" placeholder="请输入出发地" bindinput="changeInput" />
-    </view>
-    <!-- 目的地 -->
-    <view class="title">
-      <view class="title_label">目的地</view>
-      <input class="title_input" cursor-spacing="12" value="{{destination}}" data-type="destination" placeholder="请输入目的地" bindinput="changeInput" />
-    </view>
     <!-- 乘车时间 -->
-    <date_pick bind:onEmit="pickerTap"/>
-    <!-- 人数 -->
-    <view class="title">
-      <view class="title_label">人数</view>
-      <input class="title_input" cursor-spacing="12" type="number" value="{{number}}" data-type="number" placeholder="请输入乘车人数" bindinput="changeInput" />
-    </view>
+    <date_pick data-index="{{index}}" bind:onEmit="pickerTap" wx:if="{{item.label_type == 4}}"/>
   </view>
   <!-- 公共 -->
   <!-- 描述 -->
   <view class="describe_box">
     <view class="info_label">描述</view>
-    <textarea class="textarea" maxlength="120" value="{{desc}}" data-type="desc" bindinput="changeInput" placeholder="{{default_desc}}" />
+    <textarea class="textarea" maxlength="120" data-type="desc" bindinput="pubChangeInput" placeholder="{{default_desc}}" />
   </view>
   <!-- 信息展示地址 -->
   <view class="describe_box">
@@ -148,25 +55,25 @@
       <image class="right_icon" src="../../images/right.png"></image>
     </view>
   </view>
-  <!-- 标签(除招聘求职) -->
-  <view class="describe_box" wx:if="{{temp_id != 2 && temp_id != 3}}">
+  <!-- 标签 -->
+  <view class="describe_box">
     <view class="info_label">标签</view>
     <view class="info_taps">
-      <view class="tap_item {{item.active ? 'active_tap' : ''}}" wx:for="{{taps}}" wx:key="tag_id" data-id="{{item.tag_id}}" bindtap="activeTap">{{item.tag_name}}</view>
+      <view class="tag_item {{item.active ? 'active_tag' : ''}}" wx:for="{{tags}}" wx:key="index" data-index="{{index}}" bindtap="activeTap">{{item.tag_name}}</view>
     </view>
   </view>
   <!-- 上传文件 -->
   <view class="upload_content">
     <view class="upload_label">图片或视频
-      <text class="max_imgs">（可上传最多9张图片或一个视频）</text>
+      <text class="max_imgs">（最多可上传9张图片或一个视频）</text>
     </view>
     <view class="camera_box">
       <view class="show_img_box" wx:for="{{upload_files}}" wx:key="index">
-        <image class="show_img" src="{{baseUrl + item}}" wx:if="{{file_type=='image' }}"></image>
-        <video class="show_img" src="{{baseUrl + item}}" duration="8" wx:if="{{file_type=='video' }}"></video>
+        <image class="show_img" src="{{baseUrl + item}}" wx:if="{{file_type=='1'}}"></image>
+        <video class="show_img" src="{{baseUrl + item}}" duration="8" wx:if="{{file_type=='2'}}"></video>
         <image class="close" src="../../images/close.png" data-index="{{index}}" bindtap="deleteImg"></image>
       </view>
-      <view class="upload_box" bindtap="chooseImage" wx:if="{{file_type=='' || file_type=='image' && upload_files.length < 9 || file_type=='video' && upload_files.length < 1}}">
+      <view class="upload_box" bindtap="chooseImage" wx:if="{{file_type=='' || file_type=='1' && upload_files.length < 9 || file_type=='2' && upload_files.length < 1}}">
         <image class="camera_icon" src="../../images/camera.png"></image>
       </view>
     </view>
@@ -174,12 +81,12 @@
   <!-- 联系人 -->
   <view class="title">
     <view class="title_label">联系人</view>
-    <input class="title_input" cursor-spacing="12" value="{{contact}}" placeholder="请输入联系人（必填）" data-type="contact" bindinput="changeInput" />
+    <input class="title_input" cursor-spacing="12" placeholder="请输入联系人（必填）" data-type="linkman" bindinput="pubChangeInput" />
   </view>
   <!-- 联系电话 -->
   <view class="title">
     <view class="title_label">联系电话</view>
-    <input class="title_input" cursor-spacing="10" type="number" value="{{contact_phone}}" placeholder="请输入联系电话（必填）" data-type="contact_phone" bindinput="changeInput" />
+    <input class="title_input" cursor-spacing="10" type="number" placeholder="请输入联系电话（必填）" data-type="link_phone" bindinput="pubChangeInput" />
   </view>
   <view class="label_box">
     <view class="radio_box" bindtap="agree">

@@ -16,8 +16,8 @@
   <view class="auth_content" wx:if="{{type == '2'}}">
     <view class="qing">青青芒果申请使用</view>
     <view class="ti">你的手机号码</view>
-    <button class="login" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">快速登录</button>
-    <!-- <button class="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">快速登录</button> -->
+    <!-- <button class="login" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">快速注册</button> -->
+    <button class="login" bindtap="register">快速注册</button>
   </view>
   
   

@@ -1,17 +1,18 @@
 //测试地址
-const ApiRootUrl = 'http://localhost:8089/admin/';
+const ApiRootUrl = 'http://114.67.110.57/mobile/';
 
 module.exports = {
-  getFansTotal: ApiRootUrl + 'getFansTotal',          //获取总粉丝数（banner待完成）   
-  getCategoryList: ApiRootUrl + 'getCategoryList',		//获取一级二级分类
-  getCateAndTag: ApiRootUrl + 'getCateAndTag',		    //获取二级分类和标签（发布页面）
-  upLoadImg: ApiRootUrl + 'uploadImg',                //上传文件
-  deleteImg: ApiRootUrl + 'deleteImg',                //删除文件
-  pushInfo: ApiRootUrl + 'pushInfo',                  //发布信息
-  infoList: ApiRootUrl + 'infoList',                  //获取信息列表
-  getInfoDetail: ApiRootUrl + 'getInfoDetail',        //获取信息详情
-  deleteInfo: ApiRootUrl + 'deleteInfo',              //删除信息
-  getUserInfo: ApiRootUrl + 'getUserInfo',            //根据用户ID获取用户信息
-  getOpenId: ApiRootUrl + 'getOpenId',                //根据code获取openid
-  getUserStatus: ApiRootUrl + 'getUserStatus',        //根据openid获取用户信息
+  register: ApiRootUrl + 'user/register',               //用户注册
+  get3rdSession: ApiRootUrl + 'user/get3rdsession',     //获取3rdsession
+  getUserInfo: ApiRootUrl + 'user/getuserinfo',         //获取用户信息
+  updateInfo: ApiRootUrl + 'user/updateinfo',           //更新用户信息
+  getCategoryList: ApiRootUrl + 'category/list',		    //获取一级二级分类
+  infoList: ApiRootUrl + 'info/infolist',               //获取信息列表
+  getTempInfo: ApiRootUrl + 'category/getcatetempinfo', //获取模版信息（发布页面）
+  upLoadImg: ApiRootUrl + 'file/upload',                //上传文件
+  pushInfo: ApiRootUrl + 'info/publish',                //发布信息
+  deleteImg: ApiRootUrl + 'file/del',                   //删除文件
+  getInfoDetail: ApiRootUrl + 'info/getdetail',         //获取信息详情
+  deleteInfo: ApiRootUrl + 'info/setstatus',            //下架信息
+
 }

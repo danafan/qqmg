@@ -3,7 +3,7 @@
   border-bottom: 1px solid #e6e6e6;
   width: 100%;
   display: flex;
-  padding: 30rpx 15rpx 80rpx;
+  padding: 30rpx 15rpx 60rpx;
 }
 .user_img{
   border-radius: 10rpx;
@@ -14,10 +14,29 @@
 .nickname{
   margin-bottom: 10rpx;
   font-size: 42rpx;
-  color: #333;
+  color: #234d76;
   font-weight: bold;
+}
+.vip_icon_box{
+  margin-bottom: 8rpx;
+  border-radius: 5rpx;
+  background: #f7a908;
+  width: 60rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vip_icon {
+  width: 22rpx;
+  height: 22rpx;
+}
+.vip_font{
+  font-size: 20rpx;
+  color: #fff;
+  font-weight: 600rpx;
 }
 .menu_item{
   font-size: 28rpx;
-  color: #707070;
+  color: #333;
 }

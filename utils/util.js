@@ -18,52 +18,30 @@ function post(url, data = {}) {
 function request(url, data = {}, method = "GET") {
   wx.showLoading({
     title: '加载中',
-    mask:true
   })
   var contentType = 'application/json'
   return new Promise(function (resolve, reject) {
+    var req = {};
+    if (wx.getStorageSync('3rd_session')){
+      req = {...data, ...{ _3rd_session: wx.getStorageSync('3rd_session')}} 
+    }else{
+        req = data
+    }
     wx.request({
       url: url,
-      data: data,
+      data: req,
       method: method,
       header: {
         'Content-Type': contentType
       },
       success: function (res) {
         wx.hideLoading()
-        if (res.data.code == 0) {
-          //请求正常200
-          resolve(res.data);
-        } else if (res.data.code == -1){  //信息被下架之后进入详情
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 1500,
-            mask: true,
-            success:() => {
-              setTimeout(() => {
-                wx.navigateBack({
-                  delta: 1
-                })
-              },1500);
-            }
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 1500
-          })
-        }
+        resolve(res.data);
       },
       fail: function (err) {
         wx.hideLoading()
         //服务器连接异常
-        wx.showToast({
-          title: "服务器连接异常，请检查网络再试",
-          icon: 'none',
-          duration: 1500
-        })
+        reject("服务器连接异常，请检查网络再试")
       }
     })
   });
@@ -71,5 +49,5 @@ function request(url, data = {}, method = "GET") {
 
 module.exports = {
   get: get,
-  post:post
+  post: post
 }

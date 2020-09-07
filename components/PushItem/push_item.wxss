@@ -31,41 +31,39 @@
 }
 .phone{
   background: #46AC52;
-  width: 130rpx;
-  height: 50rpx;
+  width: 138rpx;
+  height: 56rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #fff;
 }
 .taps {
   margin-top: 10rpx;
   margin-bottom: 10rpx;
-  font-size: 24rpx;
-  color: red;
   display: flex;
   align-items: flex-end;
 }
 .category_item{
   margin-right: 8rpx;
-  border-radius: 8rpx;
+  border-radius: 5rpx;
   background: #f7a908;
   color: #fff;
-  font-size: 26rpx;
+  font-size: 25rpx;
   height: 46rpx;
   line-height: 46rpx;
   padding-left: 12rpx;
   padding-right: 12rpx;
 }
-.tap{
-  border:1rpx solid #a1e81a;
+.tag{
+  background: #ff5858;
   margin-right: 8rpx;
-  border-radius: 8rpx;
-  color: #a1e81a;
+  border-radius: 5rpx;
+  color: #fff;
   font-size: 22rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 38rpx;
+  line-height: 38rpx;
   padding-left: 8rpx;
   padding-right: 8rpx;
 }
@@ -80,15 +78,10 @@
   overflow: hidden;
 }
 .diff_box{
-  display: flex;
+  margin-bottom: 5rpx;
   font-size: 26rpx;
-}
-.diff_label{
   font-weight: bold;
   color: #333;
-}
-.diff_val{
-  color: #f7a908;
 }
 .all{
   margin-bottom: 10rpx;
@@ -109,7 +102,11 @@
   width: 180rpx;
   height: 180rpx;
 }
-
+.goods_video{
+  margin-bottom: 12rpx;
+  width: 220rpx;
+  height: 330rpx;
+}
 .bottom_info {
   width: 100%;
   display: flex;

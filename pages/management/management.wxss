@@ -4,7 +4,7 @@
   background: #f6f6f6;
   width: 100%;
   font-size: 24rpx;
-  color:red;
+  color:#ff5858;
 }
 .info_item{
   margin-bottom: 15rpx;

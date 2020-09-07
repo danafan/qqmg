@@ -103,11 +103,11 @@ function getApi(req) {
           console.log(result)
           let town_title = result.address_reference.town.title;
           let landmark_l2_title = result.address_reference.landmark_l2.title;
+          app.globalData.detail_address = result.address; //注册地址
           let location_info = {
             town_name: result.address_reference.town.title, //镇名称
             village_name: landmark_l2_title, //村名称
             town_code: result.address_reference.town.id, //镇代码
-            register_address: result.address, //注册地址
             info_address: town_title + landmark_l2_title //信息地址
           }
           resolve(location_info);

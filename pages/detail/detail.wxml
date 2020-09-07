@@ -1,74 +1,43 @@
 <!--pages/detail/detail.wxml-->
-<view>
+<view class="detail_container">
   <!-- 分享进入的小提示 -->
   <view class="toast_box" wx:if="{{isShare}}">
     <image class="finger" src="../../images/finger.png"></image>
     <view>进入首页，发现更多你可能感兴趣的信息哦～</view>
   </view>
-  <!-- 轮播图 -->
-  <view wx:if="{{info_detail.file_list}}">
-    <!-- 图片 -->
-    <view class="banner_box" wx:if="{{info_detail.file_type == 'image'}}">
-      <swiper class="banner_content" autoplay="true" interval="5000" circular="true" bindchange="changeBanner">
-        <swiper-item wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" bindtap="openBigImg">
-          <image class="banner_img" mode="aspectFill" src="{{baseUrl + item}}"></image>
-        </swiper-item>
-      </swiper>
-      <view class="shu">{{shu}} / {{info_detail.files.length}}</view>
-    </view>
-    <!-- 视频 -->
-    <view wx:if="{{info_detail.file_type == 'video'}}">
-      <video class="banner_box" wx:for="{{info_detail.files}}" wx:key="*this" src="{{baseUrl + item}}" direction="0" duration="8"></video>
-    </view>
-  </view>
-  <!-- 没上传文件使用默认图片 -->
-  <image class="banner_box" src="../../images/banner_01.png" wx:else></image>
   <!-- 中间用户和信息内容 -->
   <view class="push_container">
-    <image class="user_img" lazy-load="true" mode="aspectFill" src="{{info_detail.create_user_img}}" data-infoObj="{{info_detail}}" bindtap="getUserInfo"></image>
+    <image class="user_img" lazy-load="true" mode="aspectFill" src="{{info_detail.wx_head_img}}" data-infoObj="{{info_detail}}" bindtap="getUserInfo"></image>
     <view class="push_content">
-      <view class="content_top">
-        <view class="userinfo">
-          <view class="username" data-infoObj="{{info_detail}}" bindtap="getUserInfo">{{info_detail.create_user_nickname}}</view>
-          <view class="taps">
-            <view class="category_item">{{info_detail.category_name}}</view>
-            <view class="tap" wx:for="{{info_detail.tag_txts}}" wx:key="*this">{{item}}</view>
-          </view>
+      <view class="userinfo">
+        <view class="username" data-infoObj="{{info_detail}}" bindtap="getUserInfo">{{info_detail.wx_nickname}}</view>
+        <view class="taps">
+          <view class="category_item">{{info_detail.cate2_name}}</view>
+          <view class="tap" wx:for="{{info_detail.tags}}" wx:key="*this">{{item}}</view>
         </view>
-        <button class="share_box" open-type="share">
-          <image class="share_icon" src="../../images/share.png"></image>
-          <view class="share_text">分享</view>
-        </button>
       </view>
-      <view class="describe">{{info_detail.info_desc}}</view>
-      <view class="diff_box">
-        <text class="diff_label">地址：</text>
-        <text class="diff_val">杭州市萧山区金惠路</text>
+      <view class="describe">{{info_detail.desc}}</view>
+      <view class="diff_box" wx:for="{{info_detail.temp_content}}" wx:key="*this" data-id="{{info_detail.info_id}}" bindtap="detail">{{item}}</view>
+      <view class="images" wx:if="{{info_detail.view_type == '1'}}">
+        <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{info_detail.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{info_detail.host + file_url}}" data-index="{{index}}" data-imgs="{{info_detail.view_file}}" data-base_url="{{info_detail.host}}"
+          bindtap="openBigImg"></image>
+      </view>
+      <video class="goods_video" wx:if="{{info_detail.view_type == '2'}}" wx:for="{{info_detail.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{info_detail.host + file_url}}" autoplay object-fit="fill" play-btn-position="center" direction="0"></video>
+      <view class="bottom_info">
+        <view class="info_left">
+          <view>{{info_detail.create_time}}</view>
+          <view class="detail_address">{{info_detail.address}}</view>
+        </view>
+        <view class="browse">{{info_detail.view_count}} 浏览</view>
       </view>
     </view>
   </view>
-  <!-- 信息分类显示 -->
-  <view class="cate_box">
-    <view class="cate_item">
-      <view class="cate_val">{{info_detail.cate_01_name}}</view>
-      <view class="cate_label">所属分类</view>
-    </view>
-    <view class="line"></view>
-    <view class="cate_item">
-      <view class="cate_val">{{info_detail.create_time}}</view>
-      <view class="cate_label">发布时间</view>
-    </view>
-    <view class="line"></view>
-    <view class="cate_item">
-      <view class="cate_val">{{info_detail.browse_num}}</view>
-      <view class="cate_label">浏览人数</view>
-    </view>
-  </view>
-  <!-- 图片 -->
-  <view class="big_imgs" wx:if="{{info_detail.file_type == 'image'}}">
-    <image class="img_item" mode="aspectFit" wx:for="{{info_detail.files}}" wx:key="*this" data-index="{{index}}" src="{{baseUrl + item}}" bindtap="openBigImg"></image>
-  </view>
+  <view class="line"></view>
+  <button class="share_box" open-type="share">
+    <image class="share_icon" src="../../images/share_icon.png"></image>
+    <view class="share_text">分享</view>
+  </button>
   <!-- 拨打电话按钮 -->
-  <view class="phone_button" data-phone="{{info_detail.contact_phone}}" bindtap="call">拨打电话</view>
-  <big_img wx:if="{{show_img}}" big_imgs="{{info_detail.files}}" current_index="{{current_index}}" bind:onEmit="close" />
+  <view class="phone_button" data-phone="{{info_detail.link_phone}}" bindtap="call">拨打电话</view>
+  <big_img wx:if="{{show_img}}" big_imgs="{{big_imgs}}" current_index="{{current_index}}" bind:onEmit="close" />
 </view>

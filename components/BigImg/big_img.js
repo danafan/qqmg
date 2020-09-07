@@ -12,7 +12,6 @@ Component({
     }
   },
   data: {
-    baseUrl: app.globalData.baseUrl,
     imgheights: [], //所有图片的高度
   },
   methods: {
