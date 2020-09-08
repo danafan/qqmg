@@ -32,16 +32,17 @@ Page({
     util.get(api.getInfoDetail, req).then(res => {
       if(res.code == 1){
         //标签
-        res.data.tags = res.data.tags.split(",");
+        res.data.tags = res.data.tags != ''?res.data.tags.split(","):'';
         //文件
-        res.data.view_file = res.data.view_file.split(",");
+        res.data.view_file = res.data.view_file != ''?res.data.view_file.split(","):'';
         // 模版
-        res.data.temp_content = res.data.temp_content.split(",");
+        res.data.temp_content = res.data.temp_content != ''?res.data.temp_content.split(","):'';
         // 时间
         res.data.create_time = dateTime.getFormatTime(res.data.create_time);
         this.setData({
           info_detail: res.data
         })
+        console.log(this.data.info_detail)
       }else{
         wx.showToast({
           title: res.msg,

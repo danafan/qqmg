@@ -2,5 +2,6 @@
 <view class="null_box">
   <image class="null_icon" src="../../images/null.png"></image>
   <view class="null_text">{{toast_text}}</view>
+  <view class="null_text" wx:if="{{isIndex}}">重新<text class="index_toast" bindtap="onEmit">「选择位置」</text>试试～</view>
   <view class="go_push" bindtap="goPush" wx:if="{{showPush}}">去发布</view>
 </view>

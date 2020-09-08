@@ -1,8 +1,8 @@
 <!--components/BigImg/big_img.wxml-->
 <view class="imgs" bindtap="close">
-  <swiper style="width:100%;height:{{imgheights[current_index]}}rpx;" current="{{current_index}}" bindchange="bindchange">
+  <swiper style="width:100%;height:{{imgheights[current_index]}}rpx;" indicator-dots="{{true}}" indicator-active-color="#ffffff" current="{{current_index}}" duration="100" bindchange="bindchange">
     <swiper-item wx:for="{{big_imgs}}" wx:key="*this">
-      <image class="banner_img" src="{{item}}" data-index='{{index}}' mode="widthFix" bindload="imageLoad"></image>
+      <image class="banner_img" src="{{item}}" data-index='{{index}}' mode="aspectFit" bindload="imageLoad"></image>
     </swiper-item>
   </swiper>
 </view>

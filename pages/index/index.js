@@ -64,6 +64,7 @@ Page({
         village_name: res.village_name,
         town_name: res.town_name,
         town_code: res.town_code,
+        isLoad:true,
         info_list: [],
         shouNull: false,
         page: 1
@@ -150,9 +151,9 @@ Page({
         }
         res.data.data.map(item => {
           //处理标签
-          item.tags = item.tags.split(",");
+          item.tags = item.tags != ""?item.tags.split(","):[];
           //处理模版
-          item.temp_content = item.temp_content.split(",");
+          item.temp_content = item.temp_content != ''?item.temp_content.split(","):[];
           //处理时间显示
           item.create_time = dateTime.getFormatTime(item.create_time);
         })

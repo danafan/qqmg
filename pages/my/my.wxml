@@ -17,12 +17,12 @@
             </view>
           </view>
           <view class="vip_toast">
-            <text class="special">积分说明：</text>
-            <text>活跃一天或发布一条增加一积分，</text>
+            <text class="special">等级说明：</text>
+            <text>每</text>
+            <text class="special">100</text>
+            <text>积分为一个等级，最高等级</text>
             <text class="special">10</text>
-            <text>积分为一个等级，达到</text>
-            <text class="special">6</text>
-            <text>级以上可获得服务号图文推送</text>
+            <text>级</text>
           </view>
         </view>
       </view>
@@ -34,7 +34,10 @@
         <view class="line"></view>
         <view class="menu_item">
           <view class="item_num">{{(userInfo.publish_num+userInfo.active_days)/10}}</view>
-          <view class="item_label">VIP等级</view>
+          <view class="item_label">
+            <text>积分</text>
+            <image class="desc_icon" src="../../images/desc_icon.png" bindtap="integralDesc"></image>
+          </view>
         </view>
         <view class="line"></view>
         <view class="menu_item">

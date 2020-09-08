@@ -28,7 +28,7 @@ page {
   left: 50%;
   transform: translate(-50%);
   width: 700rpx;
-  height: 460rpx;
+  height: 428rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,7 +79,7 @@ page {
   width: 100%;
   padding-left: 30rpx;
   padding-right: 30rpx;
-  height: 100rpx;
+  height: 70rpx;
 }
 
 .level_box {
@@ -163,6 +163,12 @@ page {
   font-size: 26rpx;
   color: #333;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.desc_icon{
+  width: 28rpx;
+  height: 28rpx;
 }
 
 .my_push {
@@ -178,7 +184,7 @@ page {
 }
 
 .my_options {
-  margin-top: 340rpx;
+  margin-top: 310rpx;
   width: 100%;
   padding-left: 25rpx;
   padding-right: 25rpx;

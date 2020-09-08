@@ -26,14 +26,9 @@
       </view>
     </view>
     <!-- 底部列表 -->
-    <!-- <view class="search_list" wx:if="{{info_list.length > 0 && isNull}}">
-      <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
-    </view> -->
-    <!-- <view class="search_list"> -->
-      <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
-    <!-- </view> -->
+    <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
     <!-- 空 -->
-    <null_page toast_text="换个标签试试～" showPush="{{false}}" wx:if="{{info_list.length == 0 && search_val != '' && isNull}}"/>
+    <null_page toast_text="换个关键词再试试～" showPush="{{false}}" wx:if="{{info_list.length == 0 && search_val != '' && isNull}}" />
     <bottom wx:if="{{!isLoad && page >= 2}}" />
   </view>
 </view>

@@ -182,7 +182,7 @@
 
 .cate_txt {
   font-size: 28rpx;
-  color: #333;
+  color: #0b0d1d;
 }
 
 /* 热门发布 */

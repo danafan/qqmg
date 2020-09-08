@@ -9,7 +9,7 @@ Page({
     user_id: "",   //用户id
     isLoad:true,
     page:1,
-    pagesize:6
+    pagesize:10
   },
   onLoad(option){
     this.setData({
@@ -50,7 +50,6 @@ Page({
   getInfoList() {
     //获取信息列表
     let req = {
-      type: 2,
       other_user_id: this.data.user_id,
       page: this.data.page,
       pagesize: this.data.pagesize

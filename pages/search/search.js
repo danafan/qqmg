@@ -42,20 +42,22 @@ Page({
   },
   //监听搜索内容
   changeInput(v) {
-    let search_value = v.detail.value;
-    this.setData({
-      search_val: search_value,
-      info_list:[],
-      isNull:false
-    })
     if (this.data.timeOut) {
-      clearTimeout(this.data.timeOut);//先判断清除延时任务
+      clearTimeout(this.data.timeOut);
     }
     this.setData({
-      timeOut:setTimeout(() => {//创建新的延时任务
-        //获取信息列表
-        this.getInfoList();  
-      }, 800)
+      timeOut:setTimeout(() => {
+        let search_value = v.detail.value;
+        this.setData({
+          search_val: search_value,
+          info_list: [],
+          isNull: false
+        })
+        if (this.data.search_val != ''){
+          //获取信息列表
+          this.getInfoList();  
+        }
+      }, 1000)
     })
     
   },
@@ -86,9 +88,9 @@ Page({
         }
         res.data.data.map(item => {
           //处理标签
-          item.tags = item.tags.split(",");
+          item.tags = item.tags != ''?item.tags.split(","):[];
           //处理模版
-          item.temp_content = item.temp_content.split(",");
+          item.temp_content = item.temp_content != ''?item.temp_content.split(","):[];
           //处理时间显示
           item.create_time = dateTime.getFormatTime(item.create_time);
         })

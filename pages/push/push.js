@@ -59,7 +59,6 @@ Page({
           tags: tags,
           temp_items: res.data.temp_items
         })
-        console.log(this.data.temp_items)
       } else {
         wx.showToast({
           title: res.data.msg,
@@ -194,13 +193,18 @@ Page({
         maxDuration: 8,
         camera: 'back',
         success(res) {
-          console.log(res.tempFiles)
           res.tempFiles.map(item => {
-            //上传文件
-            let req = {
-              path: item.tempFilePath
+            if (res.type == 'video' && item.duration > 8){
+              that.toast("视频长度不能超过8秒");
+            } else if (res.type == 'image' && item.size > 5*1024*1024){
+              that.toast("图片大小不能超过5M");
+            }else{
+              //上传文件
+              let req = {
+                path: item.tempFilePath
+              }
+              that.upLoadFile(req);
             }
-            that.upLoadFile(req);
           })
           that.setData({
             file_type: res.type == 'image' ? '1' : '2'
@@ -288,7 +292,6 @@ Page({
         area_code: this.data.adcode,
         address: this.data.address_text
       }
-      console.log(req)
       this.submit(req);
     }
   },
@@ -300,17 +303,16 @@ Page({
       success: (res) => {
         if (res.confirm) {
           util.post(api.pushInfo, req).then(res => {
-            if(res.code == 1){
+            if (res.code == 1) {
               this.toast("发布成功！");
               setTimeout(() => {
                 wx.switchTab({
                   url: "/pages/index/index"
                 })
               }, 1500);
-            }else{
+            } else {
               this.toast(res.msg);
             }
-            
           })
         } else if (res.cancel) {
           console.log('取消')

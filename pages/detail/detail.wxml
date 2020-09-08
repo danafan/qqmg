@@ -18,11 +18,11 @@
       </view>
       <view class="describe">{{info_detail.desc}}</view>
       <view class="diff_box" wx:for="{{info_detail.temp_content}}" wx:key="*this" data-id="{{info_detail.info_id}}" bindtap="detail">{{item}}</view>
-      <view class="images" wx:if="{{info_detail.view_type == '1'}}">
+      <view class="images" wx:if="{{info_detail.view_type == '1' && info_detail.view_file != ''}}">
         <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{info_detail.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{info_detail.host + file_url}}" data-index="{{index}}" data-imgs="{{info_detail.view_file}}" data-base_url="{{info_detail.host}}"
           bindtap="openBigImg"></image>
       </view>
-      <video class="goods_video" wx:if="{{info_detail.view_type == '2'}}" wx:for="{{info_detail.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{info_detail.host + file_url}}" autoplay object-fit="fill" play-btn-position="center" direction="0"></video>
+      <video class="goods_video" wx:if="{{info_detail.view_type == '2' && info_detail.view_file != ''}}" wx:for="{{info_detail.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{info_detail.host + file_url}}" autoplay object-fit="fill" play-btn-position="center" direction="0"></video>
       <view class="bottom_info">
         <view class="info_left">
           <view>{{info_detail.create_time}}</view>

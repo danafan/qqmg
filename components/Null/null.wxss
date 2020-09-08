@@ -15,6 +15,9 @@
   font-size: 26rpx;
   color: #bfbfbf;
 }
+.index_toast{
+  color: #f7a908;
+}
 .go_push{
   margin-top: 20rpx;
   background: #287fe6;
