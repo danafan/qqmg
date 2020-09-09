@@ -1,5 +1,4 @@
-
-  //    获取当前时间戳
+//    获取当前时间戳
 function getUnix () {
     let date = new Date()
     return date.getTime()
@@ -33,13 +32,12 @@ function getLastDate(time) {
   }
   //    转换时间
 function getFormatTime (timestamp) {
-  let ss = new Date(timestamp).getTime()
+  let ss = new Date(timestamp.replace(/-/g, '/')).getTime()
     let now = getUnix()
     let today = getTodayUnix()
     let year = getYearUnix()
   let timer = (now - ss) / 1000
     let tip = ''
-
     if (timer <= 0) {
       tip = '刚刚'
     } else if (Math.floor(timer / 60) <= 0) {

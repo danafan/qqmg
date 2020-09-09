@@ -8,15 +8,17 @@
     </view>
     <view class="taps" data-id="{{infoItem.info_id}}" bindtap="detail">
       <view class="category_item">{{infoItem.cate2_name}}</view>
-      <view class="tag" wx:for="{{infoItem.tags}}" wx:key="*this">{{item}}</view>
+      <view class="tag" wx:for="{{infoItem.tags}}" wx:key="index">{{item}}</view>
     </view>
     <view class="describe" data-id="{{infoItem.info_id}}" bindtap="detail">{{infoItem.desc}}</view>
-    <view class="diff_box" wx:for="{{infoItem.temp_content}}" wx:key="*this" data-id="{{infoItem.info_id}}" bindtap="detail">{{item.k}}：{{item.v}}</view>
+    <view class="diff_box" wx:for="{{infoItem.temp_content}}" wx:key="index" data-id="{{infoItem.info_id}}" bindtap="detail">{{item.k}}：{{item.v}}</view>
     <view class="all" data-id="{{infoItem.info_id}}" bindtap="detail">全文</view>
-    <view class="images" wx:if="{{infoItem.view_type == '1'}}">
-      <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{infoItem.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{infoItem.host + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.view_file}}" data-base_url="{{infoItem.host}}" bindtap="open"></image>
+    <view class="images" wx:if="{{infoItem.view_type == '1' && infoItem.view_file.length > 0}}">
+      <image class="goods_img {{infoItem.view_file.length == 1?'goods_video':''}}" mode="aspectFill" lazy-load="true" wx:for="{{infoItem.view_file}}" wx:key="index" wx:for-item="file_url" src="{{infoItem.host + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.view_file}}"
+        data-base_url="{{infoItem.host}}" bindtap="open"></image>
     </view>
-    <video class="goods_video" wx:if="{{infoItem.view_type == '2'}}" wx:for="{{infoItem.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{infoItem.host + file_url}}" autoplay object-fit="fill" play-btn-position="center" direction="0"></video>
+    <video class="goods_video" wx:if="{{infoItem.view_type == '2' && infoItem.view_file.length > 0}}" wx:for="{{infoItem.view_file}}" wx:key="index" wx:for-item="file_url" src="{{infoItem.host + file_url}}" autoplay object-fit="fill" play-btn-position="center"
+      direction="0"></video>
     <view class="bottom_info">
       <view class="info_left">
         <view>{{infoItem.create_time}}</view>

@@ -143,7 +143,6 @@ Page({
   //上拉加载
   onReachBottom() {
     if (this.data.isLoad) {
-      console.log(this.data.page)
       this.setData({
         page: this.data.page + 1,
       })

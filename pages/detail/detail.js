@@ -24,6 +24,11 @@ Page({
     //获取信息详情
     this.getInfoDetail();
   },
+  closeToast(){
+    this.setData({
+      isShare:false
+    })
+  },
   //获取信息详情
   getInfoDetail() {
     let req = {
