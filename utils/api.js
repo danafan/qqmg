@@ -8,6 +8,7 @@ module.exports = {
   getMyInfo: ApiRootUrl + 'info/myinfolist',            //获取我的信息
   updateInfo: ApiRootUrl + 'user/updateinfo',           //更新用户信息
   getCategoryList: ApiRootUrl + 'category/list',		    //获取一级二级分类
+  getHotCate: ApiRootUrl + 'category/gethotcate',  //获取热门分类
   infoList: ApiRootUrl + 'info/infolist',               //获取信息列表
   getTempInfo: ApiRootUrl + 'category/getcatetempinfo', //获取模版信息（发布页面）
   upLoadImg: ApiRootUrl + 'file/upload',                //上传文件

@@ -8,23 +8,36 @@ Page({
     index:0
   },
   onLoad(){
-    //如果用户没授权
-    if (!app.globalData.wxUser || !app.globalData.userInfo) {
-      wx.reLaunch({
-        url: '/pages/auth/auth?page_url=category'
-      })
-    } else {
-      //获取分类列表
-      this.getCategoryList();
-    }
-    
+    //判断用户是否注册
+    this.judgeRegister();
+  },
+  //判断用户是否注册
+  judgeRegister(){
+    util.get(api.getUserInfo).then(res => {
+      if (res.code == 1) { // 如果已经注册，更新用户信息，更新微信头像和昵称；未注册不作处理
+        //更新用户信息
+        app.globalData.userInfo = res.data;
+        if (app.globalData.wxUser) {
+          //获取分类列表
+          this.getCategoryList();
+        } else {
+          wx.reLaunch({
+            url: '/pages/auth/auth?page_url=category'
+          })
+        }
+      } else {
+        wx.reLaunch({
+          url: '/pages/auth/auth?page_url=category'
+        })
+      }
+    })
   },
   //获取分类列表
   getCategoryList(){
     util.get(api.getCategoryList, { level: 0 }).then(res => {
       if (res.code == 1) {
         this.setData({
-          category_list: res.data
+          category_list: res.data.cates
         })
       } else {
         wx.showToast({

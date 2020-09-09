@@ -13,14 +13,13 @@
     <!-- 输入框 -->
     <view class="title" wx:if="{{item.label_type == 1}}">
       <view class="title_label">{{item.item_name}}</view>
-      <input class="title_input" cursor-spacing="12" placeholder="请输入{{item.item_name}}" 
-     data-index="{{index}}" bindinput="changeInput" />
+      <input class="title_input" cursor-spacing="12" placeholder="请输入{{item.item_name}}" data-index="{{index}}" bindinput="changeInput" />
     </view>
     <!-- 单选框 -->
     <view class="describe_box" wx:if="{{item.label_type == 2}}">
       <view class="info_label">{{item.item_name}}</view>
       <radio-group class="sex_box" data-index="{{index}}" bindchange="changeRadio">
-        <label class="weui-cell weui-check__label" wx:for="{{item.item_value}}" wx:for-item="radioItem"  wx:key="index">
+        <label class="weui-cell weui-check__label" wx:for="{{item.item_value}}" wx:for-item="radioItem" wx:key="index">
           <view class="weui-cell__hd">
             <radio value="{{radioItem}}" checked="{{index == 0}}" />
           </view>
@@ -39,7 +38,7 @@
       </view>
     </picker>
     <!-- 乘车时间 -->
-    <date_pick data-index="{{index}}" bind:onEmit="pickerTap" wx:if="{{item.label_type == 4}}"/>
+    <date_pick data-index="{{index}}" bind:onEmit="pickerTap" wx:if="{{item.label_type == 4}}" />
   </view>
   <!-- 公共 -->
   <!-- 描述 -->
@@ -57,7 +56,9 @@
   </view>
   <!-- 标签 -->
   <view class="describe_box">
-    <view class="info_label">标签</view>
+    <view class="upload_label">标签
+      <text class="max_imgs">（最多可选3个标签）</text>
+    </view>
     <view class="info_taps">
       <view class="tag_item {{item.active ? 'active_tag' : ''}}" wx:for="{{tags}}" wx:key="index" data-index="{{index}}" bindtap="activeTap">{{item.tag_name}}</view>
     </view>
@@ -71,7 +72,9 @@
       <view class="show_img_box" wx:for="{{upload_files}}" wx:key="index">
         <image class="show_img" mode="aspectFill" src="{{baseUrl + item}}" wx:if="{{file_type=='1'}}"></image>
         <video class="show_img" src="{{baseUrl + item}}" autoplay object-fit="fill" play-btn-position="center" direction="0" wx:if="{{file_type=='2'}}"></video>
-        <image class="close" src="../../images/close.png" data-index="{{index}}" bindtap="deleteImg"></image>
+        <view class="close" data-index="{{index}}" bindtap="deleteImg">
+          <image class="close_icon" src="../../images/close.png" ></image>
+        </view>
       </view>
       <view class="upload_box" bindtap="chooseImage" wx:if="{{file_type=='' || file_type=='1' && upload_files.length < 9 || file_type=='2' && upload_files.length < 1}}">
         <image class="camera_icon" src="../../images/camera.png"></image>

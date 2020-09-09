@@ -11,7 +11,7 @@
       <view class="tag" wx:for="{{infoItem.tags}}" wx:key="*this">{{item}}</view>
     </view>
     <view class="describe" data-id="{{infoItem.info_id}}" bindtap="detail">{{infoItem.desc}}</view>
-    <view class="diff_box" wx:for="{{infoItem.temp_content}}" wx:key="*this" data-id="{{infoItem.info_id}}" bindtap="detail">{{item}}</view>
+    <view class="diff_box" wx:for="{{infoItem.temp_content}}" wx:key="*this" data-id="{{infoItem.info_id}}" bindtap="detail">{{item.k}}：{{item.v}}</view>
     <view class="all" data-id="{{infoItem.info_id}}" bindtap="detail">全文</view>
     <view class="images" wx:if="{{infoItem.view_type == '1'}}">
       <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{infoItem.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{infoItem.host + file_url}}" data-index="{{index}}" data-imgs="{{infoItem.view_file}}" data-base_url="{{infoItem.host}}" bindtap="open"></image>

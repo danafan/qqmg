@@ -157,12 +157,21 @@
   height: 100%;
 }
 .close{
+  background: rgba(0, 0, 0, .9);
+  border-radius: 50%;
   position: absolute;
   top: 0;
   right: 0;
   width: 46rpx;
   height: 46rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
+}
+.close_icon{
+  width: 30rpx;
+  height: 30rpx;
 }
 .label_box{
   width: 100%;

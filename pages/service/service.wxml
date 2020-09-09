@@ -16,5 +16,5 @@
   </view>
   <!-- 空 -->
   <null_page toast_text="这里啥都没有，换别的分类试试～" showPush="{{false}}" wx:if="{{info_list.length == 0 && shouNull}}" bind:goPush="goPush"/>
-  <bottom wx:if="{{!isLoad && page >= 2}}"/>
+  <bottom wx:if="{{!isLoad && info_list.length > 0}}"/>
 </view>

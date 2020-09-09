@@ -43,7 +43,21 @@ Page({
     this.setData({
       show_desktop: is_first ? false : true
     })
-
+  },
+  //下拉刷新
+  onPullDownRefresh: function () {
+    this.setData({
+      info_list: [],
+      page: 1,
+      shouNull: false
+    })
+    //获取信息列表
+    let req = {
+      area_code: this.data.town_code,
+      page: this.data.page,
+      pagesize: this.data.pagesize
+    }
+    this.getInfoList(req);
   },
   //关闭顶部添加到桌面提示
   closeDeskTop() {
@@ -106,15 +120,16 @@ Page({
       level: 1
     }).then(res => {
       if (res.code == 1) {
-        let data = res.data;
+        let cates = res.data.cates;
         let all_obj = {
           cate_id: "0",
           cate_name: "全部",
           icon: "../../images/all_cate.png"
         }
-        data.push(all_obj);
+        cates.push(all_obj);
         this.setData({
-          category_list: data
+          category_list: cates,
+          fans_total: 8521 + res.data.user_total
         })
       } else {
         wx.showToast({
@@ -128,6 +143,7 @@ Page({
   //上拉加载
   onReachBottom() {
     if (this.data.isLoad) {
+      console.log(this.data.page)
       this.setData({
         page: this.data.page + 1,
       })
@@ -143,22 +159,31 @@ Page({
   //获取信息列表
   getInfoList(req) {
     util.get(api.infoList, req).then(res => {
+      wx.stopPullDownRefresh();
       if (res.code == 1) {
-        if (res.data.data.length < this.data.pagesize) {
-          this.setData({
-            isLoad: false
-          })
-        }
         res.data.data.map(item => {
           //处理标签
           item.tags = item.tags != ""?item.tags.split(","):[];
           //处理模版
-          item.temp_content = item.temp_content != ''?item.temp_content.split(","):[];
+          let temp_content = item.temp_content;
+          if (temp_content == '') {
+            item.temp_content = [];
+          } else {
+            var temp_arr = [];
+            temp_content.split(",").map(temp_item => {
+              let temp_obj = {};
+              temp_obj.k = temp_item.split(":")[0];
+              temp_obj.v = temp_item.split(":")[1];
+              temp_arr.push(temp_obj);
+            })
+            item.temp_content = temp_arr;
+          }
           //处理时间显示
           item.create_time = dateTime.getFormatTime(item.create_time);
         })
         this.setData({
           info_list: [...this.data.info_list, ...res.data.data],
+          isLoad: res.data.data.length < this.data.pagesize?false:true,
           shouNull: true
         })
       } else {

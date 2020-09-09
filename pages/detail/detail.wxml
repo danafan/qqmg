@@ -17,7 +17,8 @@
         </view>
       </view>
       <view class="describe">{{info_detail.desc}}</view>
-      <view class="diff_box" wx:for="{{info_detail.temp_content}}" wx:key="*this" data-id="{{info_detail.info_id}}" bindtap="detail">{{item}}</view>
+      <view class="diff_box" wx:for="{{info_detail.temp_content}}" wx:key="*this" data-id="{{info_detail.info_id}}">{{item.k}}：{{item.v}}</view>
+      <view class="diff_box">联系人：{{info_detail.linkman}}</view>
       <view class="images" wx:if="{{info_detail.view_type == '1' && info_detail.view_file != ''}}">
         <image class="goods_img" mode="aspectFill" lazy-load="true" wx:for="{{info_detail.view_file}}" wx:key="*this" wx:for-item="file_url" src="{{info_detail.host + file_url}}" data-index="{{index}}" data-imgs="{{info_detail.view_file}}" data-base_url="{{info_detail.host}}"
           bindtap="openBigImg"></image>

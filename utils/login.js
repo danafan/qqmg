@@ -56,26 +56,27 @@ function _serLogin(code) {
 
 //获取用户信息
 function getUserInfo() {
-  utils.get(api.getUserInfo).then(res => {
-    if (res.code == 1) { // 如果已经注册，更新用户信息，更新微信头像和昵称；未注册不作处理
+  wx.getUserInfo({
+    success: (res) => {
       var app = getApp();
-      //更新用户信息
-      app.globalData.userInfo = res.data;
-      wx.getUserInfo({
-        success: (res) => {
-          let wxUser = {
-            wx_head_img: res.userInfo.avatarUrl,
-            wx_nickname: res.userInfo.nickName
-          }
-          //更新微信信息
-          app.globalData.wxUser = wxUser;
+      var wxUser = {
+        wx_head_img: res.userInfo.avatarUrl,
+        wx_nickname: res.userInfo.nickName
+      }
+      //更新微信信息
+      app.globalData.wxUser = wxUser;
+      utils.get(api.getUserInfo).then(response => {
+        if (response.code == 1) {
+          app.globalData.userInfo = res.data;
           //更新用户信息
           updateInfo(wxUser);
-        },
-        fail: (err) => {
-          console.log("用户未授权")
+        }else{
+          console.log("用户未注册")
         }
       })
+    },
+    fail: (err) => {
+      console.log("用户未授权")
     }
   })
 }

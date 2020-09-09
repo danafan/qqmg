@@ -234,7 +234,7 @@ page {
   height: 32rpx;
 }
 
-.contact {
+/* .contact {
   margin-top: 15rpx;
   background: #fff;
   width: 100%;
@@ -244,4 +244,4 @@ page {
   padding-left: 15rpx;
   font-size: 26rpx;
   color: #333;
-}
+} */

@@ -6,7 +6,7 @@
       <view class="nickname">{{user_obj.wx_nickname}}</view>
       <view class="vip_icon_box">
         <image class="vip_icon" src="../../images/v.png"></image>
-        <text class="vip_font">10</text>
+        <text class="vip_font">{{user_obj.level}}</text>
       </view>
       <view class="menu_item">发布总数：{{user_obj.publish_num}}</view>
       <view class="menu_item">活跃天数：{{user_obj.active_days}}</view>
@@ -14,5 +14,5 @@
   </view>
   <!-- 信息列表 -->
   <record_item wx:for="{{info_list}}" wx:key="info_id" Item="{{item}}" page_type="2"/>
-  <bottom wx:if="{{!isLoad && page >= 2}}" />
+  <bottom wx:if="{{!isLoad && info_list.length > 0}}" />
 </view>

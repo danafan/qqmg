@@ -10,10 +10,10 @@
       <view class="my_name {{authStatus?'':'hui_name'}}">{{authStatus?wxUser.wx_nickname:'用户未登录'}}</view>
       <view class="vip_box">
         <view class="level_box">
-          <view class="current_level" style="width:{{userInfo.point}}%">
+          <view class="current_level" style="width:{{userInfo.level*10}}%">
             <view class="vip_icon_box">
               <image class="vip_icon" src="../../images/v.png"></image>
-              <text class="vip_font">1</text>
+              <text class="vip_font">{{userInfo.level}}</text>
             </view>
           </view>
           <view class="vip_toast">
@@ -33,7 +33,7 @@
         </view>
         <view class="line"></view>
         <view class="menu_item">
-          <view class="item_num">{{(userInfo.publish_num+userInfo.active_days)/10}}</view>
+          <view class="item_num">{{userInfo.point}}</view>
           <view class="item_label">
             <text>积分</text>
             <image class="desc_icon" src="../../images/desc_icon.png" bindtap="integralDesc"></image>
@@ -42,7 +42,7 @@
         <view class="line"></view>
         <view class="menu_item">
           <view class="item_num">{{userInfo.publish_num}}</view>
-          <view class="item_label">发布数量</view>
+          <view class="item_label">已发布</view>
         </view>
       </view>
     </view>
@@ -63,7 +63,7 @@
       </view>
       <image class="right_icon" src="../../images/right.png"></image>
     </view>
-    <view class="contact">联系我们（点击进入公众号留言）</view>
-    <official-account></official-account>
+    <!-- <view class="contact">联系我们（点击进入公众号留言）</view>
+    <official-account></official-account> -->
   </view>
 </view>

@@ -11,6 +11,7 @@ Page({
     page: 1, //当前页码
     pagesize: 10,
     info_list: [], //信息列表
+    hot_cate_list:[], //热门分类
     isLoad: true, //默认可以加载
     isNull:false,
     town_code:"",
@@ -22,6 +23,8 @@ Page({
     })
     //获取顶部导航栏信息
     this.setNavigation();
+    //获取热门分类
+    this.getHotCate();
   },
   //获取顶部导航栏信息
   setNavigation() {
@@ -40,26 +43,45 @@ Page({
       }
     })
   },
+  //获取热门分类
+  getHotCate(){
+    util.get(api.getHotCate).then(res => {
+      if (res.code == 1) {
+        this.setData({
+          hot_cate_list:res.data
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    })
+  },
+  //点击热门搜索
+  checkKeyword(e){
+    let keyword = e.currentTarget.dataset.keyword;
+    //监听搜索内容
+    this.changeInput(keyword);
+  },
   //监听搜索内容
   changeInput(v) {
     if (this.data.timeOut) {
       clearTimeout(this.data.timeOut);
     }
+    let search_value = v.detail ? v.detail.value : v;
     this.setData({
-      timeOut:setTimeout(() => {
-        let search_value = v.detail.value;
-        this.setData({
-          search_val: search_value,
-          info_list: [],
-          isNull: false
-        })
-        if (this.data.search_val != ''){
+      search_val: search_value,
+      info_list: [],
+      isNull: false,
+      timeOut: setTimeout(() => {
+        if (this.data.search_val != '') {
           //获取信息列表
-          this.getInfoList();  
+          this.getInfoList();
         }
-      }, 1000)
+      }, 800)
     })
-    
   },
   //上拉加载
   onReachBottom() {
@@ -90,7 +112,19 @@ Page({
           //处理标签
           item.tags = item.tags != ''?item.tags.split(","):[];
           //处理模版
-          item.temp_content = item.temp_content != ''?item.temp_content.split(","):[];
+          let temp_content = item.temp_content;
+          if (temp_content == '') {
+            item.temp_content = [];
+          } else {
+            var temp_arr = [];
+            temp_content.split(",").map(temp_item => {
+              let temp_obj = {};
+              temp_obj.k = temp_item.split(":")[0];
+              temp_obj.v = temp_item.split(":")[1];
+              temp_arr.push(temp_obj);
+            })
+            item.temp_content = temp_arr;
+          }
           //处理时间显示
           item.create_time = dateTime.getFormatTime(item.create_time);
         })

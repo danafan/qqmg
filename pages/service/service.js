@@ -36,7 +36,7 @@ Page({
   getCateGory() {
     util.get(api.getCategoryList, { level: 1 }).then(res => {
       if (res.code == 1) {
-        let data = res.data;
+        let data = res.data.cates;
         let obj = {
           cate_id: "0",
           cate_name: '全部'
@@ -96,7 +96,19 @@ Page({
           //处理标签
           item.tags = item.tags != ''?item.tags.split(","):[];
           //处理模版
-          item.temp_content = item.temp_content != ''?item.temp_content.split(","):[];
+          let temp_content = item.temp_content;
+          if (temp_content == '') {
+            item.temp_content = [];
+          } else {
+            var temp_arr = [];
+            temp_content.split(",").map(temp_item => {
+              let temp_obj = {};
+              temp_obj.k = temp_item.split(":")[0];
+              temp_obj.v = temp_item.split(":")[1];
+              temp_arr.push(temp_obj);
+            })
+            item.temp_content = temp_arr;
+          }
           //处理时间显示
           item.create_time = dateTime.getFormatTime(item.create_time);
         })

@@ -74,12 +74,11 @@ Page({
         delta: 1
       })
     }
-
   },
   // 注册
   register() {
     let req = {
-      phone:'13067882143',
+      phone: parseInt((Math.random() + 1) * Math.pow(10, 11 - 1)),
       wx_head_img: app.globalData.wxUser.wx_head_img,
       wx_nickname: app.globalData.wxUser.wx_nickname,
       create_addr: app.globalData.detail_address

@@ -17,6 +17,7 @@ function post(url, data = {}) {
  */
 function request(url, data = {}, method = "GET") {
   wx.showLoading({
+    mask:true,
     title: '加载中',
   })
   var contentType = 'application/json'

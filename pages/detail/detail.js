@@ -36,13 +36,24 @@ Page({
         //文件
         res.data.view_file = res.data.view_file != ''?res.data.view_file.split(","):'';
         // 模版
-        res.data.temp_content = res.data.temp_content != ''?res.data.temp_content.split(","):'';
+        let temp_content = res.data.temp_content;
+        if (temp_content == ''){
+          res.data.temp_content = [];
+        }else{
+          var temp_arr = [];
+          temp_content.split(",").map(item => {
+            let temp_obj = {};
+            temp_obj.k = item.split(":")[0];
+            temp_obj.v = item.split(":")[1];
+            temp_arr.push(temp_obj);
+          })
+          res.data.temp_content = temp_arr;
+        }
         // 时间
         res.data.create_time = dateTime.getFormatTime(res.data.create_time);
         this.setData({
           info_detail: res.data
         })
-        console.log(this.data.info_detail)
       }else{
         wx.showToast({
           title: res.msg,

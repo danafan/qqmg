@@ -174,7 +174,6 @@ Page({
           if (that.data.upload_files.length + res.tempFilePaths.length > 9) {
             that.toast("图片不能超过9张");
           } else {
-            console.log(res.tempFilePaths)
             res.tempFilePaths.map(item => {
               //上传文件
               let req = {

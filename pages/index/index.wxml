@@ -60,6 +60,6 @@
     <push_item wx:for="{{info_list}}" wx:key="info_id" page_type="index" infoItem="{{item}}" />
     <!-- 空 -->
     <null_page toast_text="这里的人有点儿懒，还没发过信息" showPush="{{false}}" isIndex="{{true}}" wx:if="{{info_list.length == 0 && shouNull}}" bind:onEmit="chooseLocation"/>
-    <bottom wx:if="{{!isLoad && page >= 2}}" />
+    <bottom wx:if="{{!isLoad && info_list.length > 0}}" />
   </view>
 </view>

@@ -7,7 +7,7 @@
       <image class="goback_icon" src="../../images/right.png" bindtap="goBack"></image>
       <view class="search_input">
         <input class="input" placeholder="请输入搜索内容" value="{{search_val}}" bindinput="changeInput"></input>
-        <image class="clear_icon" src="../../images/close.png" bindtap="clearInput" wx:if="{{search_val != ''}}"></image>
+        <image class="clear_icon" src="../../images/close_icon.png" bindtap="clearInput" wx:if="{{search_val != ''}}"></image>
       </view>
       <view class="zhan"></view>
     </view>
@@ -18,17 +18,13 @@
     <view class="hot_search_box" wx:if="{{search_val == ''}}">
       <view class="hot_title">热门搜索</view>
       <view class="hot_store_list">
-        <view class="hot_store_item">肉本家·碳烤肉</view>
-        <view class="hot_store_item">辛湘鱼·辣不怕开胃菜</view>
-        <view class="hot_store_item">coco·都可</view>
-        <view class="hot_store_item">一种味道·香卤饭</view>
-        <view class="hot_store_item">康有四季</view>
+        <view class="hot_store_item" wx:for="{{hot_cate_list}}" wx:key="index" data-keyword="{{item}}" bindtap="checkKeyword">{{item}}</view>
       </view>
     </view>
     <!-- 底部列表 -->
     <push_item wx:for="{{info_list}}" wx:key="info_id" infoItem="{{item}}" />
     <!-- 空 -->
     <null_page toast_text="换个关键词再试试～" showPush="{{false}}" wx:if="{{info_list.length == 0 && search_val != '' && isNull}}" />
-    <bottom wx:if="{{!isLoad && page >= 2}}" />
+    <bottom wx:if="{{!isLoad && info_list.length > 0}}" />
   </view>
 </view>
