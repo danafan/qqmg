@@ -84,6 +84,7 @@ Page({
       create_addr: app.globalData.detail_address
     }
     util.get(api.register, req).then(res => {
+      console.log(res)
       if (res.code == 1) {
         wx.switchTab({
           url: `/pages/${this.data.page_url}/${this.data.page_url}`

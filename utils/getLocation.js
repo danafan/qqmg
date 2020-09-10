@@ -100,15 +100,25 @@ function getApi(req) {
         location: req,
         success: (res) => {
           let result = res.result;
-          console.log(result)
-          let town_title = result.address_reference.town.title;
-          let landmark_l2_title = result.address_reference.landmark_l2.title;
           app.globalData.detail_address = result.address; //注册地址
+          console.log(result)
+          let town_name = result.address_reference.town.title;                //镇名称
+          let town_code = result.address_reference.town.id;                   //镇代码
+          let district_name = result.ad_info.district;                        //县/区名称
+          let ad_code = result.ad_info.adcode;                                //县/区代码
+          let city_name = result.ad_info.city;                                //市名称
+          let city_code = result.ad_info.city_code;                           //市代码
+          let village_name = result.address_reference.landmark_l2.title; //村名称
+          //返回参数
           let location_info = {
-            town_name: result.address_reference.town.title, //镇名称
-            village_name: landmark_l2_title, //村名称
-            town_code: result.address_reference.town.id, //镇代码
-            info_address: town_title + landmark_l2_title //信息地址
+            town_name: town_name, //镇名称
+            town_code: town_code, //镇代码
+            district_name: district_name, //县/区名称
+            ad_code: ad_code,             //县/区代码
+            city_name: city_name,         //市名称
+            city_code: city_code,         //市代码
+            village_name: village_name, //村名称
+            info_address: town_name + village_name //信息地址（镇+村）
           }
           resolve(location_info);
         }

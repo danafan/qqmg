@@ -9,7 +9,8 @@ Page({
     active_index: 0, //默认选中的顶部导航下标
     info_list: [], //信息列表
     show_index: 0, //解决顶部滑动bug
-    town_code:"",   //地址编码
+    ctd_code:"",   //地址编码
+    check_location_id:"",
     cate_id:"",     //选中的导航ID
     isLoad:true,
     page:1,
@@ -25,7 +26,8 @@ Page({
       active_index: option.index == '9' ? 0 : parseInt(option.index) + 1,
       show_index: option.index >= 6 && option.index < 9 ? 6 : option.index == '9' ? 0 : option.index,
       cate_id: option.id,
-      town_code: option.town_code
+      ctd_code: option.ctd_code,
+      check_location_id: option.check_location_id
     })
     //获取一级分类列表
     this.getCateGory();
@@ -83,7 +85,7 @@ Page({
       page: this.data.page, 
       pagesize:this.data.pagesize,
       cate1: this.data.cate_id, 
-      area_code: this.data.town_code, 
+      area_code: this.data.ctd_code, 
     };
     util.get(api.infoList, req).then(res => {
       if (res.code == 1) {

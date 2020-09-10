@@ -8,19 +8,25 @@ const dateTime = require('../../utils/dateTime.js')
 
 Page({
   data: {
-    fans_total: 0,
-    village_name: "", //村地址
-    town_name: "", //镇地址
-    town_code: "", //镇代码
+    fans_total: 0, //粉丝数
+    loaction_info: {}, //地址信息
+    check_location_id: '1', //1:全市；2:全县；3:全镇
+    area_text: "全市",
+    area_list: [{
+      id: '1',
+      name: '全市'
+    }, {
+      id: '2',
+      name: '全县'
+    }, {
+      id: '3',
+      name: '全镇'
+    }],
+    ctd_address: "", //当前所在区域地址（镇/县/市，中间最新信息）
+    ctd_code: "", //当前区域代码（镇/县/市，筛选信息）
     banner_list: [{
       id: "1",
       img_url: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2226120516,635940438&fm=26&gp=0.jpg"
-    }, {
-      id: "2",
-      img_url: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1171506515,2273340378&fm=26&gp=0.jpg"
-    }, {
-      id: "3",
-      img_url: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3457886639,2496382393&fm=26&gp=0.jpg"
     }], //轮播图
     page: 1, //当前页码
     pagesize: 6,
@@ -35,6 +41,8 @@ Page({
   onLoad() {
     //获取地理位置信息
     this.wxLocationInfo();
+    //获取顶部导航栏信息
+    this.setNavigation();
     //判断是否第一次进入（顶部提示）
     const is_first = wx.getStorageSync('is_first');
     if (!is_first) {
@@ -44,74 +52,63 @@ Page({
       show_desktop: is_first ? false : true
     })
   },
-  //下拉刷新
-  onPullDownRefresh: function () {
+  //切换范围
+  bindPickerChange(e){
+    let pickIndex = e.detail.value;
     this.setData({
+      area_text: this.data.area_list[pickIndex].name,
+      check_location_id: this.data.area_list[pickIndex].id
+    })
+    //判断当前区域范围
+    this.judgeScope()
+  },
+  //判断当前区域范围
+  judgeScope() {
+    if (this.data.check_location_id == '1') { //全市
+      this.setData({
+        ctd_code: this.data.loaction_info.city_code,
+        ctd_address: this.data.loaction_info.city_name
+      })
+    } else if (this.data.check_location_id == '2') { //全县
+      this.setData({
+        ctd_code: this.data.loaction_info.ad_code,
+        ctd_address: this.data.loaction_info.district_name
+      })
+    } else if (this.data.check_location_id == '3') { //全镇
+      this.setData({
+        ctd_code: this.data.loaction_info.town_code,
+        ctd_address: this.data.loaction_info.town_name
+      })
+    }
+    this.setData({
+      isLoad: true,
       info_list: [],
-      page: 1,
-      shouNull: false
+      shouNull: false,
+      page: 1
     })
     //获取信息列表
-    let req = {
-      area_code: this.data.town_code,
-      page: this.data.page,
-      pagesize: this.data.pagesize
-    }
-    this.getInfoList(req);
+    this.getInfoList();
   },
-  //关闭顶部添加到桌面提示
-  closeDeskTop() {
-    this.setData({
-      show_desktop: false
-    })
-  },
-  //搜索
-  search() {
-    wx.navigateTo({
-      url: "/pages/search/search?town_code=" + this.data.town_code
+  //获取地理位置信息
+  wxLocationInfo() {
+    locationApi.wxLocationInfo().then(res => {
+      this.setData({
+        loaction_info: res
+      })
+      //获取一级分类列表
+      this.getCateGory();
+      //判断当前区域范围
+      this.judgeScope();
     })
   },
   //重新选择位置
   chooseLocation() {
     locationApi.chooseLocation().then(res => {
       this.setData({
-        village_name: res.village_name,
-        town_name: res.town_name,
-        town_code: res.town_code,
-        isLoad:true,
-        info_list: [],
-        shouNull: false,
-        page: 1
+        loaction_info: res
       })
-      //获取信息列表
-      let req = {
-        area_code: this.data.town_code,
-        page: this.data.page,
-        pagesize: this.data.pagesize
-      }
-      this.getInfoList(req);
-    })
-  },
-  //获取地理位置信息
-  wxLocationInfo() {
-    locationApi.wxLocationInfo().then(res => {
-      this.setData({
-        village_name: res.village_name,
-        town_name: res.town_name,
-        town_code: res.town_code,
-        page: 1
-      })
-      //获取顶部导航栏信息
-      this.setNavigation();
-      //获取一级分类列表
-      this.getCateGory();
-      //获取信息列表
-      let req = {
-        area_code: this.data.town_code,
-        page: this.data.page,
-        pagesize: this.data.pagesize
-      }
-      this.getInfoList(req);
+      //判断当前区域范围
+      this.judgeScope();
     })
   },
   //获取一级分类列表
@@ -140,6 +137,17 @@ Page({
       }
     })
   },
+  //下拉刷新
+  onPullDownRefresh: function() {
+    this.setData({
+      info_list: [],
+      page: 1,
+      isLoad: true,
+      shouNull: false
+    })
+    //获取信息列表
+    this.getInfoList();
+  },
   //上拉加载
   onReachBottom() {
     if (this.data.isLoad) {
@@ -147,22 +155,22 @@ Page({
         page: this.data.page + 1,
       })
       //获取信息列表
-      let req = {
-        area_code: this.data.town_code,
-        page: this.data.page,
-        pagesize: this.data.pagesize
-      }
-      this.getInfoList(req);
+      this.getInfoList();
     }
   },
   //获取信息列表
-  getInfoList(req) {
+  getInfoList() {
+    let req = {
+      area_code: this.data.ctd_code,
+      page: this.data.page,
+      pagesize: this.data.pagesize
+    }
     util.get(api.infoList, req).then(res => {
       wx.stopPullDownRefresh();
       if (res.code == 1) {
         res.data.data.map(item => {
           //处理标签
-          item.tags = item.tags != ""?item.tags.split(","):[];
+          item.tags = item.tags != "" ? item.tags.split(",") : [];
           //处理模版
           let temp_content = item.temp_content;
           if (temp_content == '') {
@@ -182,7 +190,7 @@ Page({
         })
         this.setData({
           info_list: [...this.data.info_list, ...res.data.data],
-          isLoad: res.data.data.length < this.data.pagesize?false:true,
+          isLoad: res.data.data.length < this.data.pagesize ? false : true,
           shouNull: true
         })
       } else {
@@ -211,14 +219,25 @@ Page({
       }
     })
   },
-  //信息列表
+  //进入信息列表
   service(e) {
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '/pages/service/service?id=' + id + '&index=' + index + '&town_code=' + this.data.town_code
+      url: '/pages/service/service?id=' + id + '&index=' + index + '&ctd_code=' + this.data.ctd_code + "&check_location_id=" + this.data.check_location_id
     })
   },
-
+  //关闭顶部添加到桌面提示
+  closeDeskTop() {
+    this.setData({
+      show_desktop: false
+    })
+  },
+  //搜索
+  search() {
+    wx.navigateTo({
+      url: "/pages/search/search?ctd_code=" + this.data.ctd_code + "&check_location_id=" + this.data.check_location_id
+    })
+  },
 
 })

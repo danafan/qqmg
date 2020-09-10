@@ -14,12 +14,14 @@ Page({
     hot_cate_list:[], //热门分类
     isLoad: true, //默认可以加载
     isNull:false,
-    town_code:"",
+    ctd_code:"",
+    check_location_id:"",
     timeOut:null
   },
   onLoad: function (options) {
     this.setData({
-      town_code: options.town_code
+      ctd_code: options.ctd_code,
+      check_location_id:"",
     })
     //获取顶部导航栏信息
     this.setNavigation();
@@ -97,7 +99,7 @@ Page({
   getInfoList() {
     let req = {
       keyword: this.data.search_val,
-      area_code: this.data.town_code,
+      area_code: this.data.ctd_code,
       page: this.data.page,
       pagesize: this.data.pagesize
     }

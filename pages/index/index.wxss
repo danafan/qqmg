@@ -193,8 +193,24 @@
   height: 70rpx;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-
+.hot_box_left{
+  display: flex;
+  align-items: center;
+}
+.area_box{
+  display: flex;
+  align-items: center;
+}
+.area_text{
+  font-size: 26rpx;
+  color: #333;
+}
+.area_right{
+  width: 24rpx;
+  height: 24rpx;
+}
 .line {
   margin-right: 15rpx;
   background: #287fe6;
