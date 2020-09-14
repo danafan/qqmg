@@ -35,7 +35,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0 15rpx 15rpx;
+  padding: 0 15rpx 120rpx;
 }
 
 /* 添加到桌面提示 */
@@ -181,7 +181,7 @@
 }
 
 .cate_txt {
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #0b0d1d;
 }
 

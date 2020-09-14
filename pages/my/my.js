@@ -13,20 +13,14 @@ Page({
       level:1
     },//注册用户信息
   },
-  // onLoad() {
-  //   // 如果用户没授权
-  //   if (!app.globalData.wxUser || !app.globalData.userInfo) {
-  //     wx.reLaunch({
-  //       url: '/pages/auth/auth?page_url=my'
-  //     })
-  //   }else{
-  //     this.setData({
-  //       authStatus:true,
-  //       wxUser: app.globalData.wxUser,
-  //       userInfo: app.globalData.userInfo
-  //     })
-  //   }
-  // },
+  onShow(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2
+      })
+    }
+  },
   onLoad() {
     //判断用户是否注册
     this.judgeRegister();

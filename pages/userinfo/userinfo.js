@@ -56,7 +56,7 @@ Page({
     }
     utils.get(api.infoList, req).then(res => {
       if (res.code == 1) {
-        if (res.data.data.length < this.data.pagesize) {
+        if (res.data.last_page == this.data.page) {
           this.setData({
             isLoad: false
           })

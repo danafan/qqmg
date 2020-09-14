@@ -114,7 +114,7 @@ function getApi(req) {
             town_name: town_name, //镇名称
             town_code: town_code, //镇代码
             district_name: district_name, //县/区名称
-            ad_code: ad_code,             //县/区代码
+            district_code: ad_code,             //县/区代码
             city_name: city_name,         //市名称
             city_code: city_code,         //市代码
             village_name: village_name, //村名称

@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       ctd_code: options.ctd_code,
-      check_location_id:"",
+      check_location_id: options.check_location_id,
     })
     //获取顶部导航栏信息
     this.setNavigation();
@@ -100,12 +100,13 @@ Page({
     let req = {
       keyword: this.data.search_val,
       area_code: this.data.ctd_code,
+      area_type: this.data.check_location_id,
       page: this.data.page,
       pagesize: this.data.pagesize
     }
     util.get(api.infoList, req).then(res => {
       if (res.code == 1) {
-        if (res.data.data.length < this.data.pagesize) {
+        if (res.data.last_page == this.data.page) {
           this.setData({
             isLoad: false
           })

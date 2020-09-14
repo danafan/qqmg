@@ -27,7 +27,7 @@
 .mm{
   font-size: 30rpx;
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
 }
 .info_item{
   flex: 1;
@@ -47,7 +47,7 @@
   justify-content: space-between;
 }
 .info_title{
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #333;
   font-weight: 600;
   display: -webkit-box;

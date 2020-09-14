@@ -86,10 +86,11 @@ Page({
       pagesize:this.data.pagesize,
       cate1: this.data.cate_id, 
       area_code: this.data.ctd_code, 
+      area_type: this.data.check_location_id
     };
     util.get(api.infoList, req).then(res => {
       if (res.code == 1) {
-        if (res.data.data.length < this.data.pagesize) {
+        if (res.data.last_page == this.data.page) {
           this.setData({
             isLoad: false
           })

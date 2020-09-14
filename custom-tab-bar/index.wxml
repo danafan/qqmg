@@ -1,0 +1,10 @@
+<!-- 自定义tab -->
+<view class="tab-bar">
+  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <image class="center_img" wx:if="{{item.iconPath}}" src="{{item.iconPath}}"></image>
+    <view class="txt {{selected == index?'font_weight':''}}" wx:else>
+      {{item.text}}
+      <view wx:if="{{selected == index}}" class="bg_rec"></view>
+    </view>
+  </view>
+</view>

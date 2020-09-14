@@ -9,9 +9,6 @@
   font-size: 24rpx;
   color:#ff5858;
 }
-.prompt_bottom{
-  margin-top: 10rpx;
-}
 /* 模版内容 */
 /* 输入框 */
 .title{
@@ -186,7 +183,7 @@
   width: 40rpx;
   height: 40rpx;
   border-radius: 50%;
-  border:1px solid #e6e6e6;
+  border:1px solid #8a8a8a;
   display: flex;
   align-items: center;
   justify-content: center;

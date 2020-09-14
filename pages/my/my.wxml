@@ -63,7 +63,5 @@
       </view>
       <image class="right_icon" src="../../images/right.png"></image>
     </view>
-    <!-- <view class="contact">联系我们（点击进入公众号留言）</view>
-    <official-account></official-account> -->
   </view>
 </view>

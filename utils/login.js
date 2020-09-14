@@ -67,11 +67,13 @@ function getUserInfo() {
       app.globalData.wxUser = wxUser;
       utils.get(api.getUserInfo).then(response => {
         if (response.code == 1) {
-          app.globalData.userInfo = res.data;
+          app.globalData.userInfo = response.data;
           //更新用户信息
           updateInfo(wxUser);
+        } else if (response.code == 103){
+          _wxLogin();
         }else{
-          console.log("用户未注册")
+          console.log(response.msg)
         }
       })
     },

@@ -7,6 +7,14 @@ Page({
     category_list:[],
     index:0
   },
+  onShow() {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1
+      })
+    }
+  },
   onLoad(){
     //判断用户是否注册
     this.judgeRegister();

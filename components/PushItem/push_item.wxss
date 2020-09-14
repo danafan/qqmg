@@ -31,12 +31,12 @@
 }
 .phone{
   background: #46AC52;
-  width: 138rpx;
-  height: 56rpx;
+  width: 142rpx;
+  height: 58rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: #fff;
 }
 .taps {
@@ -50,7 +50,7 @@
   border-radius: 5rpx;
   background: #f7a908;
   color: #fff;
-  font-size: 25rpx;
+  font-size: 30rpx;
   height: 46rpx;
   line-height: 46rpx;
   padding-left: 12rpx;
@@ -61,7 +61,7 @@
   margin-right: 8rpx;
   border-radius: 5rpx;
   color: #fff;
-  font-size: 22rpx;
+  font-size: 26rpx;
   height: 38rpx;
   line-height: 38rpx;
   padding-left: 8rpx;
@@ -69,7 +69,7 @@
 }
 .describe {
   margin-bottom: 8rpx;
-  font-size: 28rpx;
+  font-size: 32rpx;
   color: #333;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -79,7 +79,7 @@
 }
 .diff_box{
   margin-bottom: 5rpx;
-  font-size: 26rpx;
+  font-size: 32rpx;
   font-weight: bold;
   color: #333;
 }

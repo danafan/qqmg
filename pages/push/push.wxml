@@ -2,11 +2,7 @@
 <scroll-view scroll-y="{{true}}" style="height:{{heights}}px">
   <!-- 顶部提示 -->
   <view class="prompt">
-    <view>青青芒果向您提供综合信息服务，发布信息请遵守国家法律法规，信息内容和图片不能包含联系方式、敏感词汇等信息！</view>
-    <view class="prompt_bottom">
-      <text>温馨提示：</text>
-      <text>描述清晰，内容完整，将有机会获得公众号图文推送或首页热门的机会，大大增加信息的曝光率哦！</text>
-    </view>
+    青青芒果向您提供综合信息服务，发布信息请遵守国家法律法规，保证内容真实；文字信息内容、图片、视频不能包含暴力、恐怖、敏感词汇等信息！
   </view>
   <!-- 模版内容，需遍历 -->
   <view wx:for="{{temp_items}}" wx:key="index">
@@ -95,8 +91,9 @@
     <view class="radio_box" bindtap="agree">
       <view class="yuan" wx:if="{{agree}}"></view>
     </view>
-    <text>我已阅读并且同意</text>
+    <text>请认真阅读</text>
     <text class="xuzhi" bindtap="goAgreement">【发布协议】</text>
+    <text>并勾选</text>
   </view>
   <!-- 发布按钮 -->
   <view class="push_button" bindtap="pushNow">立即发布</view>

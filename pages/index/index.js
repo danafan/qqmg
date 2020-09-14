@@ -22,8 +22,8 @@ Page({
       id: '3',
       name: '全镇'
     }],
-    ctd_address: "", //当前所在区域地址（镇/县/市，中间最新信息）
-    ctd_code: "", //当前区域代码（镇/县/市，筛选信息）
+    ctd_address: "", //当前所在区域地址（镇/县/市，中间展示）
+    ctd_code: "", //当前区域代码（镇/县/市，筛选条件，可传递）
     banner_list: [{
       id: "1",
       img_url: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2226120516,635940438&fm=26&gp=0.jpg"
@@ -37,6 +37,14 @@ Page({
     navgationHeight: 0,
     show_desktop: true, //顶部添加到桌面提示
     shouNull: false, //空页面不显示
+  },
+  onShow() {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
   },
   onLoad() {
     //获取地理位置信息
@@ -71,7 +79,7 @@ Page({
       })
     } else if (this.data.check_location_id == '2') { //全县
       this.setData({
-        ctd_code: this.data.loaction_info.ad_code,
+        ctd_code: this.data.loaction_info.district_code,
         ctd_address: this.data.loaction_info.district_name
       })
     } else if (this.data.check_location_id == '3') { //全镇
@@ -138,7 +146,7 @@ Page({
     })
   },
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh() {
     this.setData({
       info_list: [],
       page: 1,
@@ -162,6 +170,7 @@ Page({
   getInfoList() {
     let req = {
       area_code: this.data.ctd_code,
+      area_type: this.data.check_location_id,
       page: this.data.page,
       pagesize: this.data.pagesize
     }
@@ -190,7 +199,7 @@ Page({
         })
         this.setData({
           info_list: [...this.data.info_list, ...res.data.data],
-          isLoad: res.data.data.length < this.data.pagesize ? false : true,
+          isLoad: res.data.last_page == this.data.page ? false : true,
           shouNull: true
         })
       } else {

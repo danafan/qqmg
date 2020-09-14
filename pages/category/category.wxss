@@ -24,7 +24,8 @@ page{
   width: 350rpx;
   height: 110rpx;
   color: #0b0d1d;
-  font-size: 30rpx;
+  font-weight: 600;
+  font-size: 36rpx;
   display: flex;
   align-items: center;
   justify-content: space-around;

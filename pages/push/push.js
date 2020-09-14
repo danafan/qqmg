@@ -17,7 +17,9 @@ Page({
     file_type: "", //上传的文件类型
     linkman: "", //联系人（可传递）
     address_text: "", //信息展示地址（可传递）
-    adcode: "", //行政区划代码（可传递）
+    city_code:"",
+    district_code:"",
+    town_code: "", //行政区划代码（可传递）
     link_phone: "", //联系电话（可传递）
     agree: false, //是否同意发布须知
   },
@@ -236,7 +238,9 @@ Page({
     locationApi.chooseLocation().then(res => {
       this.setData({
         address_text: res.info_address,
-        adcode: res.town_code
+        town_code: res.town_code,
+        district_code: res.district_code,
+        city_code: res.city_code
       })
     })
   },
@@ -247,7 +251,9 @@ Page({
         locationApi.wxGetLocation().then(res => {
           this.setData({
             address_text: res.info_address,
-            adcode: res.town_code
+            town_code: res.town_code,
+            district_code: res.district_code,
+            city_code: res.city_code
           })
         })
       } else {
@@ -288,7 +294,9 @@ Page({
         linkman: this.data.linkman,
         link_phone: this.data.link_phone,
         temp_content: temp_content,
-        area_code: this.data.adcode,
+        town_code: this.data.town_code,
+        district_code: this.data.district_code,
+        city_code: this.data.city_code,
         address: this.data.address_text
       }
       this.submit(req);
